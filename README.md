@@ -1,5 +1,8 @@
 # CodeIgniter 4 Framework
 
+## Google sheet : liste taches
+https://docs.google.com/spreadsheets/d/1ivTkbNbVJmZuIwzrkstUTfBaSAEvFmzGEX9aRyZk2lk/edit?usp=sharing
+
 ## What is CodeIgniter?
 
 CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.

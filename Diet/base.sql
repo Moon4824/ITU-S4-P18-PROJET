@@ -141,19 +141,24 @@ CREATE TABLE suggestion_programme_detail (
 -- ============================================================
 -- DONNEES MINIMALES
 -- ============================================================
-
--- 1 admin
-INSERT INTO utilisateur (id_user, nom, email, mot_de_passe, date_naissance, genre, poids_actuel, taille, est_gold, solde_monnaie) VALUES
-(1, 'Admin Système', 'admin@app.com', SHA2('admin1234', 256), '1990-01-01', 'homme', 75.00, 1.75, 0, 0.00);
-
--- 5 utilisateurs
-INSERT INTO utilisateur (id_user, nom, email, mot_de_passe, date_naissance, genre, poids_actuel, taille, est_gold, solde_monnaie) VALUES
-(2, 'Alice Dupont',  'alice@mail.com',  SHA2('pass1234', 256), '1995-03-12', 'femme', 72.00, 1.65, 0, 20.00),
-(3, 'Bob Martin',    'bob@mail.com',    SHA2('pass1234', 256), '1988-07-22', 'homme', 95.00, 1.80, 1, 50.00),
-(4, 'Clara Rabe',    'clara@mail.com',  SHA2('pass1234', 256), '2000-11-05', 'femme', 50.00, 1.60, 0, 10.00),
-(5, 'David Rakoto',  'david@mail.com',  SHA2('pass1234', 256), '1992-06-18', 'homme', 85.00, 1.78, 0, 0.00),
-(6, 'Eva Rasolofo',  'eva@mail.com',    SHA2('pass1234', 256), '1998-09-30', 'femme', 60.00, 1.70, 0, 30.00);
-
+ 
+-- Rôles
+INSERT INTO user_role (role) VALUES ('admin'), ('utilisateur'), ('utilisateur'), ('utilisateur'), ('utilisateur'), ('utilisateur');
+ 
+-- Mots de passe hashés avec password_hash() PHP (password : pass1234)
+-- Le hashage est fait côté PHP dans le code, ces valeurs sont des hash bcrypt précalculés
+-- Admin (mdp : admin1234)
+INSERT INTO utilisateur (id_role, nom, email, mot_de_passe, date_naissance, genre, poids_actuel, taille, est_gold, solde_monnaie) VALUES
+(1, 'Admin Système', 'admin@app.com', '$2y$10$8QvYv3mCNODsouIDZ5JNaOkuBNsFHDFTFmJzme9sMICqvFzm5BXZS', '1990-01-01', 'homme', 75.00, 1.75, 0, 0.00);
+ 
+-- 5 utilisateurs (mdp : pass1234)
+INSERT INTO utilisateur (id_role, nom, email, mot_de_passe, date_naissance, genre, poids_actuel, taille, est_gold, solde_monnaie) VALUES
+(2, 'Alice Dupont',  'alice@mail.com',  '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1995-03-12', 'femme', 72.00, 1.65, 0, 20.00),
+(3, 'Bob Martin',    'bob@mail.com',    '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1988-07-22', 'homme', 95.00, 1.80, 1, 50.00),
+(4, 'Clara Rabe',    'clara@mail.com',  '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '2000-11-05', 'femme', 50.00, 1.60, 0, 10.00),
+(5, 'David Rakoto',  'david@mail.com',  '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1992-06-18', 'homme', 85.00, 1.78, 0, 0.00),
+(6, 'Eva Rasolofo',  'eva@mail.com',    '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1998-09-30', 'femme', 60.00, 1.70, 0, 30.00);
+ 
 -- 5 régimes
 INSERT INTO regime (nom, pct_viande, pct_poisson, pct_volaille) VALUES
 ('Régime Méditerranéen',  20.00, 50.00, 30.00),
@@ -161,15 +166,15 @@ INSERT INTO regime (nom, pct_viande, pct_poisson, pct_volaille) VALUES
 ('Régime Équilibré',      30.00, 30.00, 40.00),
 ('Régime Minceur',        15.00, 45.00, 40.00),
 ('Régime Prise de masse', 40.00, 20.00, 40.00);
-
--- détails prix/durée par régime
+ 
+-- Détails prix/durée par régime
 INSERT INTO regime_detail (id_regime, duree, prix, variation_poids) VALUES
 (1, 7,  15.00, -0.50), (1, 14, 25.00, -1.00), (1, 30, 45.00, -2.50),
 (2, 7,  18.00,  0.80), (2, 14, 32.00,  1.50),  (2, 30, 55.00,  3.00),
 (3, 7,  12.00, -0.30), (3, 14, 20.00, -0.80), (3, 30, 38.00, -1.50),
 (4, 7,  14.00, -0.80), (4, 14, 24.00, -1.80), (4, 30, 42.00, -3.50),
 (5, 7,  20.00,  1.00), (5, 14, 35.00,  2.00),  (5, 30, 60.00,  4.50);
-
+ 
 -- 5 sports
 INSERT INTO sport (nom) VALUES
 ('Course à pied'),
@@ -177,11 +182,22 @@ INSERT INTO sport (nom) VALUES
 ('Vélo'),
 ('Musculation'),
 ('Yoga');
-
--- 15 codes argent
+ 
+-- 15 codes argent (15 chiffres, comme carte de recharge)
 INSERT INTO code_argent (code, valeur, est_valide) VALUES
-('CODE-AAA-001', 5.00,  1), ('CODE-AAA-002', 10.00, 1), ('CODE-AAA-003', 15.00, 1),
-('CODE-BBB-001', 5.00,  1), ('CODE-BBB-002', 20.00, 1), ('CODE-BBB-003', 10.00, 1),
-('CODE-CCC-001', 25.00, 1), ('CODE-CCC-002', 5.00,  1), ('CODE-CCC-003', 10.00, 1),
-('CODE-DDD-001', 15.00, 1), ('CODE-DDD-002', 5.00,  1), ('CODE-DDD-003', 20.00, 1),
-('CODE-EEE-001', 10.00, 1), ('CODE-EEE-002', 5.00,  1), ('CODE-EEE-003', 50.00, 1);
+('933772902550071',  5.00, 1),
+('458375423622141', 10.00, 1),
+('870855474463671', 15.00, 1),
+('986976544918694',  5.00, 1),
+('724856515746817', 20.00, 1),
+('398993629620321', 10.00, 1),
+('658883308381427', 25.00, 1),
+('533216367186595',  5.00, 1),
+('973053118021121', 10.00, 1),
+('830064473687696', 15.00, 1),
+('159557106512045',  5.00, 1),
+('882953932288321', 20.00, 1),
+('934612380418957', 10.00, 1),
+('642285810966344',  5.00, 1),
+('320554871504056', 50.00, 1);
+ 

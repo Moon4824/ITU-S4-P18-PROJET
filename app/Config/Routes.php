@@ -36,3 +36,12 @@ $routes->group('', static function ($routes) {
 	$routes->get('api/imc/interpretations', 'ImcController::list');
 	$routes->post('api/imc/calculate', 'ImcController::calculate');
 });
+
+$routes->group('admin', ['filter' => 'adminAuth'], function($routes) {
+    $routes->get('regime', 'Admin\RegimeController::index');
+    $routes->get('regime/create', 'Admin\RegimeController::create');
+    $routes->post('regime/store', 'Admin\RegimeController::store');
+    $routes->get('regime/edit/(:num)', 'Admin\RegimeController::edit/$1');
+    $routes->post('regime/update/(:num)', 'Admin\RegimeController::update/$1');
+    $routes->get('regime/delete/(:num)', 'Admin\RegimeController::delete/$1');
+});

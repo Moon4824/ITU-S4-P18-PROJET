@@ -83,10 +83,7 @@ class AuthController extends BaseController
     {
         session()->destroy();
 
-        return $this->response->setJSON([
-            'status'  => 'success',
-            'message' => 'Déconnexion réussie.',
-        ]);
+        return redirect()->to('/auth/login');
     }
 
     public function me(): ResponseInterface
@@ -110,21 +107,4 @@ class AuthController extends BaseController
         ]);
     }
 
-    public function dashboard()
-    {
-        if (! session()->get('isLoggedIn')) {
-            return redirect()->to('/auth/login');
-        }
-
-        return view('dashboard/index', [
-            'title' => 'Dashboard',
-            'user'  => [
-                'id'      => session()->get('user_id'),
-                'role_id' => session()->get('user_role_id'),
-                'role'    => session()->get('user_role'),
-                'name'    => session()->get('user_name'),
-                'email'   => session()->get('user_email'),
-            ],
-        ]);
-    }
 }

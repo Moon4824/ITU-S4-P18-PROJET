@@ -100,5 +100,43 @@ class UtilisateurModel extends Model
             ->first();
     }
 
+    /**
+     * Crée un nouvel utilisateur lors de l'inscription
+     * 
+     * @param array $userData Données utilisateur contenant:
+     *   - nom: string
+     *   - email: string
+     *   - date_naissance: string (Y-m-d)
+     *   - genre: string (homme|femme)
+     *   - mot_de_passe: string
+     *   - poids_actuel: float
+     *   - taille: float (en mètres)
+     *   - id_role: int (défaut: 2 pour utilisateur standard)
+     * 
+     * @return int|false ID du nouvel utilisateur ou false
+     */
+    public function createUser(array $userData)
+    {
+        // Vérifier si l'email existe déjà
+        if ($this->where('email', $userData['email'])->first()) {
+            return false;
+        }
+
+        $data = [
+            'nom'               => $userData['nom'] ?? '',
+            'email'             => $userData['email'] ?? '',
+            'date_naissance'    => $userData['date_naissance'] ?? null,
+            'genre'             => $userData['genre'] ?? '',
+            'mot_de_passe'      => password_hash($userData['mot_de_passe'], PASSWORD_BCRYPT, ['cost' => 10]),
+            'poids_actuel'      => $userData['poids_actuel'] ?? 0,
+            'taille'            => $userData['taille'] ?? 0,
+            'id_role'           => $userData['id_role'] ?? 2,
+            'est_gold'          => 0,
+            'solde_monnaie'     => 0.00,
+        ];
+
+        return $this->insert($data) ? $this->getInsertID() : false;
+    }
+
     // Note: la clé étrangère `id_role` est gérée au niveau de la BDD.
 }

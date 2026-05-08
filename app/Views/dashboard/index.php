@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/dashboard') ?>
+<?= $this->extend('layouts/model') ?>
 
 <?= $this->section('content') ?>
 <?php $role = (string) ($user['role'] ?? ''); ?>
@@ -10,6 +10,9 @@
         <div class="dashboard-badges">
             <span class="badge badge-blue">ID utilisateur: <?= esc((string) ($user['id'] ?? '-')) ?></span>
             <span class="badge badge-green">Rôle: <?= esc($role) ?></span>
+            <?php if (!empty(session()->get('selected_objective_label'))) : ?>
+                <span class="badge badge-amber">Objectif: <?= esc((string) session()->get('selected_objective_label')) ?></span>
+            <?php endif; ?>
         </div>
     </article>
 

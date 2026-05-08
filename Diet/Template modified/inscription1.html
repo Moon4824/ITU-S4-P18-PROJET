@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SysInfo — Inscription (1/2)</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="login-page">
+  <div class="login-card">
+
+    <div class="login-logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div>
+        <h1>SysInfo</h1>
+        <span>Inscription — étape 1/2</span>
+      </div>
+    </div>
+
+    <h2>Créer un compte</h2>
+    <p class="subtitle">Renseignez vos informations de connexion</p>
+
+    <form onsubmit="registerStep1(event)">
+      <div class="field-group">
+        <label>Nom complet</label>
+        <div class="input-wrap">
+          <input id="nom" type="text" placeholder="Ex : Andry Rakoto" required />
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Adresse e-mail</label>
+        <div class="input-wrap">
+          <input id="email" type="email" placeholder="vous@exemple.com" required />
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Date de naissance</label>
+        <div class="input-wrap">
+          <input id="dob" type="date" required />
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Genre</label>
+        <select id="genre">
+          <option value="">— Sélectionner —</option>
+          <option value="femme">Femme</option>
+          <option value="homme">Homme</option>
+          <option value="autre">Autre</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label>Mot de passe</label>
+        <div class="input-wrap">
+          <input id="password" type="password" placeholder="Min. 8 caractères" required />
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:8px">
+        <a href="login.html" class="btn btn-secondary btn-full">Annuler</a>
+        <button type="submit" class="btn btn-primary btn-full">Suivant</button>
+      </div>
+    </form>
+
+    <div class="login-footer">
+      Déjà inscrit ? <a href="login.html">Se connecter</a>
+    </div>
+
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

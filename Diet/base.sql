@@ -1,6 +1,6 @@
 CREATE DATABASE IF NOT EXISTS gestionsante;
 USE gestionsante;
-- ============================================================
+-- ============================================================
 -- Script SQL - Application Régime Alimentaire
 -- ============================================================
 
@@ -151,7 +151,7 @@ INSERT INTO user_role (role) VALUES ('admin'), ('utilisateur'), ('utilisateur'),
 -- Le hashage est fait côté PHP dans le code, ces valeurs sont des hash bcrypt précalculés
 -- Admin (mdp : admin1234)
 INSERT INTO utilisateur (id_role, nom, email, mot_de_passe, date_naissance, genre, poids_actuel, taille, est_gold, solde_monnaie) VALUES
-(1, 'Admin Système', 'admin@app.com', '$2y$10$8QvYv3mCNODsouIDZ5JNaOkuBNsFHDFTFmJzme9sMICqvFzm5BXZS', '1990-01-01', 'homme', 75.00, 1.75, 0, 0.00);
+(1, 'Admin Système', 'admin@app.com', '$2y$10$0MbgG5ykCS1deZaFdNBH8O9lS8CYKAICA6j2LbqTySNqEl1Kshhg.', '1990-01-01', 'homme', 75.00, 1.75, 0, 0.00);
  
 -- 5 utilisateurs (mdp : pass1234)
 INSERT INTO utilisateur (id_role, nom, email, mot_de_passe, date_naissance, genre, poids_actuel, taille, est_gold, solde_monnaie) VALUES

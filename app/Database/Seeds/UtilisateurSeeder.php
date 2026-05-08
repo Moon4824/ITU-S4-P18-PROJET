@@ -14,7 +14,7 @@ class UtilisateurSeeder extends Seeder
                 'id_role' => 1,
                 'nom' => 'Admin Système',
                 'email' => 'admin@app.com',
-                'mot_de_passe' => '$2y$10$8QvYv3mCNODsouIDZ5JNaOkuBNsFHDFTFmJzme9sMICqvFzm5BXZS',
+                'mot_de_passe' => '$2y$10$0MbgG5ykCS1deZaFdNBH8O9lS8CYKAICA6j2LbqTySNqEl1Kshhg.',
                 'date_naissance' => '1990-01-01',
                 'genre' => 'homme',
                 'poids_actuel' => 75.00,

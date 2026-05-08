@@ -1,0 +1,106 @@
+ERROR - 2026-05-08 07:18:35 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'gestionsante' in /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Database/BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Database/BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#4 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/BaseModel.php(714): CodeIgniter\Model->doFirst()
+#6 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/app/Models/UtilisateurModel.php(100): CodeIgniter\BaseModel->first()
+#7 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/app/Controllers/AuthController.php(17): App\Models\UtilisateurModel->getAdminLoginData()
+#8 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/CodeIgniter.php(951): App\Controllers\AuthController->login()
+#9 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+#10 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+#11 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Boot.php(417): CodeIgniter\CodeIgniter->run()
+#12 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#13 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/public/index.php(59): CodeIgniter\Boot::bootWeb()
+#14 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/rewrite.php(44): require_once('...')
+#15 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'gestionsante' in /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Database/MySQLi/Connection.php:231
+Stack trace:
+#0 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Database/BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Database/BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#3 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/BaseModel.php(714): CodeIgniter\Model->doFirst()
+#5 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/app/Models/UtilisateurModel.php(100): CodeIgniter\BaseModel->first()
+#6 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/app/Controllers/AuthController.php(17): App\Models\UtilisateurModel->getAdminLoginData()
+#7 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/CodeIgniter.php(951): App\Controllers\AuthController->login()
+#8 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+#9 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+#10 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Boot.php(417): CodeIgniter\CodeIgniter->run()
+#11 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#12 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/public/index.php(59): CodeIgniter\Boot::bootWeb()
+#13 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/rewrite.php(44): require_once('...')
+#14 {main}
+CRITICAL - 2026-05-08 07:18:35 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'gestionsante'
+[Method: GET, Route: /]
+in SYSTEMPATH/Database/BaseConnection.php on line 606.
+ 1 SYSTEMPATH/Database/BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 3 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 5 APPPATH/Models/UtilisateurModel.php(100): CodeIgniter\BaseModel->first()
+ 6 APPPATH/Controllers/AuthController.php(17): App\Models\UtilisateurModel->getAdminLoginData()
+ 7 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->login()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+10 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+12 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+13 SYSTEMPATH/rewrite.php(44): require_once('/home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/public/index.php')
+ERROR - 2026-05-08 07:18:45 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'gestionsante' in /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Database/BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Database/BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#4 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/BaseModel.php(714): CodeIgniter\Model->doFirst()
+#6 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/app/Models/UtilisateurModel.php(100): CodeIgniter\BaseModel->first()
+#7 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/app/Controllers/AuthController.php(17): App\Models\UtilisateurModel->getAdminLoginData()
+#8 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/CodeIgniter.php(951): App\Controllers\AuthController->login()
+#9 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+#10 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+#11 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Boot.php(417): CodeIgniter\CodeIgniter->run()
+#12 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#13 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/public/index.php(59): CodeIgniter\Boot::bootWeb()
+#14 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/rewrite.php(44): require_once('...')
+#15 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'gestionsante' in /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Database/MySQLi/Connection.php:231
+Stack trace:
+#0 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Database/BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Database/BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#3 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/BaseModel.php(714): CodeIgniter\Model->doFirst()
+#5 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/app/Models/UtilisateurModel.php(100): CodeIgniter\BaseModel->first()
+#6 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/app/Controllers/AuthController.php(17): App\Models\UtilisateurModel->getAdminLoginData()
+#7 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/CodeIgniter.php(951): App\Controllers\AuthController->login()
+#8 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+#9 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+#10 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Boot.php(417): CodeIgniter\CodeIgniter->run()
+#11 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#12 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/public/index.php(59): CodeIgniter\Boot::bootWeb()
+#13 /home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/system/rewrite.php(44): require_once('...')
+#14 {main}
+CRITICAL - 2026-05-08 07:18:45 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'gestionsante'
+[Method: GET, Route: /]
+in SYSTEMPATH/Database/BaseConnection.php on line 606.
+ 1 SYSTEMPATH/Database/BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 3 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 5 APPPATH/Models/UtilisateurModel.php(100): CodeIgniter\BaseModel->first()
+ 6 APPPATH/Controllers/AuthController.php(17): App\Models\UtilisateurModel->getAdminLoginData()
+ 7 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->login()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+10 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+12 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+13 SYSTEMPATH/rewrite.php(44): require_once('/home/iantra/Documents/My_Docs/S4/SI/ITU-S4-P18-PROJET/public/index.php')

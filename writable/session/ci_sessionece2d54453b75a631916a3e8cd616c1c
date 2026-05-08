@@ -1,0 +1,1 @@
+__ci_last_regenerate|i:1778258461;isLoggedIn|b:1;user_id|i:14;user_role_id|i:2;user_role|s:11:"utilisateur";user_name|s:9:"Flow Test";user_email|s:22:"flow.test2@example.com";imc_nom|s:9:"Flow Test";imc_email|s:22:"flow.test2@example.com";imc_genre|s:5:"homme";imc_poids|d:70;imc_taille|d:175;_ci_previous_url|s:25:"http://localhost:8080/imc";

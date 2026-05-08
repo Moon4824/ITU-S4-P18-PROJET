@@ -6,20 +6,49 @@ use CodeIgniter\Model;
 
 class InterpretationImcModel extends Model
 {
-    protected $table      = 'interpretation_imc';
+    protected $table = 'interpretation_imc';
     protected $primaryKey = 'id';
+    protected $returnType = 'array';
     protected $allowedFields = ['libelle', 'min', 'max'];
+    protected $useTimestamps = false;
 
-    /**
-     * Récupère l'interprétation selon le score IMC
-     */
-    public function getInterpretation($imc)
+    public function findAllOrdered(): array
     {
-        return $this->where('min <=', $imc)
-                    ->groupStart()
-                        ->where('max >=', $imc)
-                        ->orWhere('max', null)
-                    ->groupEnd()
-                    ->first();
+        $interpretations = $this->findAll();
+
+        usort($interpretations, static function (array $left, array $right): int {
+            $leftMin = $left['min'];
+            $rightMin = $right['min'];
+
+            if ($leftMin === null && $rightMin === null) {
+                return 0;
+            }
+
+            if ($leftMin === null) {
+                return -1;
+            }
+
+            if ($rightMin === null) {
+                return 1;
+            }
+
+            return (float) $leftMin <=> (float) $rightMin;
+        });
+
+        return $interpretations;
+    }
+
+    public function findForImc(float $imc): ?array
+    {
+        foreach ($this->findAllOrdered() as $interpretation) {
+            $min = $interpretation['min'];
+            $max = $interpretation['max'];
+
+            if (($min === null || $imc >= (float) $min) && ($max === null || $imc <= (float) $max)) {
+                return $interpretation;
+            }
+        }
+
+        return null;
     }
 }

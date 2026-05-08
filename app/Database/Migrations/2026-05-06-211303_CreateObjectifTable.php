@@ -22,9 +22,41 @@ class CreateObjectifTable extends Migration
                 'type' => 'INT',
                 'unsigned' => true,
             ],
-            'valeur_poids' => [
+            'poids_initial' => [
                 'type' => 'DECIMAL',
                 'constraint' => '5,2',
+                'null' => true,
+            ],
+            'objectif_poids' => [
+                'type' => 'DECIMAL',
+                'constraint' => '5,2',
+                'null' => true,
+            ],
+            'regime_id' => [
+                'type' => 'INT',
+                'unsigned' => true,
+            ],
+            'sport_id' => [
+                'type' => 'INT',
+                'unsigned' => true,
+                'null' => true,
+            ],
+            'IMC_initial' => [
+                'type' => 'DECIMAL',
+                'constraint' => '5,2',
+                'null' => true,
+            ],
+            'duree_objectif' => [
+                'type' => 'INT',
+                'null' => false,
+            ],
+            'prix_total' => [
+                'type' => 'DECIMAL',
+                'constraint' => '10,2',
+                'null' => false,
+            ],
+            'date_debut' => [
+                'type' => 'DATE',
                 'null' => true,
             ],
         ]);
@@ -33,6 +65,8 @@ class CreateObjectifTable extends Migration
 
         $this->forge->addForeignKey('id_utilisateur', 'utilisateur', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('id_type_objectif', 'type_objectif', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('regime_id', 'regime', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('sport_id', 'sport', 'id', 'CASCADE', 'CASCADE');
 
         $this->forge->createTable('objectif');
     }

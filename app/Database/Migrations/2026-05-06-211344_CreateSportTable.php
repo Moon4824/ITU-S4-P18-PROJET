@@ -18,6 +18,11 @@ class CreateSportTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 150,
             ],
+            'apport_poids' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => 0,
+            ],
         ]);
 
         $this->forge->addKey('id', true);

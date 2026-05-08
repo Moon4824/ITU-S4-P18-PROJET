@@ -12,10 +12,6 @@ class UserRoleSeeder extends Seeder
         $this->db->table('user_role')->insertBatch([
             ['role' => 'admin'],
             ['role' => 'utilisateur'],
-            ['role' => 'utilisateur'],
-            ['role' => 'utilisateur'],
-            ['role' => 'utilisateur'],
-            ['role' => 'utilisateur'],
         ]);
 
     }

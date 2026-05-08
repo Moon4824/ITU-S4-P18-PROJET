@@ -35,7 +35,7 @@ class UtilisateurSeeder extends Seeder
                 'solde_monnaie' => 20.00,
             ],
             [
-                'id_role' => 3,
+                'id_role' => 2,
                 'nom' => 'Bob Martin',
                 'email' => 'bob@mail.com',
                 'mot_de_passe' => '$2y$10$LPqMTwlpiC6pYO/5.NXTlOHEMejg91VcRaKyd15GOtE44mNBArxbS',

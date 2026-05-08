@@ -47,7 +47,7 @@ class UtilisateurSeeder extends Seeder
                 'solde_monnaie' => 50.00,
             ],
             [
-                'id_role' => 4,
+                'id_role' => 2,
                 'nom' => 'Clara Rabe',
                 'email' => 'clara@mail.com',
                 'mot_de_passe' => '$2y$10$LPqMTwlpiC6pYO/5.NXTlOHEMejg91VcRaKyd15GOtE44mNBArxbS',
@@ -59,7 +59,7 @@ class UtilisateurSeeder extends Seeder
                 'solde_monnaie' => 10.00,
             ],
             [
-                'id_role' => 5,
+                'id_role' => 2,
                 'nom' => 'David Rakoto',
                 'email' => 'david@mail.com',
                 'mot_de_passe' => '$2y$10$LPqMTwlpiC6pYO/5.NXTlOHEMejg91VcRaKyd15GOtE44mNBArxbS',
@@ -71,7 +71,7 @@ class UtilisateurSeeder extends Seeder
                 'solde_monnaie' => 0.00,
             ],
             [
-                'id_role' => 6,
+                'id_role' => 2,
                 'nom' => 'Eva Rasolofo',
                 'email' => 'eva@mail.com',
                 'mot_de_passe' => '$2y$10$LPqMTwlpiC6pYO/5.NXTlOHEMejg91VcRaKyd15GOtE44mNBArxbS',

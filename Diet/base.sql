@@ -155,11 +155,11 @@ INSERT INTO utilisateur (id_role, nom, email, mot_de_passe, date_naissance, genr
  
 -- 5 utilisateurs (mdp : pass1234)
 INSERT INTO utilisateur (id_role, nom, email, mot_de_passe, date_naissance, genre, poids_actuel, taille, est_gold, solde_monnaie) VALUES
-(2, 'Alice Dupont',  'alice@mail.com',  '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1995-03-12', 'femme', 72.00, 1.65, 0, 20.00),
-(3, 'Bob Martin',    'bob@mail.com',    '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1988-07-22', 'homme', 95.00, 1.80, 1, 50.00),
-(4, 'Clara Rabe',    'clara@mail.com',  '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '2000-11-05', 'femme', 50.00, 1.60, 0, 10.00),
-(5, 'David Rakoto',  'david@mail.com',  '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1992-06-18', 'homme', 85.00, 1.78, 0, 0.00),
-(6, 'Eva Rasolofo',  'eva@mail.com',    '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1998-09-30', 'femme', 60.00, 1.70, 0, 30.00);
+(2, 'Alice Dupont',  'alice@mail.com',  '$2y$10$LPqMTwlpiC6pYO/5.NXTlOHEMejg91VcRaKyd15GOtE44mNBArxbS', '1995-03-12', 'femme', 72.00, 1.65, 0, 20.00),
+(3, 'Bob Martin',    'bob@mail.com',    '$2y$10$LPqMTwlpiC6pYO/5.NXTlOHEMejg91VcRaKyd15GOtE44mNBArxbS', '1988-07-22', 'homme', 95.00, 1.80, 1, 50.00),
+(4, 'Clara Rabe',    'clara@mail.com',  '$2y$10$LPqMTwlpiC6pYO/5.NXTlOHEMejg91VcRaKyd15GOtE44mNBArxbS', '2000-11-05', 'femme', 50.00, 1.60, 0, 10.00),
+(5, 'David Rakoto', 'david@mail.com', '$2y$10$LPqMTwlpiC6pYO/5.NXTlOHEMejg91VcRaKyd15GOtE44mNBArxbS', '1992-06-18', 'homme', 85.00, 1.78, 0, 0.00),
+(6, 'Eva Rasolofo',  'eva@mail.com',  '$2y$10$LPqMTwlpiC6pYO/5.NXTlOHEMejg91VcRaKyd15GOtE44mNBArxbS', '1998-09-30', 'femme', 60.00, 1.70, 0, 30.00);
  
 -- 5 régimes
 INSERT INTO regime (nom, pct_viande, pct_poisson, pct_volaille) VALUES

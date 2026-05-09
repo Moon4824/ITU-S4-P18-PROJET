@@ -9,7 +9,7 @@ class RegisterController extends BaseController
     public function inscription1()
     {
         if (session()->get('isLoggedIn')) {
-            return redirect()->to('/dashboard');
+            return redirect()->to('/');
         }
 
         return view('register/inscription1', [

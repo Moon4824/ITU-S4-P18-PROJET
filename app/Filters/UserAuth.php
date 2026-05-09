@@ -6,7 +6,7 @@ use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class AdminAuth implements FilterInterface
+class UserAuth implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
@@ -31,11 +31,19 @@ class AdminAuth implements FilterInterface
         // Si tu stockes plutôt l'ID du rôle dans la session (1 = admin selon ton UserRoleSeeder)
         $id_role = $session->get('id_role') ?? $session->get('user_role_id');
 
-        // Condition stricte : le rôle doit être 'admin' ou l'ID doit être 1
-            if ($role !== 'admin' && $id_role != 1) {
-                // Connecté mais pas admin : rediriger vers l'espace utilisateur.
-                return redirect()->to('/user'); //->with('error', 'Accès interdit. Espace réservé aux administrateurs.');
-            }
+        // Condition stricte : le rôle doit être 'utilisateur' ou l'ID doit être 2
+        if ($role !== 'utilisateur' && $id_role != 2) {
+            // S'il est connecté mais n'est pas admin, on le renvoie vers l'accueil/dashboard front-office
+
+            return redirect()->to('/admin'); //->with('error', 'Accès interdit. Espace réservé aux utilisateurs.');
+            
+            // Version JSON (si besoin pour de l'AJAX) :
+            // return service('response')->setStatusCode(403)->setJSON([
+            //     'status'  => 'error',
+            //     'message' => 'Accès refusé. Vous n\'avez pas les droits d\'administrateur.'
+            // ]);
+            
+        }
     }
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)

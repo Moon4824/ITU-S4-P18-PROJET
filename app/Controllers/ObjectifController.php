@@ -54,7 +54,7 @@ class ObjectifController extends BaseController
             'selected_objective_label' => (string) $objective['libelle'],
         ]);
 
-        return redirect()->to('/dashboard');
+        return redirect()->to('/');
     }
     
 }

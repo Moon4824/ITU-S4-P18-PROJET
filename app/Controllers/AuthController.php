@@ -76,7 +76,7 @@ class AuthController extends BaseController
         $sessionData = $utilisateurModel->buildLoginSessionData($user);
         session()->set($sessionData);
 
-        return redirect()->to('/dashboard');
+        return redirect()->to('/');
     }
 
     public function logout(): ResponseInterface

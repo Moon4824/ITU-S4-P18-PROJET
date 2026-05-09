@@ -27,7 +27,21 @@ class RegimeController extends BaseController
     // Formulaire de création
     public function create()
     {
-        return view('admin/regime/create');
+        return view('admin/regime/form', [
+            'regime' => null,
+            'detail' => null,
+        ]);
+    }
+
+    public function modif()
+    {
+        $regime = $this->regimeModel->find($this->request->getPost('id'));
+        $detail = $regime ? $this->detailModel->where('id_regime', $regime['id'])->first() : null;
+
+        return view('admin/regime/form', [
+            'regime' => $regime,
+            'detail' => $detail,
+        ]);
     }
 
     // Enregistrement (Insert)
@@ -72,7 +86,7 @@ class RegimeController extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
-        return view('admin/regime/edit', $data);
+        return view('admin/regime/form', $data);
     }
 
     // Mise à jour (Update)

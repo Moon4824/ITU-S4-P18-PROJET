@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var array<string,mixed> $sport
+ */
+?>
 <?= $this->extend('layouts/admin') ?>
 <?= $this->section('content') ?>
 
@@ -36,11 +41,11 @@
         <div class="detail-grid">
             <div class="detail-item">
                 <div class="detail-label">Identifiant</div>
-                <div class="detail-value">#<?= esc($sport['id']) ?></div>
+                <div class="detail-value">#<?= esc((string) $sport['id']) ?></div>
             </div>
             <div class="detail-item">
                 <div class="detail-label">Nom du sport</div>
-                <div class="detail-value"><?= esc($sport['nom']) ?></div>
+                <div class="detail-value"><?= esc((string) $sport['nom']) ?></div>
             </div>
             <div class="detail-item">
                 <div class="detail-label">Effet sur le poids</div>
@@ -68,12 +73,12 @@
             <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
         </div>
         <h3>Confirmer la suppression</h3>
-        <p>Voulez-vous vraiment supprimer <strong><?= esc($sport['nom']) ?></strong> ? Cette action est irréversible.</p>
+        <p>Voulez-vous vraiment supprimer <strong><?= esc((string) $sport['nom']) ?></strong> ? Cette action est irréversible.</p>
         <div class="modal-actions">
             <button class="btn btn-ghost" onclick="document.getElementById('modal-delete').classList.remove('open')">
                 Annuler
             </button>
-            <a href="<?= base_url('admin/sports/delete/' . $sport['id']) ?>" class="btn btn-danger">
+            <a href="<?= base_url('admin/sports/delete/' . (string) $sport['id']) ?>" class="btn btn-danger">
                 <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
                 Supprimer
             </a>

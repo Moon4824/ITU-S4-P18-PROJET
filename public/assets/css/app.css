@@ -394,3 +394,265 @@ input[type="checkbox"] {
   .imc-value { font-size: 38px; }
   .imc-scale-labels { font-size: 10px; }
 }
+
+/* ═══════════════════════════════════════════
+   BACKOFFICE — Composants admin
+═══════════════════════════════════════════ */
+
+/* ── Boutons supplémentaires ── */
+.btn-ghost {
+  background: #fff;
+  color: var(--c-text);
+  border: 1.5px solid var(--c-border);
+}
+.btn-ghost:hover { border-color: var(--c-primary); color: var(--c-primary); }
+
+.btn-danger {
+  background: rgba(239, 68, 68, .12);
+  color: var(--c-danger);
+  border: 1.5px solid rgba(239, 68, 68, .25);
+}
+.btn-danger:hover { background: var(--c-danger); color: #fff; }
+
+.btn-sm { padding: 6px 12px; font-size: 12px; font-weight: 500; }
+
+/* ── Icônes SVG ── */
+.btn svg,
+.actions svg,
+.card-header svg,
+.alert svg,
+.modal svg,
+.modal-icon svg,
+.search-wrap svg {
+  width: 15px;
+  height: 15px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* ── Card ── */
+.card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 24px;
+}
+
+.card-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--c-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.card-title { font-size: 15px; font-weight: 700; }
+
+.card-body { padding: 24px; }
+
+/* ── Formulaire backoffice ── */
+.form-section-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--c-muted);
+  margin-bottom: 18px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+
+.field-label { font-size: 13px; font-weight: 600; color: var(--c-text); }
+
+.required { color: var(--c-danger); margin-left: 2px; }
+
+.input-error { border-color: var(--c-danger) !important; }
+
+.error-msg { font-size: 12px; color: var(--c-danger); margin-top: 2px; }
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--c-border);
+}
+
+/* ── Recherche ── */
+.search-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.search-form { display: flex; align-items: center; gap: 8px; }
+
+.search-wrap { position: relative; }
+.search-wrap svg {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  stroke: var(--c-muted);
+}
+.search-wrap input {
+  padding-left: 34px;
+  width: 220px;
+}
+
+/* ── Table ── */
+.table-wrap { overflow-x: auto; }
+
+table { width: 100%; border-collapse: collapse; }
+
+thead tr { border-bottom: 1.5px solid var(--c-border); }
+
+th {
+  text-align: left;
+  padding: 10px 16px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+  color: var(--c-muted);
+  font-weight: 700;
+}
+
+td {
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--c-border);
+  font-size: 13.5px;
+  vertical-align: middle;
+}
+
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: rgba(37, 99, 235, .03); }
+
+.empty-row { text-align: center; color: var(--c-muted); padding: 32px; }
+
+.actions { display: flex; gap: 6px; }
+
+/* ── Badges effet poids ── */
+.badge-up {
+  background: rgba(34, 197, 94, .12);
+  color: #15803d;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.badge-down {
+  background: rgba(37, 99, 235, .12);
+  color: var(--c-primary);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.badge-neutral {
+  background: rgba(100, 116, 139, .12);
+  color: var(--c-muted);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ── Alertes backoffice ── */
+.alert-success {
+  background: rgba(34, 197, 94, .10);
+  color: #15803d;
+  border: 1px solid rgba(34, 197, 94, .25);
+}
+.alert-danger {
+  background: rgba(239, 68, 68, .10);
+  color: #b91c1c;
+  border: 1px solid rgba(239, 68, 68, .25);
+}
+
+/* ── Pagination ── */
+.pagination-wrap {
+  padding: 14px 20px;
+  border-top: 1px solid var(--c-border);
+  display: flex;
+  justify-content: center;
+}
+
+/* ── Detail (vue show) ── */
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.detail-item {
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+
+.detail-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+  color: var(--c-muted);
+  margin-bottom: 6px;
+}
+
+.detail-value { font-size: 15px; font-weight: 700; }
+
+/* ── Modal suppression ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .5);
+  display: none;
+  place-items: center;
+  z-index: 200;
+}
+.modal-overlay.open { display: grid; }
+
+.modal {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+
+.modal-icon {
+  width: 52px;
+  height: 52px;
+  background: rgba(239, 68, 68, .10);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 16px;
+}
+
+.modal-icon svg {
+  width: 24px !important;
+  height: 24px !important;
+  stroke: var(--c-danger);
+}
+
+.modal h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+.modal p  { color: var(--c-muted); font-size: 13px; margin-bottom: 24px; line-height: 1.5; }
+
+.modal-actions { display: flex; gap: 10px; justify-content: center; }

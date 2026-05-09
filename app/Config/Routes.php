@@ -44,4 +44,12 @@ $routes->group('admin', ['filter' => 'adminAuth'], function($routes) {
     $routes->get('regime/edit/(:num)', 'Admin\RegimeController::edit/$1');
     $routes->post('regime/update/(:num)', 'Admin\RegimeController::update/$1');
     $routes->get('regime/delete/(:num)', 'Admin\RegimeController::delete/$1');
+
+	$routes->get('sports',                'Admin\SportController::index');
+    $routes->get('sports/create',         'Admin\SportController::create');
+    $routes->post('sports/store',         'Admin\SportController::store');
+    $routes->get('sports/show/(:num)',    'Admin\SportController::show/$1');
+    $routes->get('sports/edit/(:num)',    'Admin\SportController::edit/$1');
+    $routes->post('sports/update/(:num)', 'Admin\SportController::update/$1');
+    $routes->get('sports/delete/(:num)',  'Admin\SportController::delete/$1');
 });

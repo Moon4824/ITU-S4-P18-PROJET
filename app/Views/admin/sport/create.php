@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var array<string,mixed>|null $errors
+ */
+?>
 <?= $this->extend('layouts/admin') ?>
 <?= $this->section('content') ?>
 
@@ -14,11 +19,11 @@
 
     <div class="card-body">
         <?php if (!empty($errors)) : ?>
-            <div class="alert alert-danger">
+                <div class="alert alert-danger">
                 <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                 <ul style="margin:0; padding-left:16px">
                     <?php foreach ($errors as $error) : ?>
-                        <li><?= esc($error) ?></li>
+                        <li><?= esc((string) $error) ?></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
@@ -39,12 +44,12 @@
                         type="text"
                         id="nom"
                         name="nom"
-                        value="<?= esc(old('nom')) ?>"
+                        value="<?= esc((string) old('nom')) ?>"
                         placeholder="Ex : Natation"
                         class="<?= isset($errors['nom']) ? 'input-error' : '' ?>"
                     >
                     <?php if (isset($errors['nom'])) : ?>
-                        <span class="error-msg"><?= esc($errors['nom']) ?></span>
+                        <span class="error-msg"><?= esc((string) $errors['nom']) ?></span>
                     <?php endif; ?>
                 </div>
 
@@ -65,7 +70,7 @@
                         <option value="0"  <?= old('apport_poids') == '0'  ? 'selected' : '' ?>>→ Neutre (0)</option>
                     </select>
                     <?php if (isset($errors['apport_poids'])) : ?>
-                        <span class="error-msg"><?= esc($errors['apport_poids']) ?></span>
+                        <span class="error-msg"><?= esc((string) $errors['apport_poids']) ?></span>
                     <?php endif; ?>
                 </div>
 

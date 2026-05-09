@@ -7,6 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'AuthController::login');
 
+
 // Routes d'authentification groupées.
 $routes->group('auth', static function ($routes) {
 	$routes->get('login', 'AuthController::login');
@@ -38,10 +39,11 @@ $routes->group('', static function ($routes) {
 });
 
 $routes->group('admin', ['filter' => 'adminAuth'], function($routes) {
-    $routes->get('regime', 'Admin\RegimeController::index');
-    $routes->get('regime/create', 'Admin\RegimeController::create');
-    $routes->post('regime/store', 'Admin\RegimeController::store');
-    $routes->get('regime/edit/(:num)', 'Admin\RegimeController::edit/$1');
-    $routes->post('regime/update/(:num)', 'Admin\RegimeController::update/$1');
-    $routes->get('regime/delete/(:num)', 'Admin\RegimeController::delete/$1');
+	// Controllers are in App\Controllers\ (RegimeController), not in Admin namespace.
+	$routes->get('regime', 'RegimeController::index');
+	$routes->get('regime/create', 'RegimeController::create');
+	$routes->post('regime/store', 'RegimeController::store');
+	$routes->get('regime/edit/(:num)', 'RegimeController::edit/$1');
+	$routes->post('regime/update/(:num)', 'RegimeController::update/$1');
+	$routes->get('regime/delete/(:num)', 'RegimeController::delete/$1');
 });

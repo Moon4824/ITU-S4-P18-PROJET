@@ -20,4 +20,12 @@ class RegimeModel extends Model
                     ->where('regime.id', $id)
                     ->findAll();
     }
+
+    public function getAllDetails()
+    {
+        return $this->select('regime.*, regime_detail.duree, regime_detail.prix, regime_detail.variation_poids')
+                    ->join('regime_detail', 'regime_detail.id_regime = regime.id')
+                    ->findAll();
+    }
+
 }

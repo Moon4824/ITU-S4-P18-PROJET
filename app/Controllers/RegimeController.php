@@ -20,7 +20,7 @@ class RegimeController extends BaseController
     // Liste tous les régimes
     public function index()
     {
-        $data['regimes'] = $this->regimeModel->findAll();
+        $data['regimes'] = $this->regimeModel->getAllDetails();
         return view('admin/regime/index', $data);
     }
 
@@ -98,6 +98,10 @@ class RegimeController extends BaseController
         ]);
 
         $db->transComplete();
+        
+        if ($db->transStatus() === false) {
+            return redirect()->back()->with('error', 'Erreur lors de la mise à jour.');
+        }
 
         return redirect()->to('/admin/regime')->with('success', 'Mise à jour effectuée.');
     }

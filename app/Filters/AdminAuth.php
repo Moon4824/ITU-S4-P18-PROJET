@@ -14,8 +14,8 @@ class AdminAuth implements FilterInterface
 
         // 1. Vérifier si l'utilisateur est connecté
         if (!$session->get('isLoggedIn') || !$session->get('user_id')) {
-            // Redirection vers la page de connexion admin
-            return redirect()->to('/admin/login')->with('error', 'Veuillez vous connecter pour accéder à l\'administration.');
+            // Redirection vers la page de connexion générale (route auth/login)
+            return redirect()->to('/auth/login')->with('error', 'Veuillez vous connecter pour accéder à l\'administration.');
             
             /* Version JSON (si besoin pour de l'AJAX) :
             return service('response')->setStatusCode(401)->setJSON([

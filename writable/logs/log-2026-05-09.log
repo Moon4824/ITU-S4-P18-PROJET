@@ -1,0 +1,4 @@
+CRITICAL - 2026-05-09 04:37:11 --> ErrorException: Namespace declaration statement has to be the very first statement or after any declare call in the script
+[Method: GET, Route: admin/regime]
+in APPPATH/Models/RegimeModel.php on line 4.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()

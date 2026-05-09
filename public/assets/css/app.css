@@ -248,6 +248,43 @@ input[type="checkbox"] {
   color: var(--c-muted);
 }
 
+/* Regime card nutrition bars (from template) */
+.regime-card .nutrition-bars {
+  margin-top: 15px;
+}
+
+.regime-card .nutrition-bars .bar-item {
+  height: 8px;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+.regime-card .nutrition-bars .bar-item.viande { background: #e67e22; }
+.regime-card .nutrition-bars .bar-item.poisson { background: #3498db; }
+.regime-card .nutrition-bars .bar-item.volaille { background: #f1c40f; }
+
+/* Hide large decorative circles/pseudo-elements from the imported template
+   (defensive rules: target common container pseudo-elements and known
+   decoration class names). Uses !important to override template styles. */
+.app-shell::before,
+.app::before,
+.main-panel::before,
+.main::before,
+.dashboard-content::before,
+.dash-grid::before,
+.regime-card::before,
+.app-shell::after,
+.app::after,
+.main-panel::after,
+.main::after,
+.dashboard-content::after,
+.dash-grid::after,
+.regime-card::after {
+  display: none !important;
+}
+
+.decor, .hero-circle, .bg-circle, .circle-decor { display: none !important; }
+
 .objective-list {
   display: grid;
   gap: 12px;

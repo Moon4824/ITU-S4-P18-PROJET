@@ -5,7 +5,8 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'AuthController::login');
+
+$routes->get('/', 'Home::index', ['filter' => 'auth']);
 
 // Routes d'authentification groupées.
 $routes->group('auth', static function ($routes) {
@@ -23,27 +24,31 @@ $routes->group('register', static function ($routes) {
 });
 
 // Routes métier regroupées sans préfixe pour garder les mêmes URLs publiques.
-$routes->group('', static function ($routes) {
-	$routes->get('dashboard', 'DashboardController::index', ['filter' => 'auth']);
+$routes->group('user', ['filter' => 'user'] , static function ($routes) {
+	$routes->get('/', 'UserController::index');
 
-	$routes->get('imc', 'ImcController::index', ['filter' => 'auth']);
-	$routes->post('imc/calculate', 'ImcController::calculate', ['filter' => 'auth']);
+	$routes->get('imc', 'ImcController::index');
+	$routes->post('imc/calculate', 'ImcController::calculate');
 
-	$routes->get('objectifs', 'ObjectifController::index', ['filter' => 'auth']);
-	$routes->post('objectifs/choose', 'ObjectifController::choose', ['filter' => 'auth']);
+	$routes->get('objectifs', 'ObjectifController::index');
+	$routes->post('objectifs/choose', 'ObjectifController::choose');
 
+});
 	// API endpoints for IMC interpretation
 	$routes->get('api/imc/interpretations', 'ImcController::list');
 	$routes->post('api/imc/calculate', 'ImcController::calculate');
-});
 
-$routes->group('admin', ['filter' => 'adminAuth'], function($routes) {
-    $routes->get('regime', 'Admin\RegimeController::index');
-    $routes->get('regime/create', 'Admin\RegimeController::create');
-    $routes->post('regime/store', 'Admin\RegimeController::store');
-    $routes->get('regime/edit/(:num)', 'Admin\RegimeController::edit/$1');
-    $routes->post('regime/update/(:num)', 'Admin\RegimeController::update/$1');
-    $routes->get('regime/delete/(:num)', 'Admin\RegimeController::delete/$1');
+$routes->group('admin', ['filter' => 'admin'], function($routes) {
+	// Controllers are in App\Controllers\ (RegimeController), not in Admin namespace.
+	$routes->get('/', 'AdminController::index');
+	$routes->get('regime', 'RegimeController::index');
+	$routes->get('regime/create', 'RegimeController::create');
+	$routes->post('regime/store', 'RegimeController::store');
+	$routes->get('regime/edit/(:num)', 'RegimeController::edit/$1');
+	$routes->post('regime/update/(:num)', 'RegimeController::update/$1');
+	// $routes->get('regime/delete/(:num)', 'RegimeController::delete/$1');
+	// Allow deletion via POST form submission (CSRF-protected)
+	$routes->post('regime/delete/(:num)', 'RegimeController::delete/$1');
 
 	$routes->get('sports',                'Admin\SportController::index');
     $routes->get('sports/create',         'Admin\SportController::create');

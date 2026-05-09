@@ -20,14 +20,28 @@ class RegimeController extends BaseController
     // Liste tous les régimes
     public function index()
     {
-        $data['regimes'] = $this->regimeModel->findAll();
+        $data['regimes'] = $this->regimeModel->getAllDetails();
         return view('admin/regime/index', $data);
     }
 
     // Formulaire de création
     public function create()
     {
-        return view('admin/regime/create');
+        return view('admin/regime/form', [
+            'regime' => null,
+            'detail' => null,
+        ]);
+    }
+
+    public function modif()
+    {
+        $regime = $this->regimeModel->find($this->request->getPost('id'));
+        $detail = $regime ? $this->detailModel->where('id_regime', $regime['id'])->first() : null;
+
+        return view('admin/regime/form', [
+            'regime' => $regime,
+            'detail' => $detail,
+        ]);
     }
 
     // Enregistrement (Insert)
@@ -72,7 +86,7 @@ class RegimeController extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
-        return view('admin/regime/edit', $data);
+        return view('admin/regime/form', $data);
     }
 
     // Mise à jour (Update)
@@ -98,6 +112,10 @@ class RegimeController extends BaseController
         ]);
 
         $db->transComplete();
+        
+        if ($db->transStatus() === false) {
+            return redirect()->back()->with('error', 'Erreur lors de la mise à jour.');
+        }
 
         return redirect()->to('/admin/regime')->with('success', 'Mise à jour effectuée.');
     }

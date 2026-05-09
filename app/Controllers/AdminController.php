@@ -2,15 +2,12 @@
 
 namespace App\Controllers;
 
-class DashboardController extends BaseController
+class AdminController extends BaseController
 {
     public function index()
     {
-        if (! session()->get('isLoggedIn')) {
-            return redirect()->to('/auth/login');
-        }
 
-        return view('dashboard/index', [
+        return view('/admin/dashbord', [
             'title' => 'Dashboard',
             'user'  => [
                 'id'      => session()->get('user_id'),
@@ -21,4 +18,5 @@ class DashboardController extends BaseController
             ],
         ]);
     }
+    
 }

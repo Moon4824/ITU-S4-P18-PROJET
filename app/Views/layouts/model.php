@@ -20,6 +20,7 @@
             <nav class="sidebar-nav">
                 <a class="sidebar-link active" href="/dashboard">Tableau de bord</a>
                 <a class="sidebar-link" href="/dashboard">Mon profil</a>
+                <a class="sidebar-link" href="/admin/sports">Sport</a>
                 <a class="sidebar-link" href="/auth/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Déconnexion</a>
             </nav>
 

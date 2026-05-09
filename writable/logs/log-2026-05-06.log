@@ -1,0 +1,526 @@
+ERROR - 2026-05-06 20:13:48 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'ci4' in /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/MySQLi/Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'ci4', 3306, '', 0)
+#1 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#3 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/BaseConnection.php(1706): CodeIgniter\Database\BaseConnection->query('SHOW TABLES FRO...')
+#4 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/BaseConnection.php(1726): CodeIgniter\Database\BaseConnection->listTables()
+#5 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/MigrationRunner.php(821): CodeIgniter\Database\BaseConnection->tableExists('migrations')
+#6 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/MigrationRunner.php(173): CodeIgniter\Database\MigrationRunner->ensureTable()
+#7 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#8 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+#9 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+#10 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run(Array)
+#11 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run('migrate', Array)
+#12 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#13 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#14 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#15 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'ci4' in /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/MySQLi/Connection.php:231
+Stack trace:
+#0 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#2 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/BaseConnection.php(1706): CodeIgniter\Database\BaseConnection->query('SHOW TABLES FRO...')
+#3 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/BaseConnection.php(1726): CodeIgniter\Database\BaseConnection->listTables()
+#4 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/MigrationRunner.php(821): CodeIgniter\Database\BaseConnection->tableExists('migrations')
+#5 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/MigrationRunner.php(173): CodeIgniter\Database\MigrationRunner->ensureTable()
+#6 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#7 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+#8 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+#9 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run(Array)
+#10 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run('migrate', Array)
+#11 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#12 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#13 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#14 {main}
+ERROR - 2026-05-06 20:14:32 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'ci4' in /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/MySQLi/Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'ci4', 3306, '', 0)
+#1 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#3 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/BaseConnection.php(1706): CodeIgniter\Database\BaseConnection->query('SHOW TABLES FRO...')
+#4 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/BaseConnection.php(1726): CodeIgniter\Database\BaseConnection->listTables()
+#5 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/MigrationRunner.php(821): CodeIgniter\Database\BaseConnection->tableExists('migrations')
+#6 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/MigrationRunner.php(173): CodeIgniter\Database\MigrationRunner->ensureTable()
+#7 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#8 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+#9 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+#10 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run(Array)
+#11 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run('migrate', Array)
+#12 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#13 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#14 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#15 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'ci4' in /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/MySQLi/Connection.php:231
+Stack trace:
+#0 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#2 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/BaseConnection.php(1706): CodeIgniter\Database\BaseConnection->query('SHOW TABLES FRO...')
+#3 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/BaseConnection.php(1726): CodeIgniter\Database\BaseConnection->listTables()
+#4 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/MigrationRunner.php(821): CodeIgniter\Database\BaseConnection->tableExists('migrations')
+#5 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Database/MigrationRunner.php(173): CodeIgniter\Database\MigrationRunner->ensureTable()
+#6 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#7 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+#8 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+#9 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run(Array)
+#10 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run('migrate', Array)
+#11 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#12 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/system/Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#13 /opt/lampp/htdocs/S4/SysInf/ITU-S4-P18-PROJET-main/spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#14 {main}
+ERROR - 2026-05-06 20:19:24 --> Can't create table `gestionsante`.`utilisateur` (errno: 150 "Foreign key constraint is incorrectly formed")
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 300.
+ 1 SYSTEMPATH/Database/MySQLi/Connection.php(300): mysqli->query('CREATE TABLE `utilisateur` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id_role` INT(11) NOT NULL UNIQUE,
+	`nom` VARCHAR(100) NOT NULL,
+	`email` VARCHAR(150) NOT NULL UNIQUE,
+	`mot_de_passe` VARCHAR(255) NOT NULL,
+	`date_naissance` DATE NOT NULL,
+	`genre` ENUM(\'homme\',\'femme\') NOT NULL,
+	`poids_actuel` DECIMAL(5,2) NOT NULL,
+	`taille` DECIMAL(4,2) NOT NULL,
+	`est_gold` TINYINT(1) NOT NULL DEFAULT 0,
+	`solde_monnaie` DECIMAL(10,2) NOT NULL DEFAULT 0,
+	CONSTRAINT `pk_utilisateur` PRIMARY KEY(`id`),
+	CONSTRAINT `utilisateur_id_role_foreign` FOREIGN KEY (`id_role`) REFERENCES `user_role`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci', 0)
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('CREATE TABLE `utilisateur` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id_role` INT(11) NOT NULL UNIQUE,
+	`nom` VARCHAR(100) NOT NULL,
+	`email` VARCHAR(150) NOT NULL UNIQUE,
+	`mot_de_passe` VARCHAR(255) NOT NULL,
+	`date_naissance` DATE NOT NULL,
+	`genre` ENUM(\'homme\',\'femme\') NOT NULL,
+	`poids_actuel` DECIMAL(5,2) NOT NULL,
+	`taille` DECIMAL(4,2) NOT NULL,
+	`est_gold` TINYINT(1) NOT NULL DEFAULT 0,
+	`solde_monnaie` DECIMAL(10,2) NOT NULL DEFAULT 0,
+	CONSTRAINT `pk_utilisateur` PRIMARY KEY(`id`),
+	CONSTRAINT `utilisateur_id_role_foreign` FOREIGN KEY (`id_role`) REFERENCES `user_role`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE `utilisateur` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id_role` INT(11) NOT NULL UNIQUE,
+	`nom` VARCHAR(100) NOT NULL,
+	`email` VARCHAR(150) NOT NULL UNIQUE,
+	`mot_de_passe` VARCHAR(255) NOT NULL,
+	`date_naissance` DATE NOT NULL,
+	`genre` ENUM(\'homme\',\'femme\') NOT NULL,
+	`poids_actuel` DECIMAL(5,2) NOT NULL,
+	`taille` DECIMAL(4,2) NOT NULL,
+	`est_gold` TINYINT(1) NOT NULL DEFAULT 0,
+	`solde_monnaie` DECIMAL(10,2) NOT NULL DEFAULT 0,
+	CONSTRAINT `pk_utilisateur` PRIMARY KEY(`id`),
+	CONSTRAINT `utilisateur_id_role_foreign` FOREIGN KEY (`id_role`) REFERENCES `user_role`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 4 SYSTEMPATH/Database/Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE `utilisateur` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id_role` INT(11) NOT NULL UNIQUE,
+	`nom` VARCHAR(100) NOT NULL,
+	`email` VARCHAR(150) NOT NULL UNIQUE,
+	`mot_de_passe` VARCHAR(255) NOT NULL,
+	`date_naissance` DATE NOT NULL,
+	`genre` ENUM(\'homme\',\'femme\') NOT NULL,
+	`poids_actuel` DECIMAL(5,2) NOT NULL,
+	`taille` DECIMAL(4,2) NOT NULL,
+	`est_gold` TINYINT(1) NOT NULL DEFAULT 0,
+	`solde_monnaie` DECIMAL(10,2) NOT NULL DEFAULT 0,
+	CONSTRAINT `pk_utilisateur` PRIMARY KEY(`id`),
+	CONSTRAINT `utilisateur_id_role_foreign` FOREIGN KEY (`id_role`) REFERENCES `user_role`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 5 APPPATH/Database/Migrations/2026-05-06-200218_CreateUtilisateurTable.php(79): CodeIgniter\Database\Forge->createTable('utilisateur')
+ 6 SYSTEMPATH/Database/MigrationRunner.php(1014): App\Database\Migrations\CreateUtilisateurTable->up()
+ 7 SYSTEMPATH/Database/MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 8 SYSTEMPATH/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 9 SYSTEMPATH/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+10 SYSTEMPATH/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+11 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([...])
+12 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [...])
+13 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+14 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+15 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-06 20:26:25 --> Can't create table `gestionsante`.`utilisateur` (errno: 150 "Foreign key constraint is incorrectly formed")
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 300.
+ 1 SYSTEMPATH/Database/MySQLi/Connection.php(300): mysqli->query('CREATE TABLE `utilisateur` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id_role` INT(11) NOT NULL UNIQUE,
+	`nom` VARCHAR(100) NOT NULL,
+	`email` VARCHAR(150) NOT NULL UNIQUE,
+	`mot_de_passe` VARCHAR(255) NOT NULL,
+	`date_naissance` DATE NOT NULL,
+	`genre` ENUM(\'homme\',\'femme\') NOT NULL,
+	`poids_actuel` DECIMAL(5,2) NOT NULL,
+	`taille` DECIMAL(4,2) NOT NULL,
+	`est_gold` TINYINT(1) NOT NULL DEFAULT 0,
+	`solde_monnaie` DECIMAL(10,2) NOT NULL DEFAULT 0,
+	CONSTRAINT `pk_utilisateur` PRIMARY KEY(`id`),
+	CONSTRAINT `utilisateur_id_role_foreign` FOREIGN KEY (`id_role`) REFERENCES `user_role`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci', 0)
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('CREATE TABLE `utilisateur` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id_role` INT(11) NOT NULL UNIQUE,
+	`nom` VARCHAR(100) NOT NULL,
+	`email` VARCHAR(150) NOT NULL UNIQUE,
+	`mot_de_passe` VARCHAR(255) NOT NULL,
+	`date_naissance` DATE NOT NULL,
+	`genre` ENUM(\'homme\',\'femme\') NOT NULL,
+	`poids_actuel` DECIMAL(5,2) NOT NULL,
+	`taille` DECIMAL(4,2) NOT NULL,
+	`est_gold` TINYINT(1) NOT NULL DEFAULT 0,
+	`solde_monnaie` DECIMAL(10,2) NOT NULL DEFAULT 0,
+	CONSTRAINT `pk_utilisateur` PRIMARY KEY(`id`),
+	CONSTRAINT `utilisateur_id_role_foreign` FOREIGN KEY (`id_role`) REFERENCES `user_role`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE `utilisateur` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id_role` INT(11) NOT NULL UNIQUE,
+	`nom` VARCHAR(100) NOT NULL,
+	`email` VARCHAR(150) NOT NULL UNIQUE,
+	`mot_de_passe` VARCHAR(255) NOT NULL,
+	`date_naissance` DATE NOT NULL,
+	`genre` ENUM(\'homme\',\'femme\') NOT NULL,
+	`poids_actuel` DECIMAL(5,2) NOT NULL,
+	`taille` DECIMAL(4,2) NOT NULL,
+	`est_gold` TINYINT(1) NOT NULL DEFAULT 0,
+	`solde_monnaie` DECIMAL(10,2) NOT NULL DEFAULT 0,
+	CONSTRAINT `pk_utilisateur` PRIMARY KEY(`id`),
+	CONSTRAINT `utilisateur_id_role_foreign` FOREIGN KEY (`id_role`) REFERENCES `user_role`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 4 SYSTEMPATH/Database/Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE `utilisateur` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id_role` INT(11) NOT NULL UNIQUE,
+	`nom` VARCHAR(100) NOT NULL,
+	`email` VARCHAR(150) NOT NULL UNIQUE,
+	`mot_de_passe` VARCHAR(255) NOT NULL,
+	`date_naissance` DATE NOT NULL,
+	`genre` ENUM(\'homme\',\'femme\') NOT NULL,
+	`poids_actuel` DECIMAL(5,2) NOT NULL,
+	`taille` DECIMAL(4,2) NOT NULL,
+	`est_gold` TINYINT(1) NOT NULL DEFAULT 0,
+	`solde_monnaie` DECIMAL(10,2) NOT NULL DEFAULT 0,
+	CONSTRAINT `pk_utilisateur` PRIMARY KEY(`id`),
+	CONSTRAINT `utilisateur_id_role_foreign` FOREIGN KEY (`id_role`) REFERENCES `user_role`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 5 APPPATH/Database/Migrations/2026-05-06-202552_CreateUtilisateurTable.php(79): CodeIgniter\Database\Forge->createTable('utilisateur')
+ 6 SYSTEMPATH/Database/MigrationRunner.php(1014): App\Database\Migrations\CreateUtilisateurTable->up()
+ 7 SYSTEMPATH/Database/MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 8 SYSTEMPATH/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 9 SYSTEMPATH/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+10 SYSTEMPATH/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+11 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([])
+12 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+13 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+14 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+15 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-06 21:22:43 --> Can't create table `gestionsante`.`objectif` (errno: 150 "Foreign key constraint is incorrectly formed")
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 300.
+ 1 SYSTEMPATH/Database/MySQLi/Connection.php(300): mysqli->query('CREATE TABLE `objectif` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`id_utilisateur` INT UNSIGNED NOT NULL,
+	`id_type_objectif` INT UNSIGNED NOT NULL,
+	`valeur_poids` DECIMAL(5,2) NULL,
+	CONSTRAINT `pk_objectif` PRIMARY KEY(`id`),
+	CONSTRAINT `objectif_id_utilisateur_foreign` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `objectif_id_type_objectif_foreign` FOREIGN KEY (`id_type_objectif`) REFERENCES `type_objectif`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci', 0)
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('CREATE TABLE `objectif` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`id_utilisateur` INT UNSIGNED NOT NULL,
+	`id_type_objectif` INT UNSIGNED NOT NULL,
+	`valeur_poids` DECIMAL(5,2) NULL,
+	CONSTRAINT `pk_objectif` PRIMARY KEY(`id`),
+	CONSTRAINT `objectif_id_utilisateur_foreign` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `objectif_id_type_objectif_foreign` FOREIGN KEY (`id_type_objectif`) REFERENCES `type_objectif`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE `objectif` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`id_utilisateur` INT UNSIGNED NOT NULL,
+	`id_type_objectif` INT UNSIGNED NOT NULL,
+	`valeur_poids` DECIMAL(5,2) NULL,
+	CONSTRAINT `pk_objectif` PRIMARY KEY(`id`),
+	CONSTRAINT `objectif_id_utilisateur_foreign` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `objectif_id_type_objectif_foreign` FOREIGN KEY (`id_type_objectif`) REFERENCES `type_objectif`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 4 SYSTEMPATH/Database/Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE `objectif` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`id_utilisateur` INT UNSIGNED NOT NULL,
+	`id_type_objectif` INT UNSIGNED NOT NULL,
+	`valeur_poids` DECIMAL(5,2) NULL,
+	CONSTRAINT `pk_objectif` PRIMARY KEY(`id`),
+	CONSTRAINT `objectif_id_utilisateur_foreign` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `objectif_id_type_objectif_foreign` FOREIGN KEY (`id_type_objectif`) REFERENCES `type_objectif`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 5 APPPATH/Database/Migrations/2026-05-06-211303_CreateObjectifTable.php(36): CodeIgniter\Database\Forge->createTable('objectif')
+ 6 SYSTEMPATH/Database/MigrationRunner.php(1014): App\Database\Migrations\CreateObjectifTable->up()
+ 7 SYSTEMPATH/Database/MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 8 SYSTEMPATH/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 9 SYSTEMPATH/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+10 SYSTEMPATH/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+11 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([])
+12 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+13 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+14 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+15 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-06 21:26:19 --> Can't create table `gestionsante`.`objectif` (errno: 150 "Foreign key constraint is incorrectly formed")
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 300.
+ 1 SYSTEMPATH/Database/MySQLi/Connection.php(300): mysqli->query('CREATE TABLE `objectif` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`id_utilisateur` INT UNSIGNED NOT NULL,
+	`id_type_objectif` INT UNSIGNED NOT NULL,
+	`valeur_poids` DECIMAL(5,2) NULL,
+	CONSTRAINT `pk_objectif` PRIMARY KEY(`id`),
+	CONSTRAINT `objectif_id_utilisateur_foreign` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `objectif_id_type_objectif_foreign` FOREIGN KEY (`id_type_objectif`) REFERENCES `type_objectif`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci', 0)
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('CREATE TABLE `objectif` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`id_utilisateur` INT UNSIGNED NOT NULL,
+	`id_type_objectif` INT UNSIGNED NOT NULL,
+	`valeur_poids` DECIMAL(5,2) NULL,
+	CONSTRAINT `pk_objectif` PRIMARY KEY(`id`),
+	CONSTRAINT `objectif_id_utilisateur_foreign` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `objectif_id_type_objectif_foreign` FOREIGN KEY (`id_type_objectif`) REFERENCES `type_objectif`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE `objectif` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`id_utilisateur` INT UNSIGNED NOT NULL,
+	`id_type_objectif` INT UNSIGNED NOT NULL,
+	`valeur_poids` DECIMAL(5,2) NULL,
+	CONSTRAINT `pk_objectif` PRIMARY KEY(`id`),
+	CONSTRAINT `objectif_id_utilisateur_foreign` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `objectif_id_type_objectif_foreign` FOREIGN KEY (`id_type_objectif`) REFERENCES `type_objectif`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 4 SYSTEMPATH/Database/Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE `objectif` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`id_utilisateur` INT UNSIGNED NOT NULL,
+	`id_type_objectif` INT UNSIGNED NOT NULL,
+	`valeur_poids` DECIMAL(5,2) NULL,
+	CONSTRAINT `pk_objectif` PRIMARY KEY(`id`),
+	CONSTRAINT `objectif_id_utilisateur_foreign` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `objectif_id_type_objectif_foreign` FOREIGN KEY (`id_type_objectif`) REFERENCES `type_objectif`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 5 APPPATH/Database/Migrations/2026-05-06-211303_CreateObjectifTable.php(36): CodeIgniter\Database\Forge->createTable('objectif')
+ 6 SYSTEMPATH/Database/MigrationRunner.php(1014): App\Database\Migrations\CreateObjectifTable->up()
+ 7 SYSTEMPATH/Database/MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 8 SYSTEMPATH/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 9 SYSTEMPATH/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+10 SYSTEMPATH/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+11 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([])
+12 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+13 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+14 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+15 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-06 21:37:08 --> Can't create table `gestionsante`.`objectif` (errno: 150 "Foreign key constraint is incorrectly formed")
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 300.
+ 1 SYSTEMPATH/Database/MySQLi/Connection.php(300): mysqli->query('CREATE TABLE `objectif` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`id_utilisateur` INT UNSIGNED NOT NULL,
+	`id_type_objectif` INT UNSIGNED NOT NULL,
+	`valeur_poids` DECIMAL(5,2) NULL,
+	CONSTRAINT `pk_objectif` PRIMARY KEY(`id`),
+	CONSTRAINT `objectif_id_utilisateur_foreign` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `objectif_id_type_objectif_foreign` FOREIGN KEY (`id_type_objectif`) REFERENCES `type_objectif`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci', 0)
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('CREATE TABLE `objectif` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`id_utilisateur` INT UNSIGNED NOT NULL,
+	`id_type_objectif` INT UNSIGNED NOT NULL,
+	`valeur_poids` DECIMAL(5,2) NULL,
+	CONSTRAINT `pk_objectif` PRIMARY KEY(`id`),
+	CONSTRAINT `objectif_id_utilisateur_foreign` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `objectif_id_type_objectif_foreign` FOREIGN KEY (`id_type_objectif`) REFERENCES `type_objectif`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE `objectif` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`id_utilisateur` INT UNSIGNED NOT NULL,
+	`id_type_objectif` INT UNSIGNED NOT NULL,
+	`valeur_poids` DECIMAL(5,2) NULL,
+	CONSTRAINT `pk_objectif` PRIMARY KEY(`id`),
+	CONSTRAINT `objectif_id_utilisateur_foreign` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `objectif_id_type_objectif_foreign` FOREIGN KEY (`id_type_objectif`) REFERENCES `type_objectif`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 4 SYSTEMPATH/Database/Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE `objectif` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`id_utilisateur` INT UNSIGNED NOT NULL,
+	`id_type_objectif` INT UNSIGNED NOT NULL,
+	`valeur_poids` DECIMAL(5,2) NULL,
+	CONSTRAINT `pk_objectif` PRIMARY KEY(`id`),
+	CONSTRAINT `objectif_id_utilisateur_foreign` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `objectif_id_type_objectif_foreign` FOREIGN KEY (`id_type_objectif`) REFERENCES `type_objectif`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 5 APPPATH/Database/Migrations/2026-05-06-211303_CreateObjectifTable.php(36): CodeIgniter\Database\Forge->createTable('objectif')
+ 6 SYSTEMPATH/Database/MigrationRunner.php(1014): App\Database\Migrations\CreateObjectifTable->up()
+ 7 SYSTEMPATH/Database/MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 8 SYSTEMPATH/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 9 SYSTEMPATH/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+10 SYSTEMPATH/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+11 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([])
+12 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+13 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+14 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+15 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-06 21:43:06 --> Can't create table `gestionsante`.`objectif` (errno: 150 "Foreign key constraint is incorrectly formed")
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 300.
+ 1 SYSTEMPATH/Database/MySQLi/Connection.php(300): mysqli->query('CREATE TABLE `objectif` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`id_utilisateur` INT UNSIGNED NOT NULL,
+	`id_type_objectif` INT UNSIGNED NOT NULL,
+	`valeur_poids` DECIMAL(5,2) NULL,
+	CONSTRAINT `pk_objectif` PRIMARY KEY(`id`),
+	CONSTRAINT `objectif_id_utilisateur_foreign` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `objectif_id_type_objectif_foreign` FOREIGN KEY (`id_type_objectif`) REFERENCES `type_objectif`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci', 0)
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('CREATE TABLE `objectif` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`id_utilisateur` INT UNSIGNED NOT NULL,
+	`id_type_objectif` INT UNSIGNED NOT NULL,
+	`valeur_poids` DECIMAL(5,2) NULL,
+	CONSTRAINT `pk_objectif` PRIMARY KEY(`id`),
+	CONSTRAINT `objectif_id_utilisateur_foreign` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `objectif_id_type_objectif_foreign` FOREIGN KEY (`id_type_objectif`) REFERENCES `type_objectif`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE `objectif` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`id_utilisateur` INT UNSIGNED NOT NULL,
+	`id_type_objectif` INT UNSIGNED NOT NULL,
+	`valeur_poids` DECIMAL(5,2) NULL,
+	CONSTRAINT `pk_objectif` PRIMARY KEY(`id`),
+	CONSTRAINT `objectif_id_utilisateur_foreign` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `objectif_id_type_objectif_foreign` FOREIGN KEY (`id_type_objectif`) REFERENCES `type_objectif`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 4 SYSTEMPATH/Database/Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE `objectif` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`id_utilisateur` INT UNSIGNED NOT NULL,
+	`id_type_objectif` INT UNSIGNED NOT NULL,
+	`valeur_poids` DECIMAL(5,2) NULL,
+	CONSTRAINT `pk_objectif` PRIMARY KEY(`id`),
+	CONSTRAINT `objectif_id_utilisateur_foreign` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `objectif_id_type_objectif_foreign` FOREIGN KEY (`id_type_objectif`) REFERENCES `type_objectif`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 5 APPPATH/Database/Migrations/2026-05-06-211303_CreateObjectifTable.php(36): CodeIgniter\Database\Forge->createTable('objectif')
+ 6 SYSTEMPATH/Database/MigrationRunner.php(1014): App\Database\Migrations\CreateObjectifTable->up()
+ 7 SYSTEMPATH/Database/MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 8 SYSTEMPATH/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 9 SYSTEMPATH/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+10 SYSTEMPATH/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+11 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([])
+12 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+13 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+14 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+15 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-06 21:45:07 --> Can't create table `gestionsante`.`regime_detail` (errno: 150 "Foreign key constraint is incorrectly formed")
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 300.
+ 1 SYSTEMPATH/Database/MySQLi/Connection.php(300): mysqli->query('CREATE TABLE `regime_detail` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`id_regime` INT UNSIGNED NOT NULL,
+	`duree` INT NOT NULL,
+	`prix` DECIMAL(10,2) NOT NULL,
+	`variation_poids` DECIMAL(5,2) NOT NULL,
+	CONSTRAINT `pk_regime_detail` PRIMARY KEY(`id`),
+	CONSTRAINT `regime_detail_id_regime_foreign` FOREIGN KEY (`id_regime`) REFERENCES `regime`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci', 0)
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('CREATE TABLE `regime_detail` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`id_regime` INT UNSIGNED NOT NULL,
+	`duree` INT NOT NULL,
+	`prix` DECIMAL(10,2) NOT NULL,
+	`variation_poids` DECIMAL(5,2) NOT NULL,
+	CONSTRAINT `pk_regime_detail` PRIMARY KEY(`id`),
+	CONSTRAINT `regime_detail_id_regime_foreign` FOREIGN KEY (`id_regime`) REFERENCES `regime`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE `regime_detail` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`id_regime` INT UNSIGNED NOT NULL,
+	`duree` INT NOT NULL,
+	`prix` DECIMAL(10,2) NOT NULL,
+	`variation_poids` DECIMAL(5,2) NOT NULL,
+	CONSTRAINT `pk_regime_detail` PRIMARY KEY(`id`),
+	CONSTRAINT `regime_detail_id_regime_foreign` FOREIGN KEY (`id_regime`) REFERENCES `regime`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 4 SYSTEMPATH/Database/Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE `regime_detail` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`id_regime` INT UNSIGNED NOT NULL,
+	`duree` INT NOT NULL,
+	`prix` DECIMAL(10,2) NOT NULL,
+	`variation_poids` DECIMAL(5,2) NOT NULL,
+	CONSTRAINT `pk_regime_detail` PRIMARY KEY(`id`),
+	CONSTRAINT `regime_detail_id_regime_foreign` FOREIGN KEY (`id_regime`) REFERENCES `regime`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 5 APPPATH/Database/Migrations/2026-05-06-211336_CreateRegimeDetailTable.php(36): CodeIgniter\Database\Forge->createTable('regime_detail')
+ 6 SYSTEMPATH/Database/MigrationRunner.php(1014): App\Database\Migrations\CreateRegimeDetailTable->up()
+ 7 SYSTEMPATH/Database/MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 8 SYSTEMPATH/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 9 SYSTEMPATH/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+10 SYSTEMPATH/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+11 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([...])
+12 SYSTEMPATH/CLI/BaseCommand.php(119): CodeIgniter\CLI\Commands->run('migrate', [...])
+13 SYSTEMPATH/Commands/Database/MigrateRefresh.php(91): CodeIgniter\CLI\BaseCommand->call('migrate', [...])
+14 SYSTEMPATH/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\MigrateRefresh->CodeIgniter\Commands\Database\{closure}()
+15 SYSTEMPATH/Commands/Database/MigrateRefresh.php(89): CodeIgniter\Commands\Database\MigrateRefresh->withSignalsBlocked(Object(Closure))
+16 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\MigrateRefresh->run([...])
+17 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run('migrate:refresh', [])
+18 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+19 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+20 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-06 21:46:38 --> Can't create table `gestionsante`.`suggestion_programme` (errno: 150 "Foreign key constraint is incorrectly formed")
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 300.
+ 1 SYSTEMPATH/Database/MySQLi/Connection.php(300): mysqli->query('CREATE TABLE `suggestion_programme` (
+	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id_utilisateur` INT UNSIGNED NOT NULL,
+	`id_objectif` INT UNSIGNED NOT NULL,
+	`date_debut` DATE NOT NULL,
+	`duree_programme` INT NOT NULL,
+	CONSTRAINT `pk_suggestion_programme` PRIMARY KEY(`id`),
+	CONSTRAINT `suggestion_programme_id_utilisateur_foreign` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `suggestion_programme_id_objectif_foreign` FOREIGN KEY (`id_objectif`) REFERENCES `objectif`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci', 0)
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('CREATE TABLE `suggestion_programme` (
+	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id_utilisateur` INT UNSIGNED NOT NULL,
+	`id_objectif` INT UNSIGNED NOT NULL,
+	`date_debut` DATE NOT NULL,
+	`duree_programme` INT NOT NULL,
+	CONSTRAINT `pk_suggestion_programme` PRIMARY KEY(`id`),
+	CONSTRAINT `suggestion_programme_id_utilisateur_foreign` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `suggestion_programme_id_objectif_foreign` FOREIGN KEY (`id_objectif`) REFERENCES `objectif`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE `suggestion_programme` (
+	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id_utilisateur` INT UNSIGNED NOT NULL,
+	`id_objectif` INT UNSIGNED NOT NULL,
+	`date_debut` DATE NOT NULL,
+	`duree_programme` INT NOT NULL,
+	CONSTRAINT `pk_suggestion_programme` PRIMARY KEY(`id`),
+	CONSTRAINT `suggestion_programme_id_utilisateur_foreign` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `suggestion_programme_id_objectif_foreign` FOREIGN KEY (`id_objectif`) REFERENCES `objectif`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 4 SYSTEMPATH/Database/Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE `suggestion_programme` (
+	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id_utilisateur` INT UNSIGNED NOT NULL,
+	`id_objectif` INT UNSIGNED NOT NULL,
+	`date_debut` DATE NOT NULL,
+	`duree_programme` INT NOT NULL,
+	CONSTRAINT `pk_suggestion_programme` PRIMARY KEY(`id`),
+	CONSTRAINT `suggestion_programme_id_utilisateur_foreign` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `suggestion_programme_id_objectif_foreign` FOREIGN KEY (`id_objectif`) REFERENCES `objectif`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 5 APPPATH/Database/Migrations/2026-05-06-211418_CreateSuggestionProgrammeTable.php(54): CodeIgniter\Database\Forge->createTable('suggestion_programme')
+ 6 SYSTEMPATH/Database/MigrationRunner.php(1014): App\Database\Migrations\CreateSuggestionProgrammeTable->up()
+ 7 SYSTEMPATH/Database/MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 8 SYSTEMPATH/Commands/Database/Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 9 SYSTEMPATH/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+10 SYSTEMPATH/Commands/Database/Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+11 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([...])
+12 SYSTEMPATH/CLI/BaseCommand.php(119): CodeIgniter\CLI\Commands->run('migrate', [...])
+13 SYSTEMPATH/Commands/Database/MigrateRefresh.php(91): CodeIgniter\CLI\BaseCommand->call('migrate', [...])
+14 SYSTEMPATH/CLI/SignalTrait.php(245): CodeIgniter\Commands\Database\MigrateRefresh->CodeIgniter\Commands\Database\{closure}()
+15 SYSTEMPATH/Commands/Database/MigrateRefresh.php(89): CodeIgniter\Commands\Database\MigrateRefresh->withSignalsBlocked(Object(Closure))
+16 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\MigrateRefresh->run([...])
+17 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run('migrate:refresh', [])
+18 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+19 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+20 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))

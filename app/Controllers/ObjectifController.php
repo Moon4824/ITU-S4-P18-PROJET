@@ -19,7 +19,7 @@ class ObjectifController extends BaseController
             return redirect()->to('/auth/login');
         }
 
-        return view('objectifs/index', [
+        return view('user/objectifs/index', [
             'title' => 'Choisir mes objectifs',
             'user' => [
                 'id' => session()->get('user_id'),

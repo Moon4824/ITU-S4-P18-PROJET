@@ -25,7 +25,7 @@ $prix = old('prix', $detail['prix'] ?? '');
 $variationPoids = old('variation_poids', $detail['variation_poids'] ?? '');
 ?>
 
-<?= $this->extend('layouts/model') ?>
+<?= $this->extend('layouts/admin') ?>
 
 <?= $this->section('content') ?>
 <div class="form-page">

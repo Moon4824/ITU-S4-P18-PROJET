@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\InterpretationImcModel;
+use App\Models\UtilisateurModel;
 
 class ImcController extends BaseController
 {
@@ -19,11 +20,19 @@ class ImcController extends BaseController
             return redirect()->to('/auth/login');
         }
 
-        $nom = (string) session()->get('imc_nom');
-        $email = (string) session()->get('imc_email');
-        $genre = (string) session()->get('imc_genre');
-        $poids = (float) session()->get('imc_poids');
-        $taille = (float) session()->get('imc_taille');
+        $utilisateurModel = new UtilisateurModel();
+        $profil = null;
+
+        $userId = (int) session()->get('user_id');
+        if ($userId > 0) {
+            $profil = $utilisateurModel->findByIdWithRole($userId);
+        }
+
+        $nom = (string) (session()->get('imc_nom') ?: ($profil['nom'] ?? ''));
+        $email = (string) (session()->get('imc_email') ?: ($profil['email'] ?? ''));
+        $genre = (string) (session()->get('imc_genre') ?: ($profil['genre'] ?? ''));
+        $poids = (float) (session()->get('imc_poids') ?: ($profil['poids_actuel'] ?? 0));
+        $taille = (float) (session()->get('imc_taille') ?: (((float) ($profil['taille'] ?? 0)) * 100));
 
         if ($nom === '' || $email === '' || $poids <= 0 || $taille <= 0) {
             return redirect()->to('/register/inscription2');
@@ -31,7 +40,7 @@ class ImcController extends BaseController
 
         $imc = $this->computeImc($poids, $taille);
 
-        return view('register/imc', [
+        return view('user/imc', [
             'title' => 'Inscription - IMC',
             'nom' => $nom,
             'email' => $email,

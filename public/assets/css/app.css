@@ -346,6 +346,24 @@ input[type="checkbox"] {
   display: flex;
 }
 
+.app-shell-user .sidebar {
+  background: linear-gradient(180deg, #0f1729 0%, #1a2645 100%);
+}
+
+.app-shell-admin .sidebar {
+  background: linear-gradient(180deg, #2b1452 0%, #1f123d 100%);
+}
+
+.app-shell-user .topbar h1,
+.app-shell-admin .topbar h1 {
+  letter-spacing: -.02em;
+}
+
+.app-shell-user .sidebar-link.active,
+.app-shell-admin .sidebar-link.active {
+  background: rgba(255, 255, 255, .12);
+}
+
 .sidebar {
   width: var(--sidebar-w);
   background: var(--c-sidebar);
@@ -384,7 +402,6 @@ input[type="checkbox"] {
   text-decoration: none;
   background: transparent;
 }
-.sidebar-link.active,
 .sidebar-link:hover { background: rgba(255, 255, 255, .08); }
 
 .main-panel {

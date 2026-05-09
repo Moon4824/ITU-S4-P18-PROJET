@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= esc($title ?? 'Espace admin') ?></title>
+    <link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body>
+    <?php $currentPath = trim(service('uri')->getPath(), '/'); ?>
+    <?php $role = (string) ($user['role'] ?? ''); ?>
+    <div class="app-shell app-shell-admin">
+        <aside class="sidebar sidebar-admin">
+            <div class="sidebar-brand">
+                <div class="logo-mark">A</div>
+                <div>
+                    <div class="brand-name">NutriStep Admin</div>
+                    <div class="brand-sub">Supervision</div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a class="sidebar-link <?= $currentPath === 'admin' ? 'active' : '' ?>" href="/admin">Dashboard</a>
+                <a class="sidebar-link <?= str_starts_with($currentPath, 'admin/regime') ? 'active' : '' ?>" href="/admin/regime">Régimes</a>
+                <a class="sidebar-link <?= str_starts_with($currentPath, 'admin/sports') ? 'active' : '' ?>" href="/admin/sports">Sport</a>
+                <a class="sidebar-link" href="/auth/logout" onclick="event.preventDefault(); document.getElementById('logout-form-admin').submit();">Déconnexion</a>
+            </nav>
+
+            <form id="logout-form-admin" action="/auth/logout" method="post" style="display:none;"></form>
+        </aside>
+
+        <main class="main-panel main-panel-admin">
+            <header class="topbar topbar-admin-shell">
+                <div>
+                    <h1><?= esc($title ?? 'Dashboard') ?></h1>
+                    <p><?= esc($subtitle ?? 'Votre espace de supervision') ?></p>
+                </div>
+                <div class="topbar-user">
+                    <span class="avatar"><?= esc(strtoupper(substr((string) ($user['name'] ?? 'A'), 0, 1))) ?></span>
+                    <div>
+                        <strong><?= esc((string) ($user['name'] ?? 'Administrateur')) ?></strong>
+                        <small><?= esc($role !== '' ? $role : 'admin') ?></small>
+                    </div>
+                </div>
+            </header>
+
+            <section class="dashboard-content">
+                <?= $this->renderSection('content') ?>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

@@ -4,33 +4,30 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
+/**
+ * Model pour la table `user_role`
+ */
 class UserRoleModel extends Model
 {
-    protected $table            = 'user_role';
-    protected $primaryKey       = 'id';
+    protected $table      = 'user_role';
+    protected $primaryKey = 'id';
 
-    protected $useAutoIncrement = true;
-
-    protected $returnType       = 'array';
-
-    protected $protectFields    = true;
-
-    protected $allowedFields = [
-        'role'
+    protected $returnType     = 'array';
+    protected $allowedFields  = [
+        'role',
     ];
 
-    // Timestamps désactivés
     protected $useTimestamps = false;
 
-    // Validation
-    protected $validationRules = [
-        'role' => 'required|in_list[admin,utilisateur]'
-    ];
+    public function findByRole(string $role): ?array
+    {
+        return $this->where('role', $role)->first();
+    }
 
-    protected $validationMessages = [
-        'role' => [
-            'required' => 'Le rôle est obligatoire.',
-            'in_list'  => 'Le rôle doit être admin ou utilisateur.'
-        ]
-    ];
+    public function getRoleLabelById(int $id): ?string
+    {
+        $role = $this->find($id);
+
+        return $role['role'] ?? null;
+    }
 }

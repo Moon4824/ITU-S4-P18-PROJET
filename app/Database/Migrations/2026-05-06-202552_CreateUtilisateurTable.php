@@ -20,7 +20,6 @@ class CreateUtilisateurTable extends Migration
                 'constraint' => 11,
                 'unsigned' => true,
                 'null' => false,
-                'unique' => true,
             ],
             'nom' => [
                 'type' => 'VARCHAR',

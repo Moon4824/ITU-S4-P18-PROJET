@@ -7,7 +7,7 @@ class UserController extends BaseController
     public function index()
     {
 
-        return view('/user/index', [
+        return view('user/dashboard', [
             'title' => 'Dashboard',
             'user'  => [
                 'id'      => session()->get('user_id'),

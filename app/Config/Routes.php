@@ -57,4 +57,12 @@ $routes->group('admin', ['filter' => 'admin'], function($routes) {
     $routes->get('sports/edit/(:num)',    'Admin\SportController::edit/$1');
     $routes->post('sports/update/(:num)', 'Admin\SportController::update/$1');
     $routes->get('sports/delete/(:num)',  'Admin\SportController::delete/$1');
+
+	$routes->get('utilisateurs',                'Admin\UtilisateurController::index');
+	$routes->get('utilisateurs/create',         'Admin\UtilisateurController::create');
+	$routes->post('utilisateurs/store',         'Admin\UtilisateurController::store');
+	$routes->get('utilisateurs/show/(:num)',    'Admin\UtilisateurController::show/$1');
+	$routes->get('utilisateurs/edit/(:num)',    'Admin\UtilisateurController::edit/$1');
+	$routes->post('utilisateurs/update/(:num)', 'Admin\UtilisateurController::update/$1');
+	$routes->get('utilisateurs/delete/(:num)',  'Admin\UtilisateurController::delete/$1');
 });

@@ -19,6 +19,10 @@ $routes->group('auth', static function ($routes) {
 	$routes->post('logout', 'AuthController::logout', ['filter' => 'auth']);
 });
 
+// Routes du portefeuille utilisateur.
+$routes->get('portefeuille/summary', 'PortefeuilleController::summary', ['filter' => 'user']);
+$routes->post('portefeuille/code', 'PortefeuilleController::redeemCode', ['filter' => 'user']);
+
 // Routes d'inscription groupées.
 $routes->group('register', static function ($routes) {
 	$routes->get('inscription1', 'RegisterController::inscription1');

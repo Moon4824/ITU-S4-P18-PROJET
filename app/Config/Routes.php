@@ -31,10 +31,6 @@ $routes->group('register', static function ($routes) {
 $routes->group('user', ['filter' => 'user'] , static function ($routes) {
 	$routes->get('/', 'UserController::index');
 
-	$routes->get('profile', 'UserController::profile');
-	$routes->get('profile/edit', 'UserController::editProfile');
-	$routes->post('profile/update', 'UserController::updateProfile');
-
 	$routes->get('imc', 'ImcController::index');
 	$routes->post('imc/calculate', 'ImcController::calculate');
 
@@ -73,4 +69,13 @@ $routes->group('admin', ['filter' => 'admin'], function($routes) {
 	$routes->get('utilisateurs/edit/(:num)',    'Admin\UtilisateurController::edit/$1');
 	$routes->post('utilisateurs/update/(:num)', 'Admin\UtilisateurController::update/$1');
 	$routes->get('utilisateurs/delete/(:num)',  'Admin\UtilisateurController::delete/$1');
+
+	$routes->get('codes',                'Admin\CodeArgentController::index');
+	$routes->get('codes/toggle/(:num)',                'Admin\CodeArgentController::toggle/$1');
+	$routes->get('codes/create',         'Admin\CodeArgentController::create');
+	$routes->post('codes/store',         'Admin\CodeArgentController::store');
+	$routes->get('codes/show/(:num)',    'Admin\CodeArgentController::show/$1');
+	$routes->get('codes/edit/(:num)',    'Admin\CodeArgentController::edit/$1');
+	$routes->post('codes/update/(:num)', 'Admin\CodeArgentController::update/$1');
+	$routes->get('codes/delete/(:num)',  'Admin\CodeArgentController::delete/$1');
 });

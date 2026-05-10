@@ -23,7 +23,8 @@ class UtilisateurController extends BaseController
     public function index(): string
     {
         $keyword = $this->request->getGet('q');
-        $role    = $this->request->getGet('role');
+        // On récupère le rôle pour le filtre
+        $roleFilter = $this->request->getGet('role');
 
         $builder = $this->utilisateurModel
             ->select('utilisateur.*, user_role.role AS role_label')
@@ -37,8 +38,8 @@ class UtilisateurController extends BaseController
                 ->groupEnd();
         }
 
-        if ($role) {
-            $builder->where('user_role.role', $role);
+        if ($roleFilter) {
+            $builder->where('user_role.role', $roleFilter);
         }
 
         return view('admin/utilisateur/index', [
@@ -47,7 +48,7 @@ class UtilisateurController extends BaseController
             'users'    => $builder->paginate(15),
             'pager'    => $this->utilisateurModel->pager,
             'keyword'  => $keyword,
-            'roleFilter' => $role,
+            'roleFilter' => $roleFilter,
             'roles'    => $this->roleModel->findAll(),
         ]);
     }
@@ -58,9 +59,8 @@ class UtilisateurController extends BaseController
     public function create(): string
     {
         return view('admin/utilisateur/create', [
-            'title'    => 'Ajouter un utilisateur',
-            'subtitle' => 'Création d\'un nouveau compte',
-            'roles'    => $this->roleModel->findAll(),
+            'title'    => 'Ajouter un administrateur',
+            'subtitle' => 'Création d\'un compte admin',
         ]);
     }
 
@@ -69,17 +69,11 @@ class UtilisateurController extends BaseController
     // ─────────────────────────────────────────────
     public function store()
     {
+        // Règles validées uniquement pour les champs demandés
         $rules = [
             'nom'            => 'required|min_length[2]|max_length[100]',
             'email'          => 'required|valid_email|max_length[150]|is_unique[utilisateur.email]',
             'mot_de_passe'   => 'required|min_length[8]',
-            'date_naissance' => 'required|valid_date[Y-m-d]',
-            'genre'          => 'required|in_list[homme,femme]',
-            'poids_actuel'   => 'required|decimal|greater_than[0]',
-            'taille'         => 'required|decimal|greater_than[0]|less_than[3]',
-            'id_role'        => 'required|is_natural_no_zero',
-            'est_gold'       => 'permit_empty|in_list[0,1]',
-            'solde_monnaie'  => 'permit_empty|decimal',
         ];
 
         $messages = [
@@ -93,31 +87,31 @@ class UtilisateurController extends BaseController
                 'required'   => 'Le mot de passe est obligatoire.',
                 'min_length' => 'Le mot de passe doit contenir au moins 8 caractères.',
             ],
-            'date_naissance' => ['required' => 'La date de naissance est obligatoire.'],
-            'genre'          => ['required' => 'Le genre est obligatoire.'],
-            'poids_actuel'   => ['required' => 'Le poids est obligatoire.'],
-            'taille'         => ['required' => 'La taille est obligatoire.'],
-            'id_role'        => ['required' => 'Le rôle est obligatoire.'],
         ];
 
         if (! $this->validate($rules, $messages)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
+        // Récupération de l'ID du rôle 'admin'
+        $adminRole = $this->roleModel->findByRole('admin');
+        $adminRoleId = $adminRole ? $adminRole['id'] : 1; // Fallback sur 1 si non trouvé
+
         $this->utilisateurModel->insert([
             'nom'            => $this->request->getPost('nom'),
             'email'          => $this->request->getPost('email'),
             'mot_de_passe'   => password_hash($this->request->getPost('mot_de_passe'), PASSWORD_BCRYPT, ['cost' => 10]),
-            'date_naissance' => $this->request->getPost('date_naissance'),
-            'genre'          => $this->request->getPost('genre'),
-            'poids_actuel'   => (float) $this->request->getPost('poids_actuel'),
-            'taille'         => (float) $this->request->getPost('taille'),
-            'id_role'        => (int)   $this->request->getPost('id_role'),
-            'est_gold'       => (int)   ($this->request->getPost('est_gold') ?? 0),
-            'solde_monnaie'  => (float) ($this->request->getPost('solde_monnaie') ?? 0),
+            'id_role'        => $adminRoleId, // Forcé à Admin
+            // Champs requis par la BDD mais hors formulaire - Valeurs par défaut
+            'date_naissance' => '1990-01-01', 
+            'genre'          => 'homme',
+            'poids_actuel'   => 70.0,
+            'taille'         => 1.75,
+            'est_gold'       => 0,
+            'solde_monnaie'  => 0,
         ]);
 
-        return redirect()->to('/admin/utilisateurs')->with('success', 'Utilisateur créé avec succès.');
+        return redirect()->to('/admin/utilisateurs')->with('success', 'Administrateur créé avec succès.');
     }
 
     // ─────────────────────────────────────────────
@@ -153,7 +147,6 @@ class UtilisateurController extends BaseController
             'title'    => 'Modifier l\'utilisateur',
             'subtitle' => esc($user['nom']),
             'user'     => $user,
-            'roles'    => $this->roleModel->findAll(),
         ]);
     }
 
@@ -168,17 +161,11 @@ class UtilisateurController extends BaseController
             throw new \CodeIgniter\Exceptions\PageNotFoundException("Utilisateur #$id introuvable.");
         }
 
+        // Règles simplifiées pour l'édition admin
         $rules = [
             'nom'            => 'required|min_length[2]|max_length[100]',
             'email'          => "required|valid_email|max_length[150]|is_unique[utilisateur.email,id,{$id}]",
-            'date_naissance' => 'required|valid_date[Y-m-d]',
-            'genre'          => 'required|in_list[homme,femme]',
-            'poids_actuel'   => 'required|decimal|greater_than[0]',
-            'taille'         => 'required|decimal|greater_than[0]|less_than[3]',
-            'id_role'        => 'required|is_natural_no_zero',
-            'est_gold'       => 'permit_empty|in_list[0,1]',
-            'solde_monnaie'  => 'permit_empty|decimal',
-            'mot_de_passe'   => 'permit_empty|min_length[8]',
+            'mot_de_passe'   => 'permit_empty|min_length[8]', // Permettre vide = pas de changement
         ];
 
         $messages = [
@@ -198,13 +185,6 @@ class UtilisateurController extends BaseController
         $data = [
             'nom'            => $this->request->getPost('nom'),
             'email'          => $this->request->getPost('email'),
-            'date_naissance' => $this->request->getPost('date_naissance'),
-            'genre'          => $this->request->getPost('genre'),
-            'poids_actuel'   => (float) $this->request->getPost('poids_actuel'),
-            'taille'         => (float) $this->request->getPost('taille'),
-            'id_role'        => (int)   $this->request->getPost('id_role'),
-            'est_gold'       => (int)   ($this->request->getPost('est_gold') ?? 0),
-            'solde_monnaie'  => (float) ($this->request->getPost('solde_monnaie') ?? 0),
         ];
 
         // Mettre à jour le mot de passe seulement s'il est fourni

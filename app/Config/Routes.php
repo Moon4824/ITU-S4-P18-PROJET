@@ -35,6 +35,10 @@ $routes->group('register', static function ($routes) {
 $routes->group('user', ['filter' => 'user'] , static function ($routes) {
 	$routes->get('/', 'UserController::index');
 
+	$routes->get('profile', 'UserController::profile');
+	$routes->get('profile/edit', 'UserController::editProfile');
+	$routes->post('profile/update', 'UserController::updateProfile');
+
 	$routes->get('imc', 'ImcController::index');
 	$routes->post('imc/calculate', 'ImcController::calculate');
 

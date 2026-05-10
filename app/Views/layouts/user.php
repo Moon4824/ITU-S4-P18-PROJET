@@ -22,24 +22,20 @@
                 <a class="sidebar-link" href="/user">Dashboard</a>
                 <a class="sidebar-link" href="/user/imc">IMC</a>
                 <a class="sidebar-link" href="/user/objectifs">Objectifs</a>
-                <a class="sidebar-link" href="/auth/logout" onclick="event.preventDefault(); document.getElementById('logout-form-user').submit();">Déconnexion</a>
             </nav>
-
-            <form id="logout-form-user" action="/auth/logout" method="post" style="display:none;"></form>
         </aside>
 
         <main class="main-panel main-panel-user">
-            <header class="topbar topbar-user-shell">
-                <div>
-                    <h1><?= esc($title ?? 'Dashboard') ?></h1>
-                    <p><?= esc($subtitle ?? 'Votre espace santé et objectifs') ?></p>
+            <header class="topbar">
+                <div class="topbar-search">
+                    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" placeholder="Rechercher…" />
                 </div>
-                <div class="topbar-user">
-                    <span class="avatar"><?= esc(strtoupper(substr((string) ($user['name'] ?? 'U'), 0, 1))) ?></span>
-                    <div>
-                        <strong><?= esc((string) ($user['name'] ?? 'Utilisateur')) ?></strong>
-                        <small><?= esc($role !== '' ? $role : 'utilisateur') ?></small>
-                    </div>
+                
+                <div class="topbar-actions">
+                    <a href="/user/profile" class="icon-btn" title="Mon profil">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg>
+                    </a>
                 </div>
             </header>
 

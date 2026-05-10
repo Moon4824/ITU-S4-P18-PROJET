@@ -31,9 +31,9 @@
 
         <main class="main-panel main-panel-admin">
             <header class="topbar topbar-admin-shell">
-                <div>
-                    <h1><?= esc($title ?? 'Dashboard') ?></h1>
-                    <p><?= esc($subtitle ?? 'Votre espace de supervision') ?></p>
+                <div class="topbar-search">
+                    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" placeholder="Rechercher…" />
                 </div>
                 <div class="topbar-user">
                     <span class="avatar"><?= esc(strtoupper(substr((string) ($user['name'] ?? 'A'), 0, 1))) ?></span>

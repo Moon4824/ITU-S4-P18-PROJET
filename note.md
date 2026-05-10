@@ -31,7 +31,7 @@ Pour la requête SQL, voici comment structurer le calcul dans ton modèle pour o
 SELECT 
     r.*, 
     ABS(? / r.variation_poids) * r.duree as duree_totale,
-    (ABS(? / r.variation_poids) * r.prix_unitaire) as prix_total
+    (ABS(duree_totale * r.prix_unitaire) as prix_total
 FROM regime r
 WHERE 
     (? > 0 AND r.variation_poids > 0) -- On cherche une prise de poids
@@ -48,7 +48,7 @@ $signe = ($diff > 0) ? "> 0" : "< 0";
 // Dans votre modèle
 $query = "SELECT *, 
           (ABS($diff / variation_poids) * duree_unitaire) as temps_requis,
-          (ABS($diff / variation_poids) * prix_unitaire) as prix_final 
+          (temps_requis * prix_unitaire) as prix_final 
           FROM regime 
           WHERE variation_poids $signe";
 ```
@@ -72,7 +72,7 @@ Lors de la confirmation, tu dois insérer les données dans la table `achat_obje
 
 ---
 
-### 🌳 Architecture du Flux Utilisateur (tsra rah atao formulaire succesive)
+### 🌳 Architecture du Flux Utilisateur (tsara rah atao formulaire succesive)
 
 * **📍 ÉTAPE 1 : Évaluation Santé (Calcul IMC)**
     * **Entrées :** Poids ($kg$) + Taille ($m$).

@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/model') ?>
+<?= $this->extend('layouts/admin') ?>
 <?= $this->section('content') ?>
 
 <?php $actif = (int) $code['est_valide'] === 1; ?>

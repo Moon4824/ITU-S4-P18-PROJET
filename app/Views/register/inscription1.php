@@ -83,7 +83,7 @@
             </form>
 
             <div class="login-footer">
-                Déjà inscrit ? <a href="/auth/login">Se connecter</a>
+                Déjà inscrit ? <a href="/auth/login"><strong>Se connecter</strong></a>
             </div>
         </div>
     </div>

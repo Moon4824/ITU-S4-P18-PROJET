@@ -66,7 +66,7 @@
             </form>
 
             <div class="login-footer">
-                Pas encore de compte ? <a href="/register/inscription1">S'inscrire</a>
+                Pas encore de compte ? <a href="/register/inscription1"><strong>S'inscrire</strong></a>
             </div>
         </div>
     </div>

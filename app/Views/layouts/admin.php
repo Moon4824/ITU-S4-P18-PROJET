@@ -12,7 +12,7 @@
     <div class="app-shell app-shell-admin">
         <aside class="sidebar sidebar-admin">
             <div class="sidebar-brand">
-                <div class="logo-mark">A</div>
+                <img src="/assets/logo/diet.png" alt="NutriStep logo" style="width:32px;height:32px;object-fit:contain">
                 <div>
                     <div class="brand-name">NutriStep Admin</div>
                     <div class="brand-sub">Supervision</div>

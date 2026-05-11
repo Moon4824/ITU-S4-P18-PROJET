@@ -132,34 +132,5 @@ $errorMessage = session()->getFlashdata('error');
     </div>
 </div>
 
-<!-- Activity -->
-<div class="card">
-    <div class="card-header">
-        <div class="card-title">Activité récente</div>
-    </div>
-    <div class="activity-list">
-        <div class="activity-item">
-            <div class="activity-dot" style="background:var(--c-success)"></div>
-            <div class="activity-body">
-                <div class="act-title">Profil consulté</div>
-                <div class="act-meta">Aujourd'hui</div>
-            </div>
-        </div>
-        <div class="activity-item">
-            <div class="activity-dot" style="background:var(--c-primary)"></div>
-            <div class="activity-body">
-                <div class="act-title">Connexion sécurisée</div>
-                <div class="act-meta">Aujourd'hui</div>
-            </div>
-        </div>
-        <div class="activity-item">
-            <div class="activity-dot" style="background:var(--c-warning)"></div>
-            <div class="activity-body">
-                <div class="act-title">Actualisation du compte</div>
-                <div class="act-meta">Cette semaine</div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <?= $this->endSection() ?>

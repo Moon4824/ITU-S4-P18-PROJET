@@ -85,26 +85,26 @@ if (! empty($objectiveTargetDate)) {
     </div>
 </div>
 
-<!-- Dashboard Grid (2 colonnes) -->
-<div class="dash-grid">
-    <div class="card">
-        <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
-            <div class="avatar" style="width:88px;height:88px;font-size:28px;background:var(--c-primary);color:#fff;display:flex;align-items:center;justify-content:center"><?= esc($initials) ?></div>
-            <div style="flex:1;min-width:240px">
-                <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-                    <h3 style="font-size:22px">Bienvenue, <?= esc($userName) ?></h3>
-                    <span class="badge badge-blue">Utilisateur</span>
-                    <span class="badge badge-green">Actif</span>
-                </div>
-                <p style="color:var(--c-muted);line-height:1.6;max-width:720px">
-                    Vous êtes connecté en tant que <strong><?= esc($role) ?></strong>. 
-                    Consultez votre profil, suivez vos objectifs et gérez votre programme nutritionnel.
-                </p>
+<!-- Bienvenue Section (Full Width) -->
+<div class="card">
+    <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+        <div class="avatar" style="width:88px;height:88px;font-size:28px;background:var(--c-primary);color:#fff;display:flex;align-items:center;justify-content:center"><?= esc($initials) ?></div>
+        <div style="flex:1;min-width:240px">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px">
+                <h3 style="font-size:22px">Bienvenue, <?= esc($userName) ?></h3>
+                <span class="badge badge-blue">Utilisateur</span>
+                <span class="badge badge-green">Actif</span>
             </div>
+            <p style="color:var(--c-muted);line-height:1.6;max-width:720px">
+                Vous êtes connecté en tant que <strong><?= esc($role) ?></strong>. 
+                Consultez votre profil, suivez vos objectifs et gérez votre programme nutritionnel.
+            </p>
         </div>
     </div>
+</div>
 
-    <div class="card">
+<!-- Objective & Chart Section (Full Width) -->
+<div class="card">
         <?php if ($objectiveExists) : ?>
             <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap">
                 <div>
@@ -114,13 +114,26 @@ if (! empty($objectiveTargetDate)) {
                 <span class="badge badge-green"><?= esc($objectiveTypeValue ?: 'Objectif actif') ?></span>
             </div>
 
-            <div style="margin-top:18px;padding:16px;border:1px solid var(--c-border);border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,0.85), rgba(248,250,252,0.95));">
-                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;font-size:13px;color:var(--c-muted);margin-bottom:14px">
-                    <div><strong style="display:block;color:var(--c-text);margin-bottom:4px">Sport</strong><?= esc($objectiveSportValue ?: 'Non renseigné') ?></div>
-                    <div><strong style="display:block;color:var(--c-text);margin-bottom:4px">Début</strong><?= esc($objectiveStartDateFormatted ?: 'Non renseigné') ?></div>
-                    <div><strong style="display:block;color:var(--c-text);margin-bottom:4px">Cible</strong><?= esc($objectiveTargetDateFormatted ?: 'Non renseigné') ?></div>
+            <div style="margin-top:18px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;font-size:13px;margin-bottom:16px">
+                <div style="padding:12px 14px;border:1px solid var(--c-border);border-radius:12px;background:#fff">
+                    <div style="color:var(--c-muted);margin-bottom:4px">Début</div>
+                    <strong><?= esc($objectiveStartDateFormatted) ?></strong>
                 </div>
+                <div style="padding:12px 14px;border:1px solid var(--c-border);border-radius:12px;background:#fff">
+                    <div style="color:var(--c-muted);margin-bottom:4px">Poids cible</div>
+                    <strong><?= esc(number_format((float) $objectiveTargetWeight, 2, ',', ' ')) ?> kg</strong>
+                </div>
+                <div style="padding:12px 14px;border:1px solid var(--c-border);border-radius:12px;background:#fff">
+                    <div style="color:var(--c-muted);margin-bottom:4px">Sport</div>
+                    <strong><?= esc($objectiveSportValue) ?></strong>
+                </div>
+                <div style="padding:12px 14px;border:1px solid var(--c-border);border-radius:12px;background:#fff">
+                    <div style="color:var(--c-muted);margin-bottom:4px">Durée</div>
+                    <strong><?= esc((string) $objectiveDurationDays) ?> jours</strong>
+                </div>
+            </div>
 
+            <div style="padding:16px;border:1px solid var(--c-border);border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,0.85), rgba(248,250,252,0.95));">
                 <div style="position:relative;height:280px;padding:6px 4px 0;">
                     <svg viewBox="0 0 900 280" preserveAspectRatio="none" style="width:100%;height:100%;overflow:visible">
                         <defs>
@@ -153,25 +166,6 @@ if (! empty($objectiveTargetDate)) {
                     </svg>
                 </div>
             </div>
-
-            <div style="margin-top:16px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;font-size:13px">
-                <div style="padding:12px 14px;border:1px solid var(--c-border);border-radius:12px;background:#fff">
-                    <div style="color:var(--c-muted);margin-bottom:4px">Début</div>
-                    <strong><?= esc($objectiveStartDateFormatted) ?></strong>
-                </div>
-                <div style="padding:12px 14px;border:1px solid var(--c-border);border-radius:12px;background:#fff">
-                    <div style="color:var(--c-muted);margin-bottom:4px">Poids cible</div>
-                    <strong><?= esc(number_format((float) $objectiveTargetWeight, 2, ',', ' ')) ?> kg</strong>
-                </div>
-                <div style="padding:12px 14px;border:1px solid var(--c-border);border-radius:12px;background:#fff">
-                    <div style="color:var(--c-muted);margin-bottom:4px">Sport</div>
-                    <strong><?= esc($objectiveSportValue) ?></strong>
-                </div>
-                <div style="padding:12px 14px;border:1px solid var(--c-border);border-radius:12px;background:#fff">
-                    <div style="color:var(--c-muted);margin-bottom:4px">Durée</div>
-                    <strong><?= esc((string) $objectiveDurationDays) ?> jours</strong>
-                </div>
-            </div>
         <?php else : ?>
             <div class="card-title">Actions rapides</div>
             <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px">
@@ -179,30 +173,6 @@ if (! empty($objectiveTargetDate)) {
                 <a href="<?= base_url('objectifs/choose') ?>" class="btn btn-ghost btn-full">Choisir mon objectif</a>
             </div>
         <?php endif; ?>
-    </div>
-</div>
-
-<!-- Modules utilisateur -->
-<div class="card">
-    <div class="card-header">
-        <div class="card-title">Modules disponibles</div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px">
-        <a href="<?= base_url('user/imc') ?>" style="padding:16px;border:1.5px solid var(--c-border);border-radius:8px;text-decoration:none;color:var(--c-text);transition:all 0.2s;text-align:center">
-            <svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:currentColor;fill:none;margin:0 auto 8px"><path d="M12 2l3 7h7l-5.5 4.2L18.5 21 12 16.8 5.5 21l2-7.8L2 9h7z"/></svg>
-            <div style="font-weight:600;font-size:14px">Calcul IMC</div>
-            <div style="font-size:12px;color:var(--c-muted)">Suivi santé</div>
-        </a>
-        <a href="<?= base_url('user/objectifs') ?>" style="padding:16px;border:1.5px solid var(--c-border);border-radius:8px;text-decoration:none;color:var(--c-text);transition:all 0.2s;text-align:center">
-            <svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:currentColor;fill:none;margin:0 auto 8px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <div style="font-weight:600;font-size:14px">Objectifs</div>
-            <div style="font-size:12px;color:var(--c-muted)">Vos cibles</div>
-        </a>
-        <a href="<?= base_url('user/profile') ?>" style="padding:16px;border:1.5px solid var(--c-border);border-radius:8px;text-decoration:none;color:var(--c-text);transition:all 0.2s;text-align:center">
-            <svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:currentColor;fill:none;margin:0 auto 8px"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg>
-            <div style="font-weight:600;font-size:14px">Profil</div>
-            <div style="font-size:12px;color:var(--c-muted)">Mes infos</div>
-        </a>
     </div>
 </div>
 

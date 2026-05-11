@@ -17,7 +17,7 @@
     <div class="app-shell app-shell-user">
         <aside class="sidebar sidebar-user">
             <div class="sidebar-brand">
-                <div class="logo-mark">N</div>
+                <img src="/assets/logo/diet.png" alt="NutriStep logo" style="width:32px;height:32px;object-fit:contain">
                 <div>
                     <div class="brand-name">NutriStep</div>
                     <div class="brand-sub">Espace utilisateur</div>
@@ -63,12 +63,12 @@
         </main>
     </div>
 
-    <div class="modal-overlay" id="wallet-modal" aria-hidden="true">
+    <div class="modal-overlay" id="wallet-modal" aria-hidden="true" aria-modal="true" role="dialog" aria-labelledby="wallet-modal-title">
         <div class="modal wallet-modal">
             <div class="modal-icon wallet-modal-icon">
                 <svg viewBox="0 0 24 24"><path d="M3 7h18a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/><path d="M18 13h4"/><circle cx="18.5" cy="12" r="1"/></svg>
             </div>
-            <h3>Votre solde</h3>
+            <h3 id="wallet-modal-title">Votre solde</h3>
             <p>Consultez votre solde exact et rechargez-le avec un code argent valide.</p>
 
             <div class="wallet-balance-box">
@@ -112,6 +112,34 @@
             const cfg = window.__WALLET_MODAL__ || {};
             const goldBtn = document.getElementById('wallet-gold-btn');
             const modalGoldBtn = document.getElementById('wallet-modal-gold-btn');
+            const walletBtn = document.getElementById('wallet-open-btn');
+            const walletModal = document.getElementById('wallet-modal');
+            const walletCloseBtn = document.getElementById('wallet-close-btn');
+
+            // Modal management
+            function openWalletModal(){
+                if(walletModal) {
+                    walletModal.classList.add('open');
+                    walletModal.setAttribute('aria-hidden', 'false');
+                }
+            }
+
+            function closeWalletModal(){
+                if(walletModal) {
+                    walletModal.classList.remove('open');
+                    walletModal.setAttribute('aria-hidden', 'true');
+                }
+            }
+
+            // Close modal when clicking overlay
+            if(walletModal){
+                walletModal.addEventListener('click', function(e){
+                    if(e.target === walletModal) closeWalletModal();
+                });
+            }
+
+            if(walletBtn){ walletBtn.addEventListener('click', openWalletModal); }
+            if(walletCloseBtn){ walletCloseBtn.addEventListener('click', closeWalletModal); }
 
             function setGoldActive(isActive){
                 if(!goldBtn) return;

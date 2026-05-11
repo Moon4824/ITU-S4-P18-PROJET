@@ -10,7 +10,7 @@
     <div class="app-shell">
         <aside class="sidebar">
             <div class="sidebar-brand">
-                <div class="logo-mark">N</div>
+                <img src="/assets/logo/diet.png" alt="NutriStep logo" style="width:32px;height:32px;object-fit:contain">
                 <div>
                     <div class="brand-name">NutriStep</div>
                     <div class="brand-sub">Espace sécurisé</div>

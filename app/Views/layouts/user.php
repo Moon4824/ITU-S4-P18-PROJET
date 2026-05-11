@@ -14,6 +14,7 @@
 <body>
     <?php $role = (string) ($user['role'] ?? ''); ?>
     <?php $soldeLabel = isset($user['solde_monnaie']) ? number_format((float) $user['solde_monnaie'], 2, ',', ' ') . ' Ar' : '0,00 Ar'; ?>
+    <?php $openWalletModal = ! empty($openWalletModal); ?>
     <div class="app-shell app-shell-user">
         <aside class="sidebar sidebar-user">
             <div class="sidebar-brand">
@@ -27,7 +28,7 @@
             <nav class="sidebar-nav">
                 <a class="sidebar-link" href="/user">Dashboard</a>
                 <a class="sidebar-link" href="/user/imc">IMC</a>
-                <a class="sidebar-link" href="/user/objectifs">Objectifs</a>
+                <a class="sidebar-link" href="/user/objectifs">New Objectifs</a>
             </nav>
         </aside>
 
@@ -110,6 +111,7 @@
     <script>
         (function(){
             const cfg = window.__WALLET_MODAL__ || {};
+            const shouldOpenWalletModal = <?= json_encode($openWalletModal) ?>;
             const goldBtn = document.getElementById('wallet-gold-btn');
             const modalGoldBtn = document.getElementById('wallet-modal-gold-btn');
             const walletBtn = document.getElementById('wallet-open-btn');
@@ -192,6 +194,10 @@
 
             if(goldBtn){ goldBtn.addEventListener('click', activateGold); }
             if(modalGoldBtn){ modalGoldBtn.addEventListener('click', activateGold); }
+
+            if (shouldOpenWalletModal) {
+                openWalletModal();
+            }
 
             // Initial fetch
             refreshStatus();

@@ -17,7 +17,7 @@
     $poidsObjectif = $old['poids_objectif'] ?? ($poidsIdeal ?? '');
     $dateDebut = $old['date_debut'] ?? date('Y-m-d');
     $selectedSportId = (int) ($old['sport_id'] ?? 0);
-    $selectedRegimeId = (int) ($old['regime_id'] ?? 0);
+    $selectedRegimeId = (int) ($selectedRegimeId ?? ($old['regime_id'] ?? 0));
 ?>
 <div class="dashboard-grid">
     <article class="dashboard-card dashboard-card-wide">
@@ -85,7 +85,7 @@
                 <div class="form-grid" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px;">
                     <div>
                         <label for="poids_objectif" style="display:block;margin-bottom:6px;">Poids objectif (kg)</label>
-                        <input type="number" step="0.01" min="0" id="poids_objectif" name="poids_objectif" value="<?= esc((string) $poidsObjectif) ?>" class="form-control" required>
+                        <input type="number" step="0.01" min="0" id="poids_objectif" name="poids_objectif" value="" class="form-control" placeholder="<?= esc((string) $poidsObjectif) ?>" required>
                         <small id="poids_objectif_help" style="display:block;margin-top:6px;color:var(--c-muted);">Rempli automatiquement si tu choisis l'IMC idéal.</small>
                     </div>
                     <div>
@@ -400,6 +400,14 @@
 
     if (detailClose) {
         detailClose.addEventListener('click', closeDetailModal);
+    }
+
+    const autoOpenRegimeId = <?= json_encode((int) ($selectedRegimeId ?? 0)) ?>;
+    if (autoOpenRegimeId > 0) {
+        const autoTrigger = Array.from(detailTriggers).find((trigger) => Number(trigger.dataset.regimeId || 0) === autoOpenRegimeId);
+        if (autoTrigger) {
+            openDetailModal(autoTrigger);
+        }
     }
 
     if (detailModal) {

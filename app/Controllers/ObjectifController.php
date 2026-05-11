@@ -196,7 +196,19 @@ class ObjectifController extends BaseController
         }
 
         if ((float) $user['solde_monnaie'] < $prixTotal) {
-            return redirect()->back()->withInput()->with('error', 'Solde insuffisant pour valider ce régime.');
+            return view('user/objectifs/index', $this->buildChooseViewData($user, [
+                'step' => 2,
+                'selectedObjective' => $objective,
+                'poidsObjectif' => $poidsObjectif,
+                'poidsActuel' => $poidsActuel,
+                'taille' => $taille,
+                'diffPoids' => $diffPoids,
+                'suggestions' => $suggestions,
+                'old' => $this->request->getPost(),
+                'selectedRegimeId' => $selectedRegimeId,
+                'openWalletModal' => true,
+                'errorMessage' => 'Solde insuffisant pour valider ce régime.',
+            ]));
         }
 
         $db = \Config\Database::connect();

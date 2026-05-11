@@ -25,7 +25,9 @@
                 <a class="sidebar-link <?= str_starts_with($currentPath, 'admin/sports') ? 'active' : '' ?>" href="/admin/sports">Sport</a>
                 <a class="sidebar-link <?= str_starts_with($currentPath, 'admin/codes') ? 'active' : '' ?>" href="/admin/codes">Code argent</a>
                 <a class="sidebar-link <?= str_starts_with($currentPath, 'admin/utilisateurs') ? 'active' : '' ?>" href="/admin/utilisateurs">Utilisateurs</a>
-                <a class="sidebar-link <?= str_starts_with($currentPath, 'admin/gold') ? 'active' : '' ?>" href="/admin/gold">Configuration Gold </a>
+                <div style="margin:18px 0 8px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--c-muted);">Paramètres</div>
+                <a class="sidebar-link <?= str_starts_with($currentPath, 'admin/gold') ? 'active' : '' ?>" href="/admin/gold">Configuration Gold</a>
+                <a class="sidebar-link <?= str_starts_with($currentPath, 'admin/imc/interpretations') ? 'active' : '' ?>" href="/admin/imc/interpretations">Interprétations IMC</a>
                 <a class="sidebar-link" href="/auth/logout" onclick="event.preventDefault(); document.getElementById('logout-form-admin').submit();">Déconnexion</a>
             </nav>
 

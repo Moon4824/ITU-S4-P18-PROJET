@@ -8,7 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 
 $routes->get('/', 'Home::index', ['filter' => 'auth']);
 
-// Objectifs successifs avec URL publique, protégée par le filtre utilisateur.
+// Routes publiques métier protégées par le filtre utilisateur.
 $routes->match(['get', 'post'], 'objectifs/choose', 'ObjectifController::choose', ['filter' => 'user']);
 $routes->post('objectifs/choose/save', 'ObjectifController::save', ['filter' => 'user']);
 $routes->post('objectifs/choose/pdf', 'ObjectifController::exportPdf', ['filter' => 'user']);
@@ -28,7 +28,7 @@ $routes->group('register', static function ($routes) {
 	$routes->post('save-inscription2', 'RegisterController::saveInscription2');
 });
 
-// Routes métier regroupées sans préfixe pour garder les mêmes URLs publiques.
+// Routes métier utilisateur.
 $routes->group('user', ['filter' => 'user'] , static function ($routes) {
 	$routes->get('/', 'UserController::index');
 
@@ -44,15 +44,16 @@ $routes->group('user', ['filter' => 'user'] , static function ($routes) {
 
 });
 
-// Portefeuille: activation Gold (protéger par filtre user)
+// Routes portefeuille utilisateur.
 $routes->post('portefeuille/activate-gold', 'PortefeuilleController::activateGold', ['filter' => 'user']);
-// Portefeuille: summary + redeem code
 $routes->get('portefeuille/summary', 'PortefeuilleController::summary', ['filter' => 'user']);
 $routes->post('portefeuille/code', 'PortefeuilleController::redeemCode', ['filter' => 'user']);
-	// API endpoints for IMC interpretation
-	$routes->get('api/imc/interpretations', 'ImcController::list');
-	$routes->post('api/imc/calculate', 'ImcController::calculate');
 
+// API IMC.
+$routes->get('api/imc/interpretations', 'ImcController::list');
+$routes->post('api/imc/calculate', 'ImcController::calculate');
+
+// Routes métier administrateur.
 $routes->group('admin', ['filter' => 'admin'], function($routes) {
 	// Controllers are in App\Controllers\ (RegimeController), not in Admin namespace.
 	$routes->get('/', 'AdminController::index');
@@ -89,6 +90,14 @@ $routes->group('admin', ['filter' => 'admin'], function($routes) {
 	$routes->get('codes/edit/(:num)',    'Admin\CodeArgentController::edit/$1');
 	$routes->post('codes/update/(:num)', 'Admin\CodeArgentController::update/$1');
 	$routes->get('codes/delete/(:num)',  'Admin\CodeArgentController::delete/$1');
+
+	// Routes paramètres IMC
+	$routes->get('imc/interpretations',           'Admin\InterpretationImcController::index');
+	$routes->get('imc/interpretations/create',    'Admin\InterpretationImcController::create');
+	$routes->post('imc/interpretations/store',    'Admin\InterpretationImcController::store');
+	$routes->get('imc/interpretations/edit/(:num)',   'Admin\InterpretationImcController::edit/$1');
+	$routes->post('imc/interpretations/update/(:num)', 'Admin\InterpretationImcController::update/$1');
+	$routes->get('imc/interpretations/delete/(:num)',  'Admin\InterpretationImcController::delete/$1');
 
 	// Routes Gold configuration
 	$routes->get('gold',           'Admin\GoldController::index');

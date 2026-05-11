@@ -1,11 +1,25 @@
 <?= $this->extend('layouts/admin') ?>
 <?= $this->section('content') ?>
 
-<?php if (session()->getFlashdata('success')) : ?>
-    <div class="alert alert-success"><?= esc(session()->getFlashdata('success')) ?></div>
+<?php
+$successMessage = session()->getFlashdata('success');
+$errorMessage = session()->getFlashdata('error');
+$flashToString = static function ($message): string {
+    if (is_array($message)) {
+        return implode(' ', array_map(static fn ($item) => is_scalar($item) ? (string) $item : '', $message));
+    }
+
+    return (string) ($message ?? '');
+};
+$keyword = $keyword ?? '';
+$statut = $statut ?? '';
+?>
+
+<?php if ($successMessage) : ?>
+    <div class="alert alert-success"><?= esc($flashToString($successMessage)) ?></div>
 <?php endif; ?>
-<?php if (session()->getFlashdata('error')) : ?>
-    <div class="alert alert-danger"><?= esc(session()->getFlashdata('error')) ?></div>
+<?php if ($errorMessage) : ?>
+    <div class="alert alert-danger"><?= esc($flashToString($errorMessage)) ?></div>
 <?php endif; ?>
 
 <div class="card">
@@ -51,12 +65,14 @@
                 <?php else : ?>
                     <?php foreach ($codes as $c) : ?>
                         <?php $actif = (int) $c['est_valide'] === 1; ?>
+                        <?php $codeId = (string) ($c['id'] ?? ''); ?>
+                        <?php $codeValue = (string) ($c['code'] ?? ''); ?>
                         <tr>
-                            <td><?= esc($c['id']) ?></td>
+                            <td><?= esc($codeId) ?></td>
                             <td>
                                 <code style="background:var(--c-bg);padding:3px 10px;border-radius:6px;
                                              font-size:13px;letter-spacing:2px;font-weight:700">
-                                    <?= esc($c['code']) ?>
+                                    <?= esc($codeValue) ?>
                                 </code>
                             </td>
                             <td>
@@ -86,7 +102,7 @@
                                         <?= $actif ? '⏸ Désactiver' : '▶ Activer' ?>
                                     </a>
                                     <button class="btn btn-danger btn-sm"
-                                            onclick="openDeleteModal('<?= base_url('admin/codes/delete/' . $c['id']) ?>', '<?= esc($c['code']) ?>')">
+                                            onclick="openDeleteModal('<?= base_url('admin/codes/delete/' . $codeId) ?>', '<?= esc($codeValue) ?>')">
                                         <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
                                         Supprimer
                                     </button>

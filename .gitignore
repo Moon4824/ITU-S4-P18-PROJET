@@ -1,2 +1,5 @@
 writable/logs/log-2026-05-06.log
 note.pdf
+writable/debugbar/*.json
+writable/session/*
+writable/logs/*.log

@@ -15,4 +15,9 @@ class SportModel extends Model
         'nom'          => 'required|min_length[2]|max_length[150]',
         'apport_poids' => 'required|in_list[-1,0,1]',
     ];
+
+    public function findAllOrdered(): array
+    {
+        return $this->orderBy('nom', 'ASC')->findAll();
+    }
 }

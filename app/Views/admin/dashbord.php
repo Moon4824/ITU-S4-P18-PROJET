@@ -24,10 +24,21 @@
         <h3>Espace administrateur</h3>
         <p>Cette zone est visible uniquement pour les administrateurs.</p>
         <ul class="dashboard-list">
-            <li>Gestion des utilisateurs</li>
-            <li>Validation des accès</li>
-            <li>Supervision des données</li>
+            <li><a href="<?= base_url('admin/utilisateurs') ?>">Gestion des utilisateurs</a></li>
+            <li><a href="<?= base_url('admin/regime') ?>">Gestion des régimes</a></li>
+            <li><a href="<?= base_url('admin/sports') ?>">Gestion des sports</a></li>
+            <li><a href="<?= base_url('admin/codes') ?>">Codes de remise</a></li>
         </ul>
+    </article>
+
+    <article class="dashboard-card">
+        <h3>Configuration Gold 💎</h3>
+        <p>Gérez les paramètres de l'option Gold (prix et remise).</p>
+        <p><strong>Prix Gold:</strong> Montant unique à payer pour l'accès à vie</p>
+        <p><strong>Remise:</strong> % appliqué à tous les régimes pour les utilisateurs Gold</p>
+        <a href="<?= base_url('admin/gold') ?>" class="btn btn-primary btn-sm" style="margin-top: 10px;">
+            <i class="fas fa-cog"></i> Configurer Gold
+        </a>
     </article>
 
     <article class="dashboard-card">

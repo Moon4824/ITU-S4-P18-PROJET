@@ -25,6 +25,7 @@
                 <a class="sidebar-link <?= str_starts_with($currentPath, 'admin/sports') ? 'active' : '' ?>" href="/admin/sports">Sport</a>
                 <a class="sidebar-link <?= str_starts_with($currentPath, 'admin/codes') ? 'active' : '' ?>" href="/admin/codes">Code argent</a>
                 <a class="sidebar-link <?= str_starts_with($currentPath, 'admin/utilisateurs') ? 'active' : '' ?>" href="/admin/utilisateurs">Utilisateurs</a>
+                <a class="sidebar-link <?= str_starts_with($currentPath, 'admin/gold') ? 'active' : '' ?>" href="/admin/gold">Configuration Gold </a>
                 <a class="sidebar-link" href="/auth/logout" onclick="event.preventDefault(); document.getElementById('logout-form-admin').submit();">Déconnexion</a>
             </nav>
 

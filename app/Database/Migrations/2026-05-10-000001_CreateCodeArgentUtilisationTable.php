@@ -11,11 +11,10 @@ class CreateCodeArgentUtilisationTable extends Migration
         $this->forge->addField([
             'id' => [
                 'type' => 'INT',
-                'auto_increment' => true,
+                'autoIncrement' => true,
             ],
             'id_code_argent' => [
                 'type' => 'INT',
-                'unsigned' => true,
             ],
             'id_utilisateur' => [
                 'type' => 'INT',
@@ -34,8 +33,8 @@ class CreateCodeArgentUtilisationTable extends Migration
         $this->forge->addKey('id', true);
         $this->forge->addUniqueKey('id_code_argent');
         $this->forge->addKey('id_utilisateur');
-        $this->forge->addForeignKey('id_code_argent', 'code_argent', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('id_utilisateur', 'utilisateur', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('id_code_argent', 'code_argent', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('id_utilisateur', 'utilisateur', 'id', '', 'CASCADE');
 
         $this->forge->createTable('code_argent_utilisation');
     }

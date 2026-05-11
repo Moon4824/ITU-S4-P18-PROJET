@@ -19,10 +19,6 @@ $routes->group('auth', static function ($routes) {
 	$routes->post('logout', 'AuthController::logout', ['filter' => 'auth']);
 });
 
-// Routes du portefeuille utilisateur.
-$routes->get('portefeuille/summary', 'PortefeuilleController::summary', ['filter' => 'user']);
-$routes->post('portefeuille/code', 'PortefeuilleController::redeemCode', ['filter' => 'user']);
-
 // Routes d'inscription groupées.
 $routes->group('register', static function ($routes) {
 	$routes->get('inscription1', 'RegisterController::inscription1');
@@ -86,4 +82,9 @@ $routes->group('admin', ['filter' => 'admin'], function($routes) {
 	$routes->get('codes/edit/(:num)',    'Admin\CodeArgentController::edit/$1');
 	$routes->post('codes/update/(:num)', 'Admin\CodeArgentController::update/$1');
 	$routes->get('codes/delete/(:num)',  'Admin\CodeArgentController::delete/$1');
+
+	// Routes Gold configuration
+	$routes->get('gold',           'Admin\GoldController::index');
+	$routes->post('gold/update',   'Admin\GoldController::update');
+	$routes->get('api/gold/config', 'Admin\GoldController::getConfig');
 });

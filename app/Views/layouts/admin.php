@@ -23,12 +23,9 @@
                 <a class="sidebar-link <?= $currentPath === 'admin' ? 'active' : '' ?>" href="/admin">Dashboard</a>
                 <a class="sidebar-link <?= str_starts_with($currentPath, 'admin/regime') ? 'active' : '' ?>" href="/admin/regime">Régimes</a>
                 <a class="sidebar-link <?= str_starts_with($currentPath, 'admin/sports') ? 'active' : '' ?>" href="/admin/sports">Sport</a>
-<<<<<<< Updated upstream
-=======
                 <a class="sidebar-link <?= str_starts_with($currentPath, 'admin/codes') ? 'active' : '' ?>" href="/admin/codes">Code argent</a>
                 <a class="sidebar-link <?= str_starts_with($currentPath, 'admin/utilisateurs') ? 'active' : '' ?>" href="/admin/utilisateurs">Utilisateurs</a>
                 <a class="sidebar-link <?= str_starts_with($currentPath, 'admin/gold') ? 'active' : '' ?>" href="/admin/gold">Configuration Gold </a>
->>>>>>> Stashed changes
                 <a class="sidebar-link" href="/auth/logout" onclick="event.preventDefault(); document.getElementById('logout-form-admin').submit();">Déconnexion</a>
             </nav>
 

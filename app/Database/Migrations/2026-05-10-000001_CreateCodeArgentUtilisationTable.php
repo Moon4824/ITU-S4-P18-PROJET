@@ -8,7 +8,7 @@ class CreateCodeArgentUtilisationTable extends Migration
 {
     public function up()
     {
-        $this->db->disableForeignKeyChecks();
+        $this->db->query('SET FOREIGN_KEY_CHECKS=0');
         
         $this->db->query('CREATE TABLE IF NOT EXISTS code_argent_utilisation (
             id INT AUTO_INCREMENT PRIMARY KEY,
@@ -24,13 +24,13 @@ class CreateCodeArgentUtilisationTable extends Migration
                 REFERENCES utilisateur(id) ON DELETE CASCADE
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci');
         
-        $this->db->enableForeignKeyChecks();
+        $this->db->query('SET FOREIGN_KEY_CHECKS=1');
     }
 
     public function down()
     {
-        $this->db->disableForeignKeyChecks();
+        $this->db->query('SET FOREIGN_KEY_CHECKS=0');
         $this->db->query('DROP TABLE IF EXISTS code_argent_utilisation');
-        $this->db->enableForeignKeyChecks();
+        $this->db->query('SET FOREIGN_KEY_CHECKS=1');
     }
 }

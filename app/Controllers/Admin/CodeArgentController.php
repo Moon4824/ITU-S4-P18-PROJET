@@ -103,10 +103,21 @@ class CodeArgentController extends BaseController
             throw new \CodeIgniter\Exceptions\PageNotFoundException("Code #$id introuvable.");
         }
 
+        // Récupérer l'historique d'utilisation
+        $utilisations = db_connect()
+            ->table('code_argent_utilisation')
+            ->select('code_argent_utilisation.*, utilisateur.nom, utilisateur.email')
+            ->join('utilisateur', 'utilisateur.id = code_argent_utilisation.id_utilisateur', 'left')
+            ->where('code_argent_utilisation.id_code_argent', $id)
+            ->orderBy('code_argent_utilisation.date_utilisation', 'DESC')
+            ->get()
+            ->getResultArray();
+
         return view('admin/codes/show', [
-            'title'    => 'Détail du code',
-            'subtitle' => $code['code'],
-            'code'     => $code,
+            'title'        => 'Détail du code',
+            'subtitle'     => $code['code'],
+            'code'         => $code,
+            'utilisations' => $utilisations,
         ]);
     }
 

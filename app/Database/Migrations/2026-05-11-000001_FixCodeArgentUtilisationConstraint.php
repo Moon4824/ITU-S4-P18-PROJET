@@ -8,7 +8,7 @@ class FixCodeArgentUtilisationConstraint extends Migration
 {
     public function up()
     {
-        $this->db->disableForeignKeyChecks();
+        $this->db->query('SET FOREIGN_KEY_CHECKS=0');
         
         // Retirer la contrainte UNIQUE uniquement sur id_code_argent
         $this->db->query('ALTER TABLE code_argent_utilisation DROP INDEX id_code_argent');
@@ -16,12 +16,12 @@ class FixCodeArgentUtilisationConstraint extends Migration
         // Ajouter une contrainte UNIQUE composée sur (id_code_argent, id_utilisateur)
         $this->db->query('ALTER TABLE code_argent_utilisation ADD UNIQUE KEY code_utilisateur (id_code_argent, id_utilisateur)');
         
-        $this->db->enableForeignKeyChecks();
+        $this->db->query('SET FOREIGN_KEY_CHECKS=1');
     }
 
     public function down()
     {
-        $this->db->disableForeignKeyChecks();
+        $this->db->query('SET FOREIGN_KEY_CHECKS=0');
         
         // Retirer la contrainte composée
         $this->db->query('ALTER TABLE code_argent_utilisation DROP INDEX code_utilisateur');
@@ -29,6 +29,6 @@ class FixCodeArgentUtilisationConstraint extends Migration
         // Restaurer la contrainte originale
         $this->db->query('ALTER TABLE code_argent_utilisation ADD UNIQUE KEY id_code_argent (id_code_argent)');
         
-        $this->db->enableForeignKeyChecks();
+        $this->db->query('SET FOREIGN_KEY_CHECKS=1');
     }
 }

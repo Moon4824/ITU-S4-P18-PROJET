@@ -8,7 +8,7 @@ class RecreateCodeArgentUtilisationTable extends Migration
 {
     public function up()
     {
-        $this->db->disableForeignKeyChecks();
+        $this->db->query('SET FOREIGN_KEY_CHECKS=0');
         
         // Supprimer la table existante
         $this->db->query('DROP TABLE IF EXISTS code_argent_utilisation');
@@ -44,13 +44,13 @@ class RecreateCodeArgentUtilisationTable extends Migration
 
         $this->forge->createTable('code_argent_utilisation');
         
-        $this->db->enableForeignKeyChecks();
+        $this->db->query('SET FOREIGN_KEY_CHECKS=1');
     }
 
     public function down()
     {
-        $this->db->disableForeignKeyChecks();
+        $this->db->query('SET FOREIGN_KEY_CHECKS=0');
         $this->forge->dropTable('code_argent_utilisation');
-        $this->db->enableForeignKeyChecks();
+        $this->db->query('SET FOREIGN_KEY_CHECKS=1');
     }
 }

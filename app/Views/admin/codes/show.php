@@ -1,7 +1,11 @@
 <?= $this->extend('layouts/admin') ?>
 <?= $this->section('content') ?>
 
-<?php $actif = (int) $code['est_valide'] === 1; ?>
+<?php
+/** @var array<string, mixed> $code */
+/** @var array<int, array<string, mixed>> $utilisations */
+$actif = (int) ($code['est_valide'] ?? 0) === 1;
+?>
 
 <div class="card">
     <div class="card-header">
@@ -63,19 +67,46 @@
             </div>
 
             <div class="detail-item">
-                <div class="detail-label">Utilisé par</div>
+                <div class="detail-label">Historique d'utilisation</div>
                 <div class="detail-value">
-                    <?php if ($code['id_utilisateur']) : ?>
-                        <span style="color:var(--c-primary);font-weight:600">
-                            Utilisateur #<?= esc($code['id_utilisateur']) ?>
+                    <?php if (!empty($utilisations)) : ?>
+                        <span style="color:var(--c-success);font-weight:600">
+                            <?= count($utilisations) ?> utilisation<?= count($utilisations) > 1 ? 's' : '' ?>
                         </span>
                     <?php else : ?>
-                        <span style="color:var(--c-muted);font-size:13px">Non utilisé</span>
+                        <span style="color:var(--c-muted);font-size:13px">Pas encore utilisé</span>
                     <?php endif; ?>
                 </div>
             </div>
 
         </div>
+
+        <?php if (!empty($utilisations)) : ?>
+        <div class="form-section-title" style="margin-top:32px">Historique d'utilisation</div>
+
+        <div style="overflow-x:auto">
+            <table class="admin-table" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Utilisateur</th>
+                        <th>Email</th>
+                        <th>Montant crédité</th>
+                        <th>Date d'utilisation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($utilisations as $util) : ?>
+                    <tr>
+                        <td><?= esc($util['nom']) ?></td>
+                        <td><?= esc($util['email']) ?></td>
+                        <td style="color:var(--c-success);font-weight:600"><?= number_format((float) $util['montant_credit'], 2) ?> Ar</td>
+                        <td><?= date('d/m/Y H:i', strtotime($util['date_utilisation'])) ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+        <?php endif; ?>
 
         <div class="form-actions">
             <button class="btn btn-danger"
@@ -94,7 +125,7 @@
             <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
         </div>
         <h3>Confirmer la suppression</h3>
-        <p>Supprimer le code <strong><?= esc($code['code']) ?></strong> définitivement ?</p>
+        <p>Supprimer le code <strong><?= esc( $code['code']) ?></strong> définitivement ?</p>
         <div class="modal-actions">
             <button class="btn btn-ghost"
                     onclick="document.getElementById('modal-delete').classList.remove('open')">

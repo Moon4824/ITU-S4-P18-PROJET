@@ -48,14 +48,6 @@ class ObjectifController extends BaseController
             return redirect()->to('/auth/login');
         }
 
-        $existingObjective = $this->objectifModel->findLatestByUser((int) $user['id']);
-
-        if ($existingObjective !== null) {
-            $this->syncObjectiveSession($existingObjective);
-
-            return redirect()->to('/user')->with('info', 'Vous avez déjà un objectif enregistré.');
-        }
-
         $data = $this->buildChooseViewData($user);
 
         if (strtolower($this->request->getMethod()) !== 'post') {
@@ -129,10 +121,6 @@ class ObjectifController extends BaseController
 
         if ($user === null) {
             return redirect()->to('/auth/login');
-        }
-
-        if ($this->objectifModel->findLatestByUser((int) $user['id']) !== null) {
-            return redirect()->to('/user')->with('info', 'Vous avez déjà un objectif enregistré.');
         }
 
         $rules = [

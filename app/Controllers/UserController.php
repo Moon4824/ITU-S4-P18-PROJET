@@ -2,16 +2,19 @@
 
 namespace App\Controllers;
 
+use App\Models\InterpretationImcModel;
 use App\Models\ObjectifModel;
 use App\Models\UtilisateurModel;
 
 class UserController extends BaseController
 {
+    protected InterpretationImcModel $interpretationModel;
     protected ObjectifModel $objectifModel;
     protected UtilisateurModel $utilisateurModel;
 
     public function __construct()
     {
+        $this->interpretationModel = new InterpretationImcModel();
         $this->objectifModel = new ObjectifModel();
         $this->utilisateurModel = new UtilisateurModel();
     }
@@ -34,16 +37,35 @@ class UserController extends BaseController
             return redirect()->to('/auth/login');
         }
 
+        $poidsActuel = (float) ($user['poids_actuel'] ?? 0);
+        $tailleMetres = (float) ($user['taille'] ?? 0);
+        $imc = $poidsActuel > 0 && $tailleMetres > 0 ? $poidsActuel / ($tailleMetres * $tailleMetres) : 0.0;
+        $imcInterpretation = $imc > 0 ? $this->interpretationModel->findForImc($imc) : null;
+
         $objective = $this->objectifModel->findLatestByUser($userId);
 
-        if ($objective === null) {
-            return redirect()->to('/objectifs/choose');
+        if ($objective !== null) {
+            session()->set([
+                'selected_objective_id' => (int) ($objective['id_type_objectif'] ?? 0),
+                'selected_objective_label' => (string) ($objective['type_objectif_label'] ?? ''),
+            ]);
         }
 
-        session()->set([
-            'selected_objective_id' => (int) ($objective['id_type_objectif'] ?? 0),
-            'selected_objective_label' => (string) ($objective['type_objectif_label'] ?? ''),
-        ]);
+        $objectiveWeight = $objective !== null ? (float) ($objective['objectif_poids'] ?? 0) : 0.0;
+        $objectiveType = (string) ($objective['type_objectif_label'] ?? '');
+        $objectiveSport = (string) ($objective['sport_label'] ?? '');
+        $objectiveStartDate = (string) ($objective['date_debut'] ?? '');
+        $objectiveDuration = (int) ($objective['duree_objectif'] ?? 0);
+        $objectiveTargetDate = null;
+
+        if ($objective !== null && $objectiveStartDate !== '' && isset($objective['duree_objectif'])) {
+            try {
+                $startDate = new \DateTimeImmutable($objectiveStartDate);
+                $objectiveTargetDate = $startDate->modify('+' . $objectiveDuration . ' days')->format('Y-m-d');
+            } catch (\Throwable) {
+                $objectiveTargetDate = null;
+            }
+        }
 
         return view('user/dashboard', [
             'title' => 'Dashboard',
@@ -53,7 +75,17 @@ class UserController extends BaseController
                 'role'    => $user['role_label'] ?? session()->get('user_role'),
                 'name'    => $user['nom'] ?? session()->get('user_name'),
                 'email'   => $user['email'] ?? session()->get('user_email'),
+                'poids_actuel' => $user['poids_actuel'] ?? null,
             ],
+            'imc' => round($imc, 2),
+            'imcInterpretation' => $imcInterpretation,
+            'objective' => $objective,
+            'objectiveWeight' => $objectiveWeight > 0 ? round($objectiveWeight, 2) : null,
+            'objectiveType' => $objectiveType,
+            'objectiveSport' => $objectiveSport,
+            'objectiveStartDate' => $objectiveStartDate,
+            'objectiveDuration' => $objectiveDuration,
+            'objectiveTargetDate' => $objectiveTargetDate,
         ]);
     }
 

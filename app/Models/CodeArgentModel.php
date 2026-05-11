@@ -12,23 +12,38 @@ class CodeArgentModel extends Model
     protected $allowedFields = ['code', 'valeur', 'est_valide', 'id_utilisateur'];
     protected $useTimestamps = false;
 
-    public function findRedeemableCode(string $code): ?array
+    public function findRedeemableCode(string $code, int $userId = 0): ?array
     {
-        return $this->where('code', $code)
+        $codeRow = $this->where('code', $code)
             ->where('est_valide', 1)
-            ->groupStart()
-                ->where('id_utilisateur', null)
-                ->orWhere('id_utilisateur', 0)
-            ->groupEnd()
             ->first();
+
+        if ($codeRow === null) {
+            return null;
+        }
+
+        // Si userId est fourni, vérifier que l'utilisateur n'a pas déjà utilisé ce code
+        if ($userId > 0) {
+            $utilisation = db_connect()
+                ->table('code_argent_utilisation')
+                ->where('id_code_argent', $codeRow['id'])
+                ->where('id_utilisateur', $userId)
+                ->get()
+                ->getFirstRow('array');
+
+            if ($utilisation !== null) {
+                return null; // Utilisateur a déjà utilisé ce code
+            }
+        }
+
+        return $codeRow;
     }
 
     public function markAsUsed(int $id, int $userId): bool
     {
-        return (bool) $this->update($id, [
-            'est_valide' => 0,
-            'id_utilisateur' => $userId,
-        ]);
+        // markAsUsed ne fait rien - la validation se fait via code_argent_utilisation
+        // On garde la méthode pour la compatibilité, mais elle ne modifie pas le code
+        return true;
     }
 
     // ── Toggle est_valide ─────────────────────────────────────

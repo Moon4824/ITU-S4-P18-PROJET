@@ -133,7 +133,7 @@ class PortefeuilleController extends BaseController
 
         $code = strtoupper(trim((string) $this->request->getPost('code')));
         $userId = (int) $user['id'];
-        $codeRow = $this->codeArgentModel->findRedeemableCode($code);
+        $codeRow = $this->codeArgentModel->findRedeemableCode($code, $userId);
 
         if ($codeRow === null) {
             return $this->response->setStatusCode(404)->setJSON([

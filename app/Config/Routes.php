@@ -11,6 +11,7 @@ $routes->get('/', 'Home::index', ['filter' => 'auth']);
 // Objectifs successifs avec URL publique, protégée par le filtre utilisateur.
 $routes->match(['get', 'post'], 'objectifs/choose', 'ObjectifController::choose', ['filter' => 'user']);
 $routes->post('objectifs/choose/save', 'ObjectifController::save', ['filter' => 'user']);
+$routes->post('objectifs/choose/pdf', 'ObjectifController::exportPdf', ['filter' => 'user']);
 
 // Routes d'authentification groupées.
 $routes->group('auth', static function ($routes) {

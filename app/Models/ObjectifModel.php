@@ -24,9 +24,10 @@ class ObjectifModel extends Model
 
     public function findLatestByUser(int $userId): ?array
     {
-        return $this->select('objectif.*, type_objectif.libelle AS type_objectif_label, regime.nom AS regime_label')
+        return $this->select('objectif.*, type_objectif.libelle AS type_objectif_label, regime.nom AS regime_label, sport.nom AS sport_label')
             ->join('type_objectif', 'type_objectif.id = objectif.id_type_objectif', 'left')
             ->join('regime', 'regime.id = objectif.regime_id', 'left')
+            ->join('sport', 'sport.id = objectif.sport_id', 'left')
             ->where('objectif.id_utilisateur', $userId)
             ->orderBy('objectif.id', 'DESC')
             ->first();

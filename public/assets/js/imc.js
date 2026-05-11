@@ -130,7 +130,7 @@ function initBMIPage() {
 }
 
 function continueToRegimes() {
-  window.location.href = '/objectifs';
+  window.location.href = '/objectifs/choose';
 }
 
 window.initBMIPage = initBMIPage;

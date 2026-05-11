@@ -38,22 +38,44 @@ class RegisterController extends BaseController
             'nom' => [
                 'label' => 'Nom',
                 'rules' => 'required|min_length[3]|max_length[100]',
+                'errors' => [
+                    'required' => 'Le nom est obligatoire.',
+                    'min_length' => 'Le nom doit contenir au moins 3 caracteres.',
+                    'max_length' => 'Le nom ne doit pas depasser 100 caracteres.',
+                ],
             ],
             'email' => [
                 'label' => 'Email',
                 'rules' => 'required|valid_email|is_unique[utilisateur.email]',
+                'errors' => [
+                    'required' => "L'email est obligatoire.",
+                    'valid_email' => "L'email n'est pas valide.",
+                    'is_unique' => 'Cet email est deja utilise.',
+                ],
             ],
             'date_naissance' => [
                 'label' => 'Date de naissance',
                 'rules' => 'required|valid_date[Y-m-d]',
+                'errors' => [
+                    'required' => 'La date de naissance est obligatoire.',
+                    'valid_date' => 'La date de naissance est invalide (format attendu: YYYY-MM-DD).',
+                ],
             ],
             'genre' => [
                 'label' => 'Genre',
                 'rules' => 'required|in_list[homme,femme]',
+                'errors' => [
+                    'required' => 'Le genre est obligatoire.',
+                    'in_list' => 'Le genre doit etre homme ou femme.',
+                ],
             ],
             'mot_de_passe' => [
                 'label' => 'Mot de passe',
                 'rules' => 'required|min_length[8]',
+                'errors' => [
+                    'required' => 'Le mot de passe est obligatoire.',
+                    'min_length' => 'Le mot de passe doit contenir au moins 8 caracteres.',
+                ],
             ],
         ];
 
@@ -112,10 +134,20 @@ class RegisterController extends BaseController
             'poids' => [
                 'label' => 'Poids',
                 'rules' => 'required|greater_than[0]|less_than[500]',
+                'errors' => [
+                    'required' => 'Le poids est obligatoire.',
+                    'greater_than' => 'Le poids doit etre superieur a 0.',
+                    'less_than' => 'Le poids doit etre inferieur a 500.',
+                ],
             ],
             'taille' => [
                 'label' => 'Taille',
                 'rules' => 'required|greater_than[50]|less_than[250]',
+                'errors' => [
+                    'required' => 'La taille est obligatoire.',
+                    'greater_than' => 'La taille doit etre superieure a 50 cm.',
+                    'less_than' => 'La taille doit etre inferieure a 250 cm.',
+                ],
             ],
         ];
 
@@ -183,6 +215,6 @@ class RegisterController extends BaseController
             'register_password',
         ]);
 
-        return redirect()->to('/imc');
+        return redirect()->to('/user/imc');
     }
 }

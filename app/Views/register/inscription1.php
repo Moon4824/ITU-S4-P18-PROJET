@@ -26,6 +26,15 @@
                 <div class="alert alert-error"><?= esc($error) ?></div>
             <?php endif; ?>
 
+            <?php if (isset($validation) && $validation !== null) : ?>
+                <div class="alert alert-error" style="margin-top:0.75rem;">
+                    <?php foreach ($validation->getErrors() as $message) : ?>
+                        <?php $errorText = is_array($message) ? implode(' ', array_map('strval', $message)) : (string) $message; ?>
+                        <div><?= esc($errorText) ?></div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+
             <form action="/register/save-inscription1" method="post">
                 <div class="field-group">
                     <label for="nom">Nom complet</label>

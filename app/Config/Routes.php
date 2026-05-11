@@ -82,4 +82,9 @@ $routes->group('admin', ['filter' => 'admin'], function($routes) {
 	$routes->get('codes/edit/(:num)',    'Admin\CodeArgentController::edit/$1');
 	$routes->post('codes/update/(:num)', 'Admin\CodeArgentController::update/$1');
 	$routes->get('codes/delete/(:num)',  'Admin\CodeArgentController::delete/$1');
+
+	// Routes Gold configuration
+	$routes->get('gold',           'Admin\GoldController::index');
+	$routes->post('gold/update',   'Admin\GoldController::update');
+	$routes->get('api/gold/config', 'Admin\GoldController::getConfig');
 });

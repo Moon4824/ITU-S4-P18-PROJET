@@ -215,6 +215,6 @@ class RegisterController extends BaseController
             'register_password',
         ]);
 
-        return redirect()->to('/user/imc');
+    return redirect()->to('/user/imc');
     }
 }

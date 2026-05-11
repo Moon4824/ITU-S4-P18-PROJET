@@ -141,7 +141,7 @@
                                 <th style="text-align:left;padding:12px 10px;border-bottom:1px solid var(--c-border);">Régime</th>
                                 <th style="text-align:left;padding:12px 10px;border-bottom:1px solid var(--c-border);">Durée totale</th>
                                 <th style="text-align:left;padding:12px 10px;border-bottom:1px solid var(--c-border);">Prix total</th>
-                                <th style="text-align:left;padding:12px 10px;border-bottom:1px solid var(--c-border);">Détail</th>
+                                <th style="text-align:left;padding:12px 10px;border-bottom:1px solid var(--c-border);">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -155,14 +155,14 @@
                                         <td style="padding:12px 10px;border-bottom:1px solid var(--c-border);vertical-align:middle;">
                                             <strong><?= esc((string) $suggestion['nom']) ?></strong><br>
                                             <small style="color:var(--c-muted);">
-                                                <?= esc((string) $suggestion['duree']) ?> j de base · <?= esc(number_format((float) $suggestion['prix'], 2, ',', ' ')) ?> Ar/j
+                                                <?= esc((string) $suggestion['duree']) ?> j de base · <?= esc(number_format((float) $suggestion['prix'], 2, ',', ' ')) ?> € / j
                                             </small>
                                         </td>
                                         <td style="padding:12px 10px;border-bottom:1px solid var(--c-border);vertical-align:middle;">
                                             <?= esc((string) $suggestion['duree_totale_calculee']) ?> jours
                                         </td>
                                         <td style="padding:12px 10px;border-bottom:1px solid var(--c-border);vertical-align:middle;">
-                                            <?= esc(number_format((float) $suggestion['prix_total_calcule'], 2, ',', ' ')) ?> Ar
+                                            <?= esc(number_format((float) $suggestion['prix_total_calcule'], 2, ',', ' ')) ?> €
                                         </td>
                                         <td style="padding:12px 10px;border-bottom:1px solid var(--c-border);vertical-align:middle;">
                                             <button

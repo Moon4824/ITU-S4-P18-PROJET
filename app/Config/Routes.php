@@ -43,6 +43,12 @@ $routes->group('user', ['filter' => 'user'] , static function ($routes) {
 	$routes->post('objectifs/choose', 'ObjectifController::choose');
 
 });
+
+// Portefeuille: activation Gold (protéger par filtre user)
+$routes->post('portefeuille/activate-gold', 'PortefeuilleController::activateGold', ['filter' => 'user']);
+// Portefeuille: summary + redeem code
+$routes->get('portefeuille/summary', 'PortefeuilleController::summary', ['filter' => 'user']);
+$routes->post('portefeuille/code', 'PortefeuilleController::redeemCode', ['filter' => 'user']);
 	// API endpoints for IMC interpretation
 	$routes->get('api/imc/interpretations', 'ImcController::list');
 	$routes->post('api/imc/calculate', 'ImcController::calculate');

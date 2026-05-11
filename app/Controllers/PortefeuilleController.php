@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\CodeArgentModel;
 use App\Models\UtilisateurModel;
+use App\Models\GoldConfigModel;
 
 class PortefeuilleController extends BaseController
 {
@@ -31,8 +32,73 @@ class PortefeuilleController extends BaseController
             'success' => true,
             'balance' => (float) ($user['solde_monnaie'] ?? 0),
             'balance_label' => $this->formatBalance((float) ($user['solde_monnaie'] ?? 0)),
+            'est_gold' => (int) ($user['est_gold'] ?? 0),
             'note' => 'Solde actualisé en temps réel.',
         ]);
+    }
+
+    /**
+     * Activer l'option Gold pour l'utilisateur authentifié.
+     * Cette action marque `est_gold = 1` et enregistre un enregistrement dans `payments`.
+     */
+    public function activateGold()
+    {
+        $user = $this->getAuthenticatedUser();
+
+        if ($user === null) {
+            return $this->response->setStatusCode(401)->setJSON([
+                'success' => false,
+                'message' => 'Session expirée. Veuillez vous reconnecter.',
+            ]);
+        }
+
+        $userId = (int) $user['id'];
+
+        if ((int) ($user['est_gold'] ?? 0) === 1) {
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Vous avez déjà l\'option Gold.',
+                'est_gold' => 1,
+            ]);
+        }
+
+        $goldModel = new GoldConfigModel();
+        $config = $goldModel->getActiveConfig();
+
+        $db = db_connect();
+        $db->transBegin();
+
+        try {
+            $this->utilisateurModel->update($userId, [
+                'est_gold' => 1,
+            ]);
+
+            // Enregistrer un paiement simple (produit GOLD)
+            $db->table('payments')->insert([
+                'user_id' => $userId,
+                'product' => 'GOLD',
+                'created_at' => date('Y-m-d H:i:s'),
+            ]);
+
+            if ($db->transStatus() === false) {
+                throw new \RuntimeException('La transaction a échoué.');
+            }
+
+            $db->transCommit();
+
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Option Gold activée avec succès.',
+                'est_gold' => 1,
+            ]);
+        } catch (\Throwable $exception) {
+            $db->transRollback();
+
+            return $this->response->setStatusCode(500)->setJSON([
+                'success' => false,
+                'message' => 'Impossible d\'activer Gold pour le moment.',
+            ]);
+        }
     }
 
     public function redeemCode()

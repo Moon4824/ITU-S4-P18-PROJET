@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= esc($title ?? 'Espace utilisateur') ?></title>
     <link rel="stylesheet" href="/assets/css/app.css">
+    <style>
+        .wallet-gold-pill.btn-gold-inactive{ background:#ffffff; color:#333; border:1px solid #e0c97a; padding:6px 8px; border-radius:4px; }
+        .wallet-gold-pill.btn-gold-active{ background:#ffd54f; color:#222; border:1px solid #ffb300; padding:6px 8px; border-radius:4px; }
+        .btn.btn-gold{ background:linear-gradient(180deg,#ffd54f,#ffb300); color:#111; border:none; padding:8px 12px; border-radius:4px; cursor:pointer }
+    </style>
 </head>
 <body>
     <?php $role = (string) ($user['role'] ?? ''); ?>
@@ -44,7 +49,7 @@
                         </span>
                     </button>
 
-                    <span class="wallet-gold-pill" title="Fonction GOLD à venir">GOLD</span>
+                    <button type="button" id="wallet-gold-btn" class="wallet-gold-pill btn-gold-inactive" title="Activer GOLD">GOLD</button>
 
                     <a href="/user/profile" class="icon-btn" title="Mon profil">
                         <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg>
@@ -84,7 +89,7 @@
 
                 <div class="modal-actions wallet-modal-actions">
                     <button type="button" class="btn btn-ghost" id="wallet-close-btn">Fermer</button>
-                    <button type="button" class="btn btn-gold" disabled>GOLD</button>
+                    <button type="button" class="btn btn-gold" id="wallet-modal-gold-btn">GOLD</button>
                     <button type="submit" class="btn btn-primary" id="wallet-submit-btn">Créditer</button>
                 </div>
             </form>
@@ -96,8 +101,73 @@
             summaryUrl: <?= json_encode(base_url('portefeuille/summary')) ?>,
             redeemUrl: <?= json_encode(base_url('portefeuille/code')) ?>,
             balanceLabel: <?= json_encode($soldeLabel) ?>,
+            activateGoldUrl: <?= json_encode(base_url('portefeuille/activate-gold')) ?>,
+            csrfTokenName: <?= json_encode(csrf_token()) ?>,
+            csrfTokenValue: <?= json_encode(csrf_hash()) ?>,
         };
     </script>
     <script src="<?= base_url('assets/js/portefeuille.js') ?>"></script>
+    <script>
+        (function(){
+            const cfg = window.__WALLET_MODAL__ || {};
+            const goldBtn = document.getElementById('wallet-gold-btn');
+            const modalGoldBtn = document.getElementById('wallet-modal-gold-btn');
+
+            function setGoldActive(isActive){
+                if(!goldBtn) return;
+                if(isActive){
+                    goldBtn.classList.remove('btn-gold-inactive');
+                    goldBtn.classList.add('btn-gold-active');
+                } else {
+                    goldBtn.classList.remove('btn-gold-active');
+                    goldBtn.classList.add('btn-gold-inactive');
+                }
+            }
+
+            async function refreshStatus(){
+                try{
+                    const res = await fetch(cfg.summaryUrl, { credentials: 'same-origin' });
+                    const j = await res.json();
+                    setGoldActive((j.est_gold ?? 0) === 1);
+                    const balanceVal = document.getElementById('wallet-topbar-balance');
+                    const balanceModal = document.getElementById('wallet-balance-value');
+                    if(balanceVal) balanceVal.textContent = j.balance_label ?? cfg.balanceLabel;
+                    if(balanceModal) balanceModal.textContent = j.balance_label ?? cfg.balanceLabel;
+                }catch(e){
+                    // ignore
+                }
+            }
+
+            async function activateGold(){
+                if(!confirm('Confirmer l\'activation de l\'option GOLD ?')) return;
+                try{
+                    const body = {};
+                    body[cfg.csrfTokenName] = cfg.csrfTokenValue;
+                    const res = await fetch(cfg.activateGoldUrl, {
+                        method: 'POST',
+                        credentials: 'same-origin',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(body),
+                    });
+                    const j = await res.json();
+                    if(j.success){
+                        setGoldActive(true);
+                        alert(j.message || 'Gold activé');
+                        refreshStatus();
+                    } else {
+                        alert(j.message || 'Erreur lors de l\'activation');
+                    }
+                }catch(e){
+                    alert('Erreur réseau lors de l\'activation.');
+                }
+            }
+
+            if(goldBtn){ goldBtn.addEventListener('click', activateGold); }
+            if(modalGoldBtn){ modalGoldBtn.addEventListener('click', activateGold); }
+
+            // Initial fetch
+            refreshStatus();
+        })();
+    </script>
 </body>
 </html>

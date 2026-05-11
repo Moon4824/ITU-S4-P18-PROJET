@@ -8,6 +8,7 @@ use App\Models\RegimeDetailModel;
 use App\Models\TypeObjectifModel;
 use App\Models\UtilisateurModel;
 use App\Libraries\SimplePdf;
+use App\Models\GoldConfigModel;
 
 class ObjectifController extends BaseController
 {
@@ -325,7 +326,7 @@ class ObjectifController extends BaseController
         $taille = (float) ($user['taille'] ?? 0);
         $imcActuel = $taille > 0 ? round($poidsActuel / ($taille * $taille), 2) : null;
 
-        return array_merge([
+        $data = array_merge([
             'title' => 'Choisir mes objectifs',
             'user' => [
                 'id' => $user['id'] ?? null,
@@ -346,6 +347,24 @@ class ObjectifController extends BaseController
             'old' => [],
             'errors' => null,
         ], $extra);
+
+        // Si des suggestions existent et que l'utilisateur est GOLD,
+        // appliquer la remise configurée aux prix totaux affichés.
+        if (! empty($data['suggestions']) && ((int) ($user['est_gold'] ?? 0) === 1)) {
+            $goldModel = new GoldConfigModel();
+            $config = $goldModel->getActiveConfig();
+            $remisePct = (int) ($config['remise_pct'] ?? 0);
+
+            foreach ($data['suggestions'] as &$sugg) {
+                $original = (float) ($sugg['prix_total_calcule'] ?? 0);
+                $discounted = round($original * (1 - ($remisePct / 100)), 2);
+                $sugg['prix_total_calcule'] = $discounted;
+                $sugg['prix_total_original'] = $original;
+            }
+            unset($sugg);
+        }
+
+        return $data;
     }
 
     private function syncObjectiveSession(array $objective): void

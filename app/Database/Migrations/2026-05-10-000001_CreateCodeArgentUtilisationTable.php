@@ -8,29 +8,39 @@ class CreateCodeArgentUtilisationTable extends Migration
 {
     public function up()
     {
-        $this->db->query('SET FOREIGN_KEY_CHECKS=0');
-        
-        $this->db->query('CREATE TABLE IF NOT EXISTS code_argent_utilisation (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            id_code_argent INT NOT NULL,
-            id_utilisateur INT UNSIGNED NOT NULL,
-            montant_credit DECIMAL(10,2) NOT NULL,
-            date_utilisation DATETIME NULL,
-            UNIQUE KEY code_utilisateur (id_code_argent, id_utilisateur),
-            KEY id_utilisateur (id_utilisateur),
-            CONSTRAINT code_argent_utilisation_id_code_argent_foreign FOREIGN KEY (id_code_argent) 
-                REFERENCES code_argent(id) ON DELETE CASCADE,
-            CONSTRAINT code_argent_utilisation_id_utilisateur_foreign FOREIGN KEY (id_utilisateur) 
-                REFERENCES utilisateur(id) ON DELETE CASCADE
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci');
-        
-        $this->db->query('SET FOREIGN_KEY_CHECKS=1');
+        $this->forge->addField([
+            'id' => [
+                'type'          => 'INT',
+                'auto_increment' => true,
+            ],
+            'id_code_argent' => [
+                'type' => 'INT',
+            ],
+            'id_utilisateur' => [
+                'type'     => 'INT',
+                'unsigned' => true,
+            ],
+            'montant_credit' => [
+                'type'       => 'DECIMAL',
+                'constraint' => '10,2',
+            ],
+            'date_utilisation' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
+        ]);
+
+        $this->forge->addKey('id', true);
+        $this->forge->addUniqueKey(['id_code_argent', 'id_utilisateur'], 'code_utilisateur');
+        $this->forge->addKey('id_utilisateur');
+        $this->forge->addForeignKey('id_code_argent', 'code_argent', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('id_utilisateur', 'utilisateur', 'id', 'CASCADE', 'CASCADE');
+
+        $this->forge->createTable('code_argent_utilisation');
     }
 
     public function down()
     {
-        $this->db->query('SET FOREIGN_KEY_CHECKS=0');
-        $this->db->query('DROP TABLE IF EXISTS code_argent_utilisation');
-        $this->db->query('SET FOREIGN_KEY_CHECKS=1');
+        $this->forge->dropTable('code_argent_utilisation');
     }
 }

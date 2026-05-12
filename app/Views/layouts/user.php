@@ -104,6 +104,45 @@
         </div>
     </div>
 
+    <div class="modal-overlay" id="gold-confirm-modal" aria-hidden="true" aria-modal="true" role="dialog" aria-labelledby="gold-confirm-title">
+        <div class="modal" style="max-width:500px;">
+            <div class="modal-icon" style="background:linear-gradient(135deg,#ffd54f,#ffb300);">
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z" fill="currentColor"/></svg>
+            </div>
+            <h3 id="gold-confirm-title">Activer l'option GOLD</h3>
+            <p style="color:var(--c-muted);margin-bottom:18px;">Confirmez l'activation de l'option Gold pour bénéficier de réductions exclusives.</p>
+
+            <div class="dashboard-card" style="margin-bottom:16px;background:linear-gradient(135deg,rgba(255,213,79,.1),rgba(255,179,0,.05));border:1px solid #ffe082;">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+                    <div>
+                        <div style="font-size:0.85rem;color:var(--c-muted);margin-bottom:4px;">Coût de l'option</div>
+                        <strong style="font-size:1.3rem;color:#ff6b6b;" id="gold-price-display">—</strong>
+                    </div>
+                    <div>
+                        <div style="font-size:0.85rem;color:var(--c-muted);margin-bottom:4px;">Réduction sur les régimes</div>
+                        <strong style="font-size:1.3rem;color:#51cf66;" id="gold-discount-display">—</strong>
+                    </div>
+                </div>
+                <div style="font-size:0.9rem;color:var(--c-muted);">
+                    <strong style="color:var(--c-text);">Avantages :</strong><br>
+                    ✓ Réductions sur TOUS les régimes premium<br>
+                    ✓ Accès illimité aux contenus exclusifs<br>
+                    ✓ Priorité support client
+                </div>
+            </div>
+
+            <div style="padding:12px;background:var(--c-surface);border-radius:6px;border-left:3px solid #ff6b6b;margin-bottom:16px;font-size:0.9rem;">
+                <strong>Solde après activation :</strong><br>
+                <span id="gold-new-balance">— Ar</span>
+            </div>
+
+            <div class="modal-actions" style="gap:10px;flex-wrap:wrap;">
+                <button type="button" class="btn btn-ghost" id="gold-confirm-cancel">Annuler</button>
+                <button type="button" class="btn btn-primary" id="gold-confirm-accept">Confirmer et activer</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         window.__WALLET_MODAL__ = {
             summaryUrl: <?= json_encode(base_url('portefeuille/summary')) ?>,
@@ -176,13 +215,50 @@
                     const balanceModal = document.getElementById('wallet-balance-value');
                     if(balanceVal) balanceVal.textContent = j.balance_label ?? cfg.balanceLabel;
                     if(balanceModal) balanceModal.textContent = j.balance_label ?? cfg.balanceLabel;
+                    // Store gold config for modal
+                    window.__GOLD_CONFIG__ = {
+                        price: j.gold_price ?? 0,
+                        discount: j.gold_discount ?? 0,
+                        balance: j.balance ?? 0,
+                    };
                 }catch(e){
                     // ignore
                 }
             }
 
-            async function activateGold(){
-                if(!confirm('Confirmer l\'activation de l\'option GOLD ?')) return;
+            function formatBalance(amount) {
+                return Number(amount || 0).toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Ar';
+            }
+
+            function showGoldConfirmModal(){
+                const goldConfig = window.__GOLD_CONFIG__ || { price: 0, discount: 0, balance: 0 };
+                const goldConfirmModal = document.getElementById('gold-confirm-modal');
+                const priceDisplay = document.getElementById('gold-price-display');
+                const discountDisplay = document.getElementById('gold-discount-display');
+                const newBalanceDisplay = document.getElementById('gold-new-balance');
+
+                if(priceDisplay) priceDisplay.textContent = formatBalance(goldConfig.price);
+                if(discountDisplay) discountDisplay.textContent = goldConfig.discount + ' %';
+                
+                const newBalance = goldConfig.balance - goldConfig.price;
+                if(newBalanceDisplay) newBalanceDisplay.textContent = formatBalance(newBalance);
+
+                if(goldConfirmModal){
+                    goldConfirmModal.classList.add('open');
+                    goldConfirmModal.setAttribute('aria-hidden', 'false');
+                }
+            }
+
+            function closeGoldConfirmModal(){
+                const goldConfirmModal = document.getElementById('gold-confirm-modal');
+                if(goldConfirmModal){
+                    goldConfirmModal.classList.remove('open');
+                    goldConfirmModal.setAttribute('aria-hidden', 'true');
+                }
+            }
+
+            async function performActivateGold(){
+                closeGoldConfirmModal();
                 try{
                     const body = {};
                     body[cfg.csrfTokenName] = cfg.csrfTokenValue;
@@ -195,8 +271,9 @@
                     const j = await res.json();
                     if(j.success){
                         setGoldActive(true);
-                        alert(j.message || 'Gold activé');
+                        alert(j.message || 'Gold activé avec succès !');
                         refreshStatus();
+                        closeWalletModal();
                     } else {
                         alert(j.message || 'Erreur lors de l\'activation');
                     }
@@ -205,8 +282,41 @@
                 }
             }
 
+            function activateGold(){
+                const goldConfig = window.__GOLD_CONFIG__ || { price: 0, discount: 0, balance: 0 };
+                
+                // Check if already gold
+                const goldBtn = document.getElementById('wallet-gold-btn');
+                if(goldBtn && goldBtn.classList.contains('btn-gold-active')) {
+                    alert('Vous avez déjà l\'option Gold.');
+                    return;
+                }
+
+                // // Check balance
+                // if(goldConfig.balance < goldConfig.price){
+                //     alert('Solde insuffisant pour activer l\'option Gold.');
+                //     return;
+                // }
+
+                showGoldConfirmModal();
+            }
+
             if(goldBtn){ goldBtn.addEventListener('click', activateGold); }
             if(modalGoldBtn){ modalGoldBtn.addEventListener('click', activateGold); }
+
+            // Gold confirm modal handlers
+            const goldConfirmModal = document.getElementById('gold-confirm-modal');
+            const goldConfirmCancel = document.getElementById('gold-confirm-cancel');
+            const goldConfirmAccept = document.getElementById('gold-confirm-accept');
+
+            if(goldConfirmCancel){ goldConfirmCancel.addEventListener('click', closeGoldConfirmModal); }
+            if(goldConfirmAccept){ goldConfirmAccept.addEventListener('click', performActivateGold); }
+
+            if(goldConfirmModal){
+                goldConfirmModal.addEventListener('click', function(e){
+                    if(e.target === goldConfirmModal) closeGoldConfirmModal();
+                });
+            }
 
             if (shouldOpenWalletModal) {
                 openWalletModal(initialWalletError, initialWalletError ? 'error' : '');

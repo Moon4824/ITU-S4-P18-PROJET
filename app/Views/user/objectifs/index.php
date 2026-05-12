@@ -163,7 +163,23 @@
                                             <?= esc((string) $suggestion['duree_totale_calculee']) ?> jours
                                         </td>
                                         <td style="padding:12px 10px;border-bottom:1px solid var(--c-border);vertical-align:middle;">
-                                            <?= esc(number_format((float) $suggestion['prix_total_calcule'], 2, ',', ' ')) ?> Ar
+                                            <div style="display:flex;align-items:center;gap:6px;">
+                                                <span style="<?= ((int) ($user['est_gold'] ?? 0) === 1) ? 'text-decoration:line-through;color:var(--c-muted);' : '' ?>">
+                                                    <?= esc(number_format((float) $suggestion['prix_total_calcule'], 2, ',', ' ')) ?> Ar
+                                                </span>
+                                                <?php if ((int) ($user['est_gold'] ?? 0) === 1) : ?>
+                                                    <div style="display:flex;align-items:center;gap:4px;background:#e8f5e9;padding:2px 6px;border-radius:4px;font-size:0.85rem;">
+                                                        <svg style="width:14px;height:14px;color:#51cf66;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z"/></svg>
+                                                        <strong style="color:#51cf66;">
+                                                            <?php 
+                                                                $origPrice = (float) ($suggestion['prix_total_original'] ?? $suggestion['prix_total_calcule']);
+                                                                $displayPrice = (float) $suggestion['prix_total_calcule'];
+                                                                echo esc(number_format($displayPrice, 2, ',', ' ')) . ' Ar';
+                                                            ?>
+                                                        </strong>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
                                         </td>
                                         <td style="padding:12px 10px;border-bottom:1px solid var(--c-border);vertical-align:middle;">
                                             <button
@@ -241,6 +257,18 @@
                         <h4 style="margin-top:0;">Répartition du régime</h4>
                         <div id="detail-regime-percentages" class="dashboard-badges" style="gap:8px;flex-wrap:wrap;"></div>
                     </div>
+
+                    <?php if ((int) ($user['est_gold'] ?? 0) === 1) : ?>
+                        <div class="dashboard-card" style="margin-bottom:16px;background:linear-gradient(135deg,rgba(81,207,102,.1),rgba(76,175,80,.05));border:1px solid #a5d6a7;border-left:4px solid #51cf66;">
+                            <div style="display:flex;align-items:center;gap:12px;">
+                                <svg style="width:24px;height:24px;color:#51cf66;flex-shrink:0;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z"/></svg>
+                                <div>
+                                    <strong style="color:#51cf66;display:block;margin-bottom:2px;">Remise GOLD appliquée</strong>
+                                    <small style="color:var(--c-muted);">Vous bénéficiez d'une réduction exclusive sur ce régime.</small>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
 
                     <!-- Sport selection moved to the recap area; modal no longer contains a selector -->
 

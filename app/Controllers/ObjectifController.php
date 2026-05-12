@@ -195,7 +195,7 @@ class ObjectifController extends BaseController
                 'old' => $this->request->getPost(),
                 'selectedRegimeId' => $selectedRegimeId,
                 'openWalletModal' => true,
-                'errorMessage' => 'Solde insuffisant pour valider ce régime. entrer une code pour recharger votre solde',
+                'errorMessage' => 'Solde insuffisant pour valider ce régime. entrer un code pour recharger votre solde',
             ]));
         }
 
@@ -333,6 +333,7 @@ class ObjectifController extends BaseController
                 'role' => $user['role_label'] ?? ($user['role'] ?? null),
                 'name' => $user['nom'] ?? ($user['name'] ?? null),
                 'email' => $user['email'] ?? null,
+                'est_gold' => (int) ($user['est_gold'] ?? 0),
             ],
             'objectifs' => $this->typeObjectifModel->findAllOrdered(),
             'step' => 1,

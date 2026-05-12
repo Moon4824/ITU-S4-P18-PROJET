@@ -28,18 +28,23 @@ class PortefeuilleController extends BaseController
             ]);
         }
 
+        $goldModel = new GoldConfigModel();
+        $goldConfig = $goldModel->getActiveConfig();
+
         return $this->response->setJSON([
             'success' => true,
             'balance' => (float) ($user['solde_monnaie'] ?? 0),
             'balance_label' => $this->formatBalance((float) ($user['solde_monnaie'] ?? 0)),
             'est_gold' => (int) ($user['est_gold'] ?? 0),
+            'gold_price' => $goldConfig ? (float) ($goldConfig['prix'] ?? 0) : 0,
+            'gold_discount' => $goldConfig ? (int) ($goldConfig['remise_pct'] ?? 0) : 0,
             'note' => 'Solde actualisé en temps réel.',
         ]);
     }
 
     /**
      * Activer l'option Gold pour l'utilisateur authentifié.
-     * Cette action marque `est_gold = 1` et enregistre un enregistrement dans `payments`.
+     * Cette action déduit le prix du Gold du solde, marque `est_gold = 1` et enregistre dans `payments`.
      */
     public function activateGold()
     {
@@ -65,18 +70,40 @@ class PortefeuilleController extends BaseController
         $goldModel = new GoldConfigModel();
         $config = $goldModel->getActiveConfig();
 
+        if (!$config) {
+            return $this->response->setStatusCode(422)->setJSON([
+                'success' => false,
+                'message' => 'La configuration Gold n\'est pas disponible.',
+            ]);
+        }
+
+        $goldPrice = (float) ($config['prix'] ?? 0);
+        $userBalance = (float) ($user['solde_monnaie'] ?? 0);
+
+        if ($userBalance < $goldPrice) {
+            return $this->response->setStatusCode(422)->setJSON([
+                'success' => false,
+                'message' => 'Solde insuffisant pour activer l\'option Gold.',
+                'required' => number_format($goldPrice, 2, ',', ' '),
+                'available' => number_format($userBalance, 2, ',', ' '),
+            ]);
+        }
+
         $db = db_connect();
         $db->transBegin();
 
         try {
+            $newBalance = round($userBalance - $goldPrice, 2);
             $this->utilisateurModel->update($userId, [
                 'est_gold' => 1,
+                'solde_monnaie' => $newBalance,
             ]);
 
             // Enregistrer un paiement simple (produit GOLD)
             $db->table('payments')->insert([
                 'user_id' => $userId,
                 'product' => 'GOLD',
+                'amount' => $goldPrice,
                 'created_at' => date('Y-m-d H:i:s'),
             ]);
 
@@ -90,6 +117,8 @@ class PortefeuilleController extends BaseController
                 'success' => true,
                 'message' => 'Option Gold activée avec succès.',
                 'est_gold' => 1,
+                'new_balance' => $newBalance,
+                'new_balance_label' => $this->formatBalance($newBalance),
             ]);
         } catch (\Throwable $exception) {
             $db->transRollback();

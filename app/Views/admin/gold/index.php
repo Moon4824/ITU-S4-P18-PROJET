@@ -95,45 +95,7 @@
         </form>
     </article>
 
-    <!-- Informations -->
-    <article class="dashboard-card">
-        <h3>Informations</h3>
-        <div style="background: #f9f9f9; padding: 16px; border-radius: 4px;">
-            <p style="margin: 10px 0; font-size: 14px;">
-                <strong>Dernière modification:</strong><br>
-                <?= date('d/m/Y à H:i', strtotime($config['updated_at'] ?? 'now')); ?>
-            </p>
-            <p style="margin: 10px 0; font-size: 14px;">
-                <strong>Créé le:</strong><br>
-                <?= date('d/m/Y à H:i', strtotime($config['created_at'] ?? 'now')); ?>
-            </p>
-            <p style="margin: 10px 0; font-size: 14px;">
-                <strong>Statut:</strong><br>
-                <span style="display: inline-block; padding: 4px 12px; border-radius: 12px; background: <?= $config['actif'] ? '#d4edda' : '#f8d7da'; ?>; color: <?= $config['actif'] ? '#155724' : '#721c24'; ?>; font-weight: 600; font-size: 12px;">
-                    <?= $config['actif'] ? '✓ Actif' : '✗ Inactif'; ?>
-                </span>
-            </p>
-        </div>
-    </article>
-
-    <!-- Guide d'utilisation -->
-    <article class="dashboard-card">
-        <h3>Guide d'utilisation</h3>
-        <ul style="list-style: none; padding: 0;">
-            <li style="margin: 10px 0; padding: 10px; background: #f0f8ff; border-left: 3px solid #0066cc;">
-                💰 <strong>Prix Gold:</strong> Le montant que les utilisateurs vont payer une seule fois
-            </li>
-            <li style="margin: 10px 0; padding: 10px; background: #f0f8ff; border-left: 3px solid #0066cc;">
-                📉 <strong>Remise:</strong> Réduction en % appliquée à tous les régimes
-            </li>
-            <li style="margin: 10px 0; padding: 10px; background: #f0f8ff; border-left: 3px solid #0066cc;">
-                🔄 <strong>Exemple:</strong> Régime à 10€ → Gold obtient 10€ × 0.85 = 8.50€
-            </li>
-            <li style="margin: 10px 0; padding: 10px; background: #f0f8ff; border-left: 3px solid #0066cc;">
-                ♾️ <strong>Accès:</strong> Illimité une fois Gold activé
-            </li>
-        </ul>
-    </article>
+    
 </div>
 
 <script>

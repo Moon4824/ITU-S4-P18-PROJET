@@ -8,6 +8,7 @@ $chartBars = $chartBars ?? [];
 $recentActivity = $recentActivity ?? [];
 $goldConfig = $stats['goldConfig'] ?? ['prix' => 0, 'remise_pct' => 0, 'actif' => 0];
 $barMax = 1;
+$chartCount = count($chartBars);
 
 foreach ($chartBars as $bar) {
     $barMax = max($barMax, (int) ($bar['value'] ?? 0));
@@ -55,20 +56,23 @@ foreach ($chartBars as $bar) {
                     <?php foreach ($chartBars as $bar) : ?>
                         <?php
                             $barValue = (int) ($bar['value'] ?? 0);
-                            $barHeight = $barMax > 0 ? max(14, (int) round(($barValue / $barMax) * 100)) : 14;
+                            // reference pixel height for the chart area (in px)
+                            $refPx = 220;
+                            $minPx = 28;
+                            $barHeightPx = $barMax > 0 ? max($minPx, (int) round(($barValue / $barMax) * $refPx)) : $minPx;
                             $barColor = (string) ($bar['color'] ?? 'var(--c-primary)');
                         ?>
                         <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:0;">
                             <div style="width:100%;max-width:72px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:8px;">
                                 <span style="font-size:12px;font-weight:700;color:var(--c-muted);"> <?= esc((string) $barValue) ?> </span>
-                                <div style="width:100%;height:<?= esc((string) $barHeight) ?>%;min-height:28px;border-radius:18px 18px 8px 8px;background:linear-gradient(180deg, <?= esc($barColor) ?>, rgba(255,255,255,.22));box-shadow:0 10px 20px rgba(15,23,42,.08);"></div>
+                                <div style="width:100%;height:<?= esc((string) $barHeightPx) ?>px;border-radius:18px 18px 8px 8px;background:linear-gradient(180deg, <?= esc($barColor) ?>, rgba(255,255,255,.22));box-shadow:0 10px 20px rgba(15,23,42,.08);"></div>
                             </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
             </div>
 
-            <div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;">
+            <div style="display:grid;grid-template-columns:repeat(<?= esc((string)$chartCount) ?>,minmax(0,1fr));gap:10px;">
                 <?php foreach ($chartBars as $bar) : ?>
                     <div style="text-align:center;font-size:12px;color:var(--c-muted);line-height:1.3;">
                         <strong style="display:block;color:var(--c-text);font-size:13px;"> <?= esc((string) ($bar['label'] ?? '')) ?> </strong>

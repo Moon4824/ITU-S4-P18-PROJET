@@ -163,21 +163,25 @@
                                             <?= esc((string) $suggestion['duree_totale_calculee']) ?> jours
                                         </td>
                                         <td style="padding:12px 10px;border-bottom:1px solid var(--c-border);vertical-align:middle;">
+                                            <?php
+                                                $origPrice = (float) ($suggestion['prix_total_original'] ?? $suggestion['prix_total_calcule']);
+                                                $displayPrice = (float) ($suggestion['prix_total_calcule'] ?? $origPrice);
+                                            ?>
                                             <div style="display:flex;align-items:center;gap:6px;">
-                                                <span style="<?= ((int) ($user['est_gold'] ?? 0) === 1) ? 'text-decoration:line-through;color:var(--c-muted);' : '' ?>">
-                                                    <?= esc(number_format((float) $suggestion['prix_total_calcule'], 2, ',', ' ')) ?> Ar
-                                                </span>
                                                 <?php if ((int) ($user['est_gold'] ?? 0) === 1) : ?>
+                                                    <span style="text-decoration:line-through;color:var(--c-muted);">
+                                                        <?= esc(number_format($origPrice, 2, ',', ' ')) ?> Ar
+                                                    </span>
                                                     <div style="display:flex;align-items:center;gap:4px;background:#e8f5e9;padding:2px 6px;border-radius:4px;font-size:0.85rem;">
                                                         <svg style="width:14px;height:14px;color:#51cf66;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z"/></svg>
                                                         <strong style="color:#51cf66;">
-                                                            <?php 
-                                                                $origPrice = (float) ($suggestion['prix_total_original'] ?? $suggestion['prix_total_calcule']);
-                                                                $displayPrice = (float) $suggestion['prix_total_calcule'];
-                                                                echo esc(number_format($displayPrice, 2, ',', ' ')) . ' Ar';
-                                                            ?>
+                                                            <?= esc(number_format($displayPrice, 2, ',', ' ')) ?> Ar
                                                         </strong>
                                                     </div>
+                                                <?php else: ?>
+                                                    <span>
+                                                        <?= esc(number_format($displayPrice, 2, ',', ' ')) ?> Ar
+                                                    </span>
                                                 <?php endif; ?>
                                             </div>
                                         </td>

@@ -85,7 +85,7 @@ class AdminController extends BaseController
 
         $chartBars = [
             ['label' => 'Utilisateurs', 'value' => $totalUsers, 'color' => 'var(--c-primary)'],
-            ['label' => 'Gold actifs', 'value' => $goldUsers, 'color' => 'var(--c-warning)'],
+            ['label' => 'Comptes Gold actifs', 'value' => $goldUsers, 'color' => 'var(--c-warning)'],
             ['label' => 'Régimes', 'value' => $totalRegimes, 'color' => 'var(--c-success)'],
             ['label' => 'Sports', 'value' => $totalSports, 'color' => 'var(--c-info)'],
             ['label' => 'Codes valides', 'value' => $activeCodes, 'color' => 'var(--c-danger)'],

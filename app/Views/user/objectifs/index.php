@@ -87,6 +87,7 @@
                         <label for="poids_objectif" style="display:block;margin-bottom:6px;">Poids objectif (kg)</label>
                         <input type="number" step="0.01" min="0" id="poids_objectif" name="poids_objectif" value="" class="form-control" placeholder="<?= esc((string) $poidsObjectif) ?>" required>
                         <small id="poids_objectif_help" style="display:block;margin-top:6px;color:var(--c-muted);">Rempli automatiquement si tu choisis l'IMC idéal.</small>
+                        <small id="poids_objectif_error" style="display:none;margin-top:6px;color:var(--c-danger);"></small>
                     </div>
                     <div>
                         <label for="date_debut" style="display:block;margin-bottom:6px;">Date de début</label>
@@ -260,6 +261,8 @@
     const stepOneForm = document.getElementById('objectif-step-one-form');
     const poidsInput = document.getElementById('poids_objectif');
     const helpText = document.getElementById('poids_objectif_help');
+    const poidsErrorMsg = document.getElementById('poids_objectif_error');
+    const poidsActuel = <?= json_encode((float) $poidsActuel, JSON_UNESCAPED_UNICODE) ?>;
     const idealWeight = <?= json_encode($poidsIdeal, JSON_UNESCAPED_UNICODE) ?>;
     const detailModal = document.getElementById('objective-detail-modal');
     const detailClose = document.getElementById('objective-detail-close');
@@ -296,6 +299,9 @@
             if (helpText) {
                 helpText.textContent = 'Calculé automatiquement à partir de l\'IMC idéal.';
             }
+            if (poidsErrorMsg) {
+                poidsErrorMsg.style.display = 'none';
+            }
             return;
         }
 
@@ -303,12 +309,64 @@
         if (helpText) {
             helpText.textContent = 'Rempli automatiquement si tu choisis l\'IMC idéal.';
         }
+        validatePoidsObjectif();
+    };
+
+    const validatePoidsObjectif = () => {
+        if (!stepOneForm || !poidsInput || !poidsErrorMsg) return;
+        
+        const selected = stepOneForm.querySelector('input[name="id_type_objectif"]:checked');
+        if (!selected) {
+            poidsErrorMsg.style.display = 'none';
+            return;
+        }
+
+        const label = selected.dataset.label || '';
+        const normalizedLabel = label.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+        const isAugmenter = normalizedLabel.includes('augmenter');
+        const isDiminuer = normalizedLabel.includes('reduire') || normalizedLabel.includes('diminuer');
+        const isImc = normalizedLabel.includes('imc') && normalizedLabel.includes('ideal');
+
+        if (isImc) {
+            poidsErrorMsg.style.display = 'none';
+            return;
+        }
+
+        const poidsValue = poidsInput.value ? parseFloat(poidsInput.value) : null;
+
+        if (poidsValue === null || poidsValue === '') {
+            poidsErrorMsg.style.display = 'none';
+            return;
+        }
+
+        let hasError = false;
+        let errorText = '';
+
+        if (isAugmenter && poidsValue <= poidsActuel) {
+            hasError = true;
+            errorText = `Le poids doit être supérieur à ${poidsActuel} kg`;
+        } else if (isDiminuer && poidsValue >= poidsActuel) {
+            hasError = true;
+            errorText = `Le poids doit être inférieur à ${poidsActuel} kg`;
+        }
+
+        if (hasError) {
+            poidsErrorMsg.textContent = errorText;
+            poidsErrorMsg.style.display = 'block';
+            poidsInput.classList.add('is-invalid');
+        } else {
+            poidsErrorMsg.style.display = 'none';
+            poidsInput.classList.remove('is-invalid');
+        }
     };
 
     if (stepOneForm && poidsInput) {
         objectiveRadios.forEach((radio) => {
             radio.addEventListener('change', syncWeightField);
         });
+
+        poidsInput.addEventListener('input', validatePoidsObjectif);
+        poidsInput.addEventListener('change', validatePoidsObjectif);
 
         syncWeightField();
     }

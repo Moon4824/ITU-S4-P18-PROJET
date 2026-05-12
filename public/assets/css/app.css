@@ -20,6 +20,12 @@
   --c-muted: #5a7a62;
   --c-border: #d4e8d8;
   --c-input: #f0f7f1;
+  --c-chart-users: #2D6A4F;
+  --c-chart-gold: #F59E0B;
+  --c-chart-regimes: #22C55E;
+  --c-chart-sports: #0EA5E9;
+  --c-chart-codes: #EF4444;
+  --c-chart-imc: #64748B;
   --radius: 8px;
   --radius-lg: 12px;
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
@@ -320,7 +326,7 @@ input[type=checkbox] {
 .login-footer {
   margin-top: 24px;
   text-align: center;
-  font-size: 14px;
+  font-size: 12px;
   color: var(--c-muted);
 }
 

@@ -16,6 +16,12 @@ $c-text:     #1a2e1f;       // texte principal — vert très foncé
 $c-muted:    #5a7a62;       // texte secondaire — vert grisé
 $c-border:   #d4e8d8;       // bordures — vert pâle
 $c-input:    #f0f7f1;       // fond des inputs
+$c-chart-users:   #2D6A4F;
+$c-chart-gold:    #F59E0B;
+$c-chart-regimes: #22C55E;
+$c-chart-sports:  #0EA5E9;
+$c-chart-codes:   #EF4444;
+$c-chart-imc:     #64748B;
 $radius:     8px;
 $radius-lg:  12px;
 $shadow-sm:  0 1px 3px rgba(0, 0, 0, .08);
@@ -42,6 +48,12 @@ $font:       'Segoe UI', system-ui, sans-serif;
   --c-muted:    #{$c-muted};
   --c-border:   #{$c-border};
   --c-input:    #{$c-input};
+  --c-chart-users:   #{$c-chart-users};
+  --c-chart-gold:    #{$c-chart-gold};
+  --c-chart-regimes: #{$c-chart-regimes};
+  --c-chart-sports:  #{$c-chart-sports};
+  --c-chart-codes:   #{$c-chart-codes};
+  --c-chart-imc:     #{$c-chart-imc};
   --radius:     #{$radius};
   --radius-lg:  #{$radius-lg};
   --shadow-sm:  #{$shadow-sm};

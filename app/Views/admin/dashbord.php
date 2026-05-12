@@ -46,7 +46,7 @@ foreach ($chartBars as $bar) {
 
         <div style="margin-top:18px;display:grid;grid-template-rows:1fr auto;gap:12px;">
             <div style="position:relative;height:280px;padding:18px 18px 10px;border-radius:20px;background:linear-gradient(180deg, rgba(15,23,42,.02), rgba(15,23,42,.06));border:1px solid rgba(148,163,184,.14);overflow:hidden;">
-                <div style="position:absolute;left:18px;right:18px;bottom:46px;height:1px;background:rgba(148,163,184,.18);"></div>
+                <div style="position:absolute;left:18px;right:18px;bottom:46px;height:1px;background:rgba(113, 127, 146, 0.18);"></div>
                 <div style="position:absolute;left:18px;right:18px;bottom:88px;height:1px;background:rgba(148,163,184,.10);"></div>
                 <div style="position:absolute;left:18px;right:18px;bottom:130px;height:1px;background:rgba(148,163,184,.10);"></div>
                 <div style="position:absolute;left:18px;right:18px;bottom:172px;height:1px;background:rgba(148,163,184,.10);"></div>

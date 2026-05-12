@@ -84,12 +84,12 @@ class AdminController extends BaseController
         $recentActivity = array_slice($recentActivity, 0, 8);
 
         $chartBars = [
-            ['label' => 'Utilisateurs', 'value' => $totalUsers, 'color' => 'var(--c-primary)'],
-            ['label' => 'Comptes Gold actifs', 'value' => $goldUsers, 'color' => 'var(--c-warning)'],
-            ['label' => 'Régimes', 'value' => $totalRegimes, 'color' => 'var(--c-success)'],
-            ['label' => 'Sports', 'value' => $totalSports, 'color' => 'var(--c-info)'],
-            ['label' => 'Codes valides', 'value' => $activeCodes, 'color' => 'var(--c-danger)'],
-            ['label' => 'IMC', 'value' => $totalInterpretations, 'color' => 'var(--c-muted)'],
+            ['label' => 'Utilisateurs', 'value' => $totalUsers, 'color' => 'var(--c-chart-users)'],
+            ['label' => 'Comptes Gold actifs', 'value' => $goldUsers, 'color' => 'var(--c-chart-gold)'],
+            ['label' => 'Régimes', 'value' => $totalRegimes, 'color' => 'var(--c-chart-regimes)'],
+            ['label' => 'Sports', 'value' => $totalSports, 'color' => 'var(--c-chart-sports)'],
+            ['label' => 'Codes valides', 'value' => $activeCodes, 'color' => 'var(--c-chart-codes)'],
+            ['label' => 'IMC', 'value' => $totalInterpretations, 'color' => 'var(--c-chart-imc)'],
         ];
 
         return view('/admin/dashbord', [

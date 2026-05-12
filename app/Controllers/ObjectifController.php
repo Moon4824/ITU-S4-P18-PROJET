@@ -195,7 +195,7 @@ class ObjectifController extends BaseController
                 'old' => $this->request->getPost(),
                 'selectedRegimeId' => $selectedRegimeId,
                 'openWalletModal' => true,
-                'errorMessage' => 'Solde insuffisant pour valider ce régime.',
+                'errorMessage' => 'Solde insuffisant pour valider ce régime. entrer une code pour recharger votre solde',
             ]));
         }
 

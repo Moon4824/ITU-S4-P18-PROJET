@@ -15,6 +15,7 @@
     <?php $role = (string) ($user['role'] ?? ''); ?>
     <?php $soldeLabel = isset($user['solde_monnaie']) ? number_format((float) $user['solde_monnaie'], 2, ',', ' ') . ' Ar' : '0,00 Ar'; ?>
     <?php $openWalletModal = ! empty($openWalletModal); ?>
+    <?php $walletErrorMessage = isset($errorMessage) && is_string($errorMessage) ? trim((string) $errorMessage) : ''; ?>
     <div class="app-shell app-shell-user">
         <aside class="sidebar sidebar-user">
             <div class="sidebar-brand">
@@ -72,6 +73,12 @@
             <h3 id="wallet-modal-title">Votre solde</h3>
             <p>Consultez votre solde exact et rechargez-le avec un code argent valide.</p>
 
+            <?php if ($walletErrorMessage !== '') : ?>
+                <div class="alert alert-danger" style="margin:0 0 16px;">
+                    <?= esc($walletErrorMessage) ?>
+                </div>
+            <?php endif; ?>
+
             <div class="wallet-balance-box">
                 <span class="wallet-balance-label">Solde exact</span>
                 <strong id="wallet-balance-value"><?= esc($soldeLabel) ?></strong>
@@ -112,6 +119,7 @@
         (function(){
             const cfg = window.__WALLET_MODAL__ || {};
             const shouldOpenWalletModal = <?= json_encode($openWalletModal) ?>;
+            const initialWalletError = <?= json_encode($walletErrorMessage) ?>;
             const goldBtn = document.getElementById('wallet-gold-btn');
             const modalGoldBtn = document.getElementById('wallet-modal-gold-btn');
             const walletBtn = document.getElementById('wallet-open-btn');
@@ -119,10 +127,15 @@
             const walletCloseBtn = document.getElementById('wallet-close-btn');
 
             // Modal management
-            function openWalletModal(){
+            function openWalletModal(message = '', type = ''){
                 if(walletModal) {
                     walletModal.classList.add('open');
                     walletModal.setAttribute('aria-hidden', 'false');
+                    if (message) {
+                        setWalletMessage(message, type || 'error');
+                    } else {
+                        setWalletMessage('');
+                    }
                 }
             }
 
@@ -196,7 +209,7 @@
             if(modalGoldBtn){ modalGoldBtn.addEventListener('click', activateGold); }
 
             if (shouldOpenWalletModal) {
-                openWalletModal();
+                openWalletModal(initialWalletError, initialWalletError ? 'error' : '');
             }
 
             // Initial fetch

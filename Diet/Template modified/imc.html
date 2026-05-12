@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SysInfo — IMC & Objectifs</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="login-page">
+  <div class="login-card imc-card">
+
+    <div class="login-logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div>
+        <h1>SysInfo</h1>
+        <span>IMC & objectifs</span>
+      </div>
+    </div>
+
+    <h2>Votre IMC</h2>
+    <p class="subtitle" id="bmi-hint">Analyse de votre profil</p>
+
+    <div class="imc-summary">
+      <div class="imc-value" id="bmi-value">--.-</div>
+      <div class="imc-category" id="bmi-label">—</div>
+    </div>
+
+    <div class="imc-scale">
+      <div class="imc-scale-track">
+        <div class="imc-scale-fill" id="bmi-bar"></div>
+      </div>
+      <div class="imc-scale-labels">
+        <span>Maigreur</span>
+        <span>Normal</span>
+        <span>Surpoids</span>
+        <span>Obésité</span>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label>Choisissez votre objectif</label>
+      <div class="objective-list">
+        <label class="objective-card">
+          <input type="radio" name="objectif" value="perte" checked />
+          <div>
+            <strong>Perte de poids</strong>
+            <span>Réduction calorique et menus légers</span>
+          </div>
+        </label>
+        <label class="objective-card">
+          <input type="radio" name="objectif" value="maintien" />
+          <div>
+            <strong>Maintien</strong>
+            <span>Équilibre entre énergie et satiété</span>
+          </div>
+        </label>
+        <label class="objective-card">
+          <input type="radio" name="objectif" value="prise" />
+          <div>
+            <strong>Prise de masse</strong>
+            <span>Apports plus riches et protéinés</span>
+          </div>
+        </label>
+        <label class="objective-card">
+          <input type="radio" name="objectif" value="equilibre" />
+          <div>
+            <strong>Équilibre alimentaire</strong>
+            <span>Menus variés et durables</span>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:10px;margin-top:8px">
+      <a href="inscription2.html" class="btn btn-secondary btn-full">Précédent</a>
+      <button type="button" class="btn btn-primary btn-full" onclick="continueToRegimes()">Voir les régimes</button>
+    </div>
+
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>document.addEventListener('DOMContentLoaded', initBMIPage);</script>
+</body>
+</html>
